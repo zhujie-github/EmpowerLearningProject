@@ -1,5 +1,6 @@
 ﻿using Company.Application.Share.Events;
 using Company.Application.Share.Models;
+using Company.Core.Dialogs;
 using Company.Core.Ioc;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -50,15 +51,17 @@ namespace Company.Application.Login.ViewModels
 
         private bool CanLogIn()
         {
-            return string.Equals(Login, "admin", StringComparison.OrdinalIgnoreCase) &&
-                   string.Equals(Password, "123", StringComparison.Ordinal);
+            //return string.Equals(Login, "admin", StringComparison.OrdinalIgnoreCase) &&
+            //string.Equals(Password, "123", StringComparison.Ordinal);
+            return true;
         }
 
         private void OnLogIn()
         {
-            if (!CanLogIn())
+            if (!(string.Equals(Login, "admin", StringComparison.OrdinalIgnoreCase) &&
+                string.Equals(Password, "123", StringComparison.Ordinal)))
             {
-                MessageBox.Show("用户名或密码错误，请重试！", "登录失败", MessageBoxButton.OK, MessageBoxImage.Error);
+                PopupBox.Show("用户名或密码错误");
                 return;
             }
 

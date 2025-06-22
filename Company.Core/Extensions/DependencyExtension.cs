@@ -32,10 +32,6 @@ namespace Company.Core.Extensions
                 {
                     containerRegistry.RegisterSingleton(type); //注册单例
                 }
-                //else if (exposedService.Lifetime == Lifetime.Transient)
-                //{
-                //    containerRegistry.Register(type); //注册瞬态
-                //}
 
                 foreach (var itype in exposedService.Types)
                 {
