@@ -11,14 +11,14 @@ namespace Company.Core.Ioc
     {
         public Lifetime Lifetime
         {
-            get; set;
+            get; private set;
         } = lifetime;
 
         public bool AutoInitialize
         {
-            get; set;
+            get; private set;
         } = autoInitialize;
 
-        public Type[] Types { get; set; } = types;
+        public Type[] Types { get; private set; } = types;
     }
 }

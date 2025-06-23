@@ -2,7 +2,7 @@
 
 namespace Company.Core.Helpers
 {
-    public static class Asserts
+    public static class Assert
     {
         public static void NotNull<T>(T? obj, [CallerMemberName]string? memberName = null)
         {
