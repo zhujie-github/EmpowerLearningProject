@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Company.Core.Ioc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,34 @@ namespace Company.Application.Login.Views
         public LoginView()
         {
             InitializeComponent();
+
+            this.Loaded += (s, e) =>
+            {
+                CN.Checked += OnChecked;
+                TW.Checked += OnChecked;
+                US.Checked += OnChecked;
+            };
+        }
+
+        private void OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is RadioButton button)
+            {
+                switch (button.Name)
+                {
+                    case "CN":
+                        PrismProvider.LanguageManager?.Set(Core.Enums.LanguageType.CN);
+                        break;
+                    case "TW":
+                        PrismProvider.LanguageManager?.Set(Core.Enums.LanguageType.TW);
+                        break;
+                    case "US":
+                        PrismProvider.LanguageManager?.Set(Core.Enums.LanguageType.US);
+                        break;
+                    default:
+                        throw new NotSupportedException($"Unsupported language: {button.Name}");
+                }
+            }
         }
     }
 }

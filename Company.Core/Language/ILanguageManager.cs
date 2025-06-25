@@ -9,6 +9,6 @@ namespace Company.Core.Language
 
         LanguageType Current { get; }
 
-        void SetLanguage(LanguageType languageType);
+        void Set(LanguageType languageType);
     }
 }

@@ -13,7 +13,7 @@ namespace Company.Core.Language
 
         public LanguageManager()
         {
-            SetLanguage(LanguageType.CN);
+            Set(LanguageType.CN);
         }
 
         public string this[string key]
@@ -30,14 +30,14 @@ namespace Company.Core.Language
 
         public LanguageType Current { get; set; }
 
-        public void SetLanguage(LanguageType languageType)
+        public void Set(LanguageType languageType)
         {
             Assert.NotNull(languageType);
 
             if (_uri == null)
             {
-                var resourceDictionary = Application.Current.Resources.MergedDictionaries.FirstOrDefault();
-                var path = resourceDictionary?.Source?.AbsolutePath;
+                var resourceDictionary = Application.Current.Resources.MergedDictionaries[0];
+                var path = resourceDictionary?.Source?.ToString();
                 _uri = path?[..path.LastIndexOf('/')];
             }
 

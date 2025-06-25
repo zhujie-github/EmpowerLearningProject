@@ -48,42 +48,32 @@
         </Grid>
         <Grid Grid.Column="1" Background="White">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock
-                        Margin="10,10,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
+                        Width="90"
+                        Margin="5"
                         FontSize="20"
-                        Text="登录名:" />
+                        Text="{DynamicResource 登录名}" />
                     <TextBox
                         Width="200"
-                        Margin="10"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="20"
                         Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock
-                        Margin="10,10,0,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
+                        Width="90"
+                        Margin="5"
                         FontSize="20"
-                        Text="密码:" />
+                        Text="{DynamicResource 密码}" />
                     <TextBox
                         Width="200"
-                        Margin="30,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         FontSize="20"
                         Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <TextBlock Width="90" Margin="5" />
                     <Button
                         Width="96"
-                        Margin="84,10,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
                         Background="#7B2ED9"
                         Command="{Binding LogInCommand}"
                         Content="登录"
@@ -91,15 +81,32 @@
                         Foreground="White" />
                     <Button
                         Width="96"
-                        Margin="10,10,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
+                        Margin="8,0,0,0"
                         Background="#7B2ED9"
                         Command="{Binding CancelCommand}"
                         Content="取消"
                         FontSize="20"
                         Foreground="White" />
                 </StackPanel>
+            </StackPanel>
+            <StackPanel
+                Margin="15"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Orientation="Horizontal">
+                <RadioButton
+                    x:Name="CN"
+                    Margin="5"
+                    Content="简体中文"
+                    IsChecked="True" />
+                <RadioButton
+                    x:Name="TW"
+                    Margin="5"
+                    Content="台湾繁体" />
+                <RadioButton
+                    x:Name="US"
+                    Margin="5"
+                    Content="美式英文" />
             </StackPanel>
         </Grid>
     </Grid>
