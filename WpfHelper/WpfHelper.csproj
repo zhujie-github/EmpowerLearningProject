@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Company.Application.Login\Company.Application.Login.csproj" />
+    <ProjectReference Include="..\Company.Application.Main\Company.Application.Main.csproj" />
+    <ProjectReference Include="..\Company.Application.Share\Company.Application.Share.csproj" />
+    <ProjectReference Include="..\Company.Core\Company.Core.csproj" />
+    <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
+    <ProjectReference Include="..\Company.UI\Company.UI.csproj" />
+  </ItemGroup>
+
+</Project>

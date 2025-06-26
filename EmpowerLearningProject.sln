@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.UI", "Company.UI\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Login", "Company.Application.Login\Company.Application.Login.csproj", "{B4480D70-006F-4EE2-8DAC-F75E53B9A78F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHelper", "WpfHelper\WpfHelper.csproj", "{897AF149-F0DB-4DB8-9699-A12159F1AAFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{B4480D70-006F-4EE2-8DAC-F75E53B9A78F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4480D70-006F-4EE2-8DAC-F75E53B9A78F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4480D70-006F-4EE2-8DAC-F75E53B9A78F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{897AF149-F0DB-4DB8-9699-A12159F1AAFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897AF149-F0DB-4DB8-9699-A12159F1AAFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897AF149-F0DB-4DB8-9699-A12159F1AAFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897AF149-F0DB-4DB8-9699-A12159F1AAFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
