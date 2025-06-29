@@ -5,11 +5,6 @@ using Company.Application.Share.Events;
 using Company.Application.Share.Models;
 using Company.Application.Share.Prism;
 using Company.Core.Ioc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -34,6 +29,10 @@ namespace Shell.ViewModels
 
         private void OnLoaded()
         {
+            var mainRegion = PrismProvider.RegionManager?.Regions[RegionNames.MainRegion];
+            if (mainRegion != null)
+                mainRegion.NavigationService.Navigated += NavigationService_Navigated;
+
             // 确保登录模块已加载
             PrismProvider.ModuleManager?.LoadModule(nameof(ApplicationLoginModule));
 
@@ -54,6 +53,32 @@ namespace Shell.ViewModels
             Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
             Application.Current.MainWindow.Title = $"{Title} - {user.UserName}"; // 更新窗口标题
             MessageBox.Show($"欢迎回来，{user.UserName}！", "登录成功", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private Window MainWindow { get; } = Application.Current.MainWindow;
+
+        private void NavigationService_Navigated(object? sender, RegionNavigationEventArgs e)
+        {
+            switch(e.Uri.OriginalString)
+            {
+                case nameof(LoginView):
+                    // 登录视图被导航到时，可以执行一些特定的操作
+                    MainWindow.ResizeMode = ResizeMode.NoResize; // 禁止调整大小
+                    MainWindow.SizeToContent = SizeToContent.WidthAndHeight; // 根据内容自动调整大小
+                    MainWindow.WindowState = WindowState.Normal; // 确保窗口处于正常状态
+                    MainWindow.WindowStyle = WindowStyle.None; // 设置窗口样式为无边框
+                    break;
+
+                case nameof(MainView):
+                    // 主视图被导航到时，可以执行一些特定的操作
+                    MainWindow.ResizeMode = ResizeMode.CanResize; // 允许调整大小
+                    MainWindow.SizeToContent = SizeToContent.Manual; // 手动设置大小
+                    MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
+                    MainWindow.WindowStyle = WindowStyle.SingleBorderWindow; // 设置窗口样式为单边框窗口
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnLoginCancelled()

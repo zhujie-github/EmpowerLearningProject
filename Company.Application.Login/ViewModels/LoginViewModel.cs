@@ -2,15 +2,6 @@
 using Company.Application.Share.Models;
 using Company.Core.Dialogs;
 using Company.Core.Ioc;
-using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace Company.Application.Login.ViewModels
 {
@@ -18,7 +9,7 @@ namespace Company.Application.Login.ViewModels
     {
         private CurrentUser CurrentUser { get; set; } = new CurrentUser();
 
-        private string? _login;
+        private string? _login = "admin";
         public string? Login
         {
             get => _login;
@@ -29,7 +20,7 @@ namespace Company.Application.Login.ViewModels
             }
         }
 
-        private string? _password;
+        private string? _password = "123";
         public string? Password
         {
             get => _password;
