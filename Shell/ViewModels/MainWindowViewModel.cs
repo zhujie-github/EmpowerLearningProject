@@ -52,7 +52,6 @@ namespace Shell.ViewModels
             // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
             Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
             Application.Current.MainWindow.Title = $"{Title} - {user.UserName}"; // 更新窗口标题
-            MessageBox.Show($"欢迎回来，{user.UserName}！", "登录成功", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private Window MainWindow { get; } = Application.Current.MainWindow;
