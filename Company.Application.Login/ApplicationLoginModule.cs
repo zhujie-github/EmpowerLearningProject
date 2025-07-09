@@ -12,7 +12,7 @@ namespace Company.Application.Login
     /// <summary>
     /// 登录模块 - 按需延迟加载
     /// </summary>
-    [Module(OnDemand = true)]
+    [Module(ModuleName = ModuleNames.ApplicationLoginModule, OnDemand = true)]
     public class ApplicationLoginModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

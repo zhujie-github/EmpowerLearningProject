@@ -1,7 +1,4 @@
-﻿using Company.Application.Login;
-using Company.Application.Login.Views;
-using Company.Application.Main.Views;
-using Company.Application.Share.Events;
+﻿using Company.Application.Share.Events;
 using Company.Application.Share.Models;
 using Company.Application.Share.Prism;
 using Company.Core.Ioc;
@@ -34,10 +31,10 @@ namespace Shell.ViewModels
                 mainRegion.NavigationService.Navigated += NavigationService_Navigated;
 
             // 确保登录模块已加载
-            PrismProvider.ModuleManager?.LoadModule(nameof(ApplicationLoginModule));
+            PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationLoginModule);
 
             // 导航到登录视图
-            PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, nameof(LoginView));
+            PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
 
             // 订阅登录成功、登录取消事件
             PrismProvider.EventAggregator?.GetEvent<LoginSucceededEvent>().Subscribe(OnLoginSucceeded);
@@ -47,7 +44,7 @@ namespace Shell.ViewModels
         private void OnLoginSucceeded(CurrentUser user)
         {
             // 登录成功后，导航到主界面或其他视图
-            PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, nameof(MainView));
+            PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
 
             // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
             Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
@@ -60,7 +57,7 @@ namespace Shell.ViewModels
         {
             switch(e.Uri.OriginalString)
             {
-                case nameof(LoginView):
+                case ViewNames.LoginView:
                     // 登录视图被导航到时，可以执行一些特定的操作
                     MainWindow.ResizeMode = ResizeMode.NoResize; // 禁止调整大小
                     MainWindow.SizeToContent = SizeToContent.WidthAndHeight; // 根据内容自动调整大小
@@ -68,7 +65,7 @@ namespace Shell.ViewModels
                     MainWindow.WindowStyle = WindowStyle.None; // 设置窗口样式为无边框
                     break;
 
-                case nameof(MainView):
+                case ViewNames.MainView:
                     // 主视图被导航到时，可以执行一些特定的操作
                     MainWindow.ResizeMode = ResizeMode.CanResize; // 允许调整大小
                     MainWindow.SizeToContent = SizeToContent.Manual; // 手动设置大小

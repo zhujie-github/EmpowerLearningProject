@@ -11,7 +11,7 @@ namespace Company.Application.Share.Prism
         /// </summary>
         public const string ImageRegion = "ImageRegion";
         /// <summary>
-        /// 菜单区域
+        /// 主菜单区域
         /// </summary>
         public const string MenuRegion = "MenuRegion";
     }

@@ -7,14 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
     prism:ViewModelLocator.AutoWireViewModel="True"
     Background="LightBlue"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
             <ColumnDefinition Width="500" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">

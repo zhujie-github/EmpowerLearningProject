@@ -24,6 +24,7 @@ namespace Shell
             moduleCatalog.AddModule<Company.Core.CoreModule>();
             moduleCatalog.AddModule<Company.Application.Main.ApplicationMainModule>();
             moduleCatalog.AddModule<Company.Application.Login.ApplicationLoginModule>();
+            moduleCatalog.AddModule<Company.Application.Menu.ApplicationMenuModule>();
         }
     }
 }

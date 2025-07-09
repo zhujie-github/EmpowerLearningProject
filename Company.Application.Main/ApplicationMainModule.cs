@@ -1,11 +1,11 @@
-
-
 using Company.Application.Main.ViewModels;
 using Company.Application.Main.Views;
 using Company.Application.Share.Prism;
 
 namespace Company.Application.Main
 {
+    [Module(ModuleName = ModuleNames.ApplicationMainModule, OnDemand = true)]
+    [ModuleDependency(ModuleNames.ApplicationMenuModule)]
     public class ApplicationMainModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
