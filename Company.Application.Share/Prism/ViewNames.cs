@@ -16,5 +16,10 @@
         /// 主菜单视图
         /// </summary>
         public const string MenuView = "MenuView";
+
+        /// <summary>
+        /// 图片视图
+        /// </summary>
+        public const string ImageView = "ImageView";
     }
 }

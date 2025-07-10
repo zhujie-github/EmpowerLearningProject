@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Shell
 {
@@ -11,7 +9,7 @@ namespace Shell
     {
         protected override Window CreateShell()
         {
-            return new Views.MainWindow();
+            return Container.Resolve<Views.MainWindow>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -25,6 +23,7 @@ namespace Shell
             moduleCatalog.AddModule<Company.Application.Main.ApplicationMainModule>();
             moduleCatalog.AddModule<Company.Application.Login.ApplicationLoginModule>();
             moduleCatalog.AddModule<Company.Application.Menu.ApplicationMenuModule>();
+            moduleCatalog.AddModule<Company.Application.Image.ApplicationImageModule>();
         }
     }
 }

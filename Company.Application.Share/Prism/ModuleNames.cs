@@ -16,5 +16,10 @@
         /// 主菜单模块
         /// </summary>
         public const string ApplicationMenuModule = "ApplicationMenuModule";
+
+        /// <summary>
+        /// 图片模块
+        /// </summary>
+        public const string ApplicationImageModule = "ApplicationImageModule";
     }
 }

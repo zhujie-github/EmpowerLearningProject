@@ -1,26 +1,26 @@
-﻿using Company.Application.Menu.Views;
+﻿using Company.Application.Image.Views;
 using Company.Application.Share.Prism;
 using Company.Core.Extensions;
 using System.Reflection;
 
-namespace Company.Application.Menu
+namespace Company.Application.Image
 {
     /// <summary>
-    /// 主菜单模块 - 按需延迟加载
+    /// 图片模块 - 按需延迟加载
     /// </summary>
-    [Module(ModuleName = ModuleNames.ApplicationMenuModule, OnDemand = true)]
-    public class ApplicationMenuModule : IModule
+    [Module(ModuleName = ModuleNames.ApplicationImageModule, OnDemand = true)]
+    public class ApplicationImageModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
             containerProvider.InitializeAssembly(Assembly.GetExecutingAssembly());
-            containerProvider.Resolve<IRegionManager>().RequestNavigate(RegionNames.MenuRegion, ViewNames.MenuView);
+            containerProvider.Resolve<IRegionManager>().RequestNavigate(RegionNames.ImageRegion, ViewNames.ImageView);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            containerRegistry.RegisterForNavigation<MenuView>();
+            containerRegistry.RegisterForNavigation<ImageView>();
         }
     }
 }

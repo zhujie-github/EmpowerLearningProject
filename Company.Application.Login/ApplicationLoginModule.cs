@@ -1,11 +1,5 @@
-﻿using Company.Application.Login.ViewModels;
-using Company.Application.Login.Views;
+﻿using Company.Application.Login.Views;
 using Company.Application.Share.Prism;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Company.Application.Login
 {
@@ -17,7 +11,7 @@ namespace Company.Application.Login
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<LoginView>(RegionNames.MainRegion);
+            containerProvider.Resolve<IRegionManager>().RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHelper", "WpfHelper\WpfH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Menu", "Company.Application.Menu\Company.Application.Menu.csproj", "{391E208B-98E5-4F77-A796-8DA2A430FB78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Image", "Company.Application.Image\Company.Application.Image.csproj", "{2FE919D0-0AC2-4ACC-9112-D0456830EF2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{391E208B-98E5-4F77-A796-8DA2A430FB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{391E208B-98E5-4F77-A796-8DA2A430FB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{391E208B-98E5-4F77-A796-8DA2A430FB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE919D0-0AC2-4ACC-9112-D0456830EF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE919D0-0AC2-4ACC-9112-D0456830EF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE919D0-0AC2-4ACC-9112-D0456830EF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE919D0-0AC2-4ACC-9112-D0456830EF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{B0928907-BE10-493B-BB4A-851719E83BD7} = {64060B5E-1C8A-49CC-82F1-CEAD9DB10CAD}
 		{B4480D70-006F-4EE2-8DAC-F75E53B9A78F} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{391E208B-98E5-4F77-A796-8DA2A430FB78} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2FE919D0-0AC2-4ACC-9112-D0456830EF2A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77E1C007-B2CE-476B-A879-0F2F7B232048}
