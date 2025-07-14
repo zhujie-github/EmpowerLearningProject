@@ -6,7 +6,7 @@
 
         public bool Initialized { get; private set; }
 
-        public event Action<nint> ImageCaptured;
+        public event Action<nint>? ImageCaptured;
 
         public bool Init(CameraConfig cameraConfig)
         {
