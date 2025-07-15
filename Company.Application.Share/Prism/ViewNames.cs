@@ -23,6 +23,11 @@
         public const string ImageView = "ImageView";
 
         /// <summary>
+        /// 硬件初始化视图
+        /// </summary>
+        public const string InitializeView = "InitializeView";
+
+        /// <summary>
         /// 配置试图
         /// </summary>
         public const string ConfigView = "ConfigView";

@@ -1,11 +1,11 @@
 ﻿namespace Company.Hardware.Camera
 {
-    internal interface ICamera
+    public interface ICamera
     {
         /// <summary>
         /// 事件：相机拍照完成
         /// </summary>
-        event Action<IntPtr> ImageCaptured;
+        event Action<nint>? ImageCaptured;
 
         /// <summary>
         /// 相机是否初始化完成

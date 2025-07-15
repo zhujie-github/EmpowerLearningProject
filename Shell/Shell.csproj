@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Company.Application.Config\Company.Application.Config.csproj" />
     <ProjectReference Include="..\Company.Application.Image\Company.Application.Image.csproj" />
+    <ProjectReference Include="..\Company.Application.Initialize\Company.Application.Initialize.csproj" />
     <ProjectReference Include="..\Company.Application.Login\Company.Application.Login.csproj" />
     <ProjectReference Include="..\Company.Application.Main\Company.Application.Main.csproj" />
     <ProjectReference Include="..\Company.Application.Menu\Company.Application.Menu.csproj" />

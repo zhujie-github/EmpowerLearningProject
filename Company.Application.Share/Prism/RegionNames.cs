@@ -18,6 +18,11 @@ namespace Company.Application.Share.Prism
         public const string MenuRegion = "MenuRegion";
 
         /// <summary>
+        /// 硬件初始化区域
+        /// </summary>
+        public const string InitializeRegion = "InitializeRegion";
+
+        /// <summary>
         /// 配置区域
         /// </summary>
         public const string ConfigRegion = "ConfigRegion";
