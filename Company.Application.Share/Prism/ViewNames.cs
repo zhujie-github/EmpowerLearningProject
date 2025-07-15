@@ -21,5 +21,10 @@
         /// 图片视图
         /// </summary>
         public const string ImageView = "ImageView";
+
+        /// <summary>
+        /// 配置试图
+        /// </summary>
+        public const string ConfigView = "ConfigView";
     }
 }

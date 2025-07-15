@@ -21,5 +21,10 @@
         /// 图片模块
         /// </summary>
         public const string ApplicationImageModule = "ApplicationImageModule";
+
+        /// <summary>
+        /// 配置模块
+        /// </summary>
+        public const string ApplicationConfigModule = "ApplicationConfigModule";
     }
 }
