@@ -1,21 +1,66 @@
-﻿
+﻿using Company.Core.Helpers;
+using Company.Core.Models;
+using System.Drawing;
+using System.Drawing.Imaging;
+
 namespace Company.Hardware.Camera.None
 {
     public class NoneCamera : CameraBase
     {
-        public override bool Trigger()
+        private UnmanagedArray2D<ColorBGRA>? _unmanagedArray;
+
+        protected override bool DoInit(out string errMsg)
         {
+            errMsg = "";
+            if (CameraConfig == null)
+            {
+                errMsg = $"{nameof(CameraConfig)} cannot be null.";
+                return false;
+            }
+
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", CameraConfig!.Photo); //todo
+            if (!File.Exists(filePath))
+            {
+                errMsg = $"Image file not found: {filePath}";
+                return false;
+            }
+
+            _unmanagedArray = new UnmanagedArray2D<ColorBGRA>(CameraConfig!.Width, CameraConfig.Height);
+            var bitmap = ImageHelper.Load(filePath);
+            if (bitmap == null)
+            {
+                errMsg = $"Failed to load image from file: {filePath}";
+                return false;
+            }
+            if (_unmanagedArray.Width != bitmap.Width || _unmanagedArray.Height != bitmap.Height)
+            {
+                errMsg = "系统设置中的相机尺寸与实际相机分辨率不一致";
+                return false;
+            }
+
+            var data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            MemoryHelper.CopyMemory(_unmanagedArray.Header, data.Scan0, _unmanagedArray.Length);
+            bitmap.UnlockBits(data);
+
             return true;
         }
 
-        protected override void DoClose()
+        protected override bool DoClose(out string errMsg)
         {
-
+            errMsg = "";
+            return true;
         }
 
-        protected override bool DoInit()
+        public override void Trigger()
         {
-            return true;
+            Task.Delay(50).ContinueWith(t =>
+            {
+                if (_unmanagedArray != null)
+                {
+                    OnImageCaptured(new Photo(_unmanagedArray));
+                }
+            });
         }
     }
 }

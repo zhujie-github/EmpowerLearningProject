@@ -16,7 +16,7 @@ namespace Company.Hardware.Camera.None
 
             if (!containerRegistry.IsRegistered<ICamera>())
             {
-                containerRegistry.Register<ICamera, NoneCamera>(); //注册仿真相机到IoC容器
+                containerRegistry.RegisterSingleton<ICamera, NoneCamera>(); //注册仿真相机到IoC容器
             }
         }
     }

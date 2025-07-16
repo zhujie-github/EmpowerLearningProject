@@ -11,29 +11,40 @@
         public bool Init(CameraConfig cameraConfig)
         {
             CameraConfig = cameraConfig;
+
             if (Initialized)
             {
                 throw new Exception("Camera is already initialized.");
+                //todo log error
             }
 
-            if (DoInit())
+            if (!DoInit(out var errMsg))
             {
-                Initialized = true;
-                return true;
+                throw new Exception($"Camera initialization failed: {errMsg}");
+                //todo log error
             }
 
-            return false;
+            Initialized = true;
+            return true;
         }
 
         public void Close()
         {
             if (Initialized)
             {
-                DoClose();
+                if (!DoClose(out var errMsg))
+                {
+                    throw new Exception($"Camera close failed: {errMsg}");
+                    //todo log error
+                }
                 Initialized = false;
             }
         }
 
+        /// <summary>
+        /// 拍照时触发的事件
+        /// </summary>
+        /// <param name="photo"></param>
         public void OnImageCaptured(Photo photo)
         {
             ImageCaptured?.Invoke(photo);
@@ -42,18 +53,20 @@
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，执行相机初始化逻辑。
         /// </summary>
+        /// <param name="errMsg"></param>
         /// <returns></returns>
-        protected abstract bool DoInit();
+        protected abstract bool DoInit(out string errMsg);
 
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，执行相机关闭逻辑。
         /// </summary>
-        protected abstract void DoClose();
+        /// <param name="errMsg"></param>
+        /// <returns></returns>
+        protected abstract bool DoClose(out string errMsg);
 
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，触发相机拍照逻辑。
         /// </summary>
-        /// <returns></returns>
-        public abstract bool Trigger();
+        public abstract void Trigger();
     }
 }

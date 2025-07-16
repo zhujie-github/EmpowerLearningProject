@@ -29,6 +29,6 @@
         /// 触发相机拍照
         /// </summary>
         /// <returns></returns>
-        bool Trigger();
+        void Trigger();
     }
 }
