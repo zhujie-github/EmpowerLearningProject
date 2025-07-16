@@ -1,7 +1,7 @@
 ﻿using Company.Core.Helpers;
 using System.Runtime.InteropServices;
 
-namespace Company.Core.Model
+namespace Company.Core.Models
 {
     /// <summary>
     /// 非托管数组基类
