@@ -6,7 +6,7 @@
 
         public bool Initialized { get; private set; } = false;
 
-        public bool IsCapturing { get; private set; } = false;
+        public bool IsCapturing { get; protected set; } = false;
 
         public event Action<Photo>? ImageCaptured;
 
@@ -40,6 +40,7 @@
                     //todo log error
                 }
                 Initialized = false;
+                IsCapturing = false; // 确保关闭时重置抓拍状态
             }
         }
 
@@ -52,7 +53,6 @@
                     throw new Exception($"Camera capture failed: {errMsg}");
                     //todo log error
                 }
-                IsCapturing = true;
             }
         }
 

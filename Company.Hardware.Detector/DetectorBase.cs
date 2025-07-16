@@ -1,11 +1,13 @@
-﻿namespace Company.Hardware.Detector
+﻿using Company.Core.Models;
+
+namespace Company.Hardware.Detector
 {
     public abstract class DetectorBase : IDetector
     {
         public DetectorConfig? DetectorConfig { get; private set; }
 
         public bool Initialized { get; private set; } = false;
-        public bool IsCapturing { get; private set; } = false;
+        public bool IsCapturing { get; protected set; } = false;
 
         public event Action<DetectorImage>? ImageCaptured;
 
@@ -36,6 +38,7 @@
                     throw new InvalidOperationException($"Detector close failed: {errMsg}");
                 }
                 Initialized = false;
+                IsCapturing = false; // 确保关闭时重置抓拍状态
             }
         }
 
@@ -47,7 +50,6 @@
                 {
                     throw new InvalidOperationException($"Detector capture failed: {errMsg}");
                 }
-                IsCapturing = true;
             }
         }
 
@@ -55,9 +57,9 @@
         /// 拍照时触发的事件
         /// </summary>
         /// <param name="image"></param>
-        public void OnImageCaptured(DetectorImage image)
+        public void OnImageCaptured(UnmanagedArray2D<ushort> image)
         {
-            ImageCaptured?.Invoke(image);
+            ImageCaptured?.Invoke(new DetectorImage(image));
         }
 
         /// <summary>

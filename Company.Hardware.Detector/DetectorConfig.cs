@@ -9,6 +9,6 @@
 
         public int Height { get; set; }
 
-        public string? Photo { get; set; } = "1.tiff";
+        public string Photo { get; set; } = "1.tiff";
     }
 }

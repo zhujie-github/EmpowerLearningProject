@@ -39,6 +39,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Initial
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Hardware.Camera.None", "Company.Hardware.Camera.None\Company.Hardware.Camera.None.csproj", "{60424CB2-B342-DEF5-17A8-C4C98CB900E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Hardware.Detector.None", "Company.Hardware.Detector.None\Company.Hardware.Detector.None.csproj", "{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{60424CB2-B342-DEF5-17A8-C4C98CB900E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60424CB2-B342-DEF5-17A8-C4C98CB900E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60424CB2-B342-DEF5-17A8-C4C98CB900E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{DACC2666-E4FB-4DF4-8593-1216D73D846A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{320602E6-3530-4546-B2CC-361DDA3EFD19} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{60424CB2-B342-DEF5-17A8-C4C98CB900E0} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
+		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77E1C007-B2CE-476B-A879-0F2F7B232048}
