@@ -2,11 +2,11 @@
 {
     public abstract class CameraBase : ICamera
     {
-        private CameraConfig? CameraConfig { get; set; }
+        public CameraConfig? CameraConfig { get; private set; }
 
-        public bool Initialized { get; private set; }
+        public bool Initialized { get; private set; } = false;
 
-        public event Action<nint>? ImageCaptured;
+        public event Action<Photo>? ImageCaptured;
 
         public bool Init(CameraConfig cameraConfig)
         {
@@ -34,9 +34,9 @@
             }
         }
 
-        public void OnImageCaptured(nint image)
+        public void OnImageCaptured(Photo photo)
         {
-            ImageCaptured?.Invoke(image);
+            ImageCaptured?.Invoke(photo);
         }
 
         /// <summary>
