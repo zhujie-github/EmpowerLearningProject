@@ -1,29 +1,26 @@
-﻿namespace Company.Hardware.Camera
+﻿namespace Company.Hardware.Detector
 {
-    public abstract class CameraBase : ICamera
+    public abstract class DetectorBase : IDetector
     {
-        public CameraConfig? CameraConfig { get; private set; }
+        public DetectorConfig? DetectorConfig { get; private set; }
 
         public bool Initialized { get; private set; } = false;
-
         public bool IsCapturing { get; private set; } = false;
 
-        public event Action<Photo>? ImageCaptured;
+        public event Action<DetectorImage>? ImageCaptured;
 
-        public bool Init(CameraConfig cameraConfig)
+        public bool Init(DetectorConfig detectorConfig)
         {
-            CameraConfig = cameraConfig;
+            DetectorConfig = detectorConfig;
 
             if (Initialized)
             {
-                throw new Exception("Camera is already initialized.");
-                //todo log error
+                throw new InvalidOperationException("Detector is already initialized.");
             }
 
             if (!DoInit(out var errMsg))
             {
-                throw new Exception($"Camera initialization failed: {errMsg}");
-                //todo log error
+                throw new InvalidOperationException($"Detector initialization failed: {errMsg}");
             }
 
             Initialized = true;
@@ -36,8 +33,7 @@
             {
                 if (!DoClose(out var errMsg))
                 {
-                    throw new Exception($"Camera close failed: {errMsg}");
-                    //todo log error
+                    throw new InvalidOperationException($"Detector close failed: {errMsg}");
                 }
                 Initialized = false;
             }
@@ -49,8 +45,7 @@
             {
                 if (!DoCapture(out var errMsg))
                 {
-                    throw new Exception($"Camera capture failed: {errMsg}");
-                    //todo log error
+                    throw new InvalidOperationException($"Detector capture failed: {errMsg}");
                 }
                 IsCapturing = true;
             }
@@ -59,10 +54,10 @@
         /// <summary>
         /// 拍照时触发的事件
         /// </summary>
-        /// <param name="photo"></param>
-        public void OnImageCaptured(Photo photo)
+        /// <param name="image"></param>
+        public void OnImageCaptured(DetectorImage image)
         {
-            ImageCaptured?.Invoke(photo);
+            ImageCaptured?.Invoke(image);
         }
 
         /// <summary>
@@ -80,7 +75,7 @@
         protected abstract bool DoClose(out string errMsg);
 
         /// <summary>
-        /// 抽象方法，由具体相机实现类实现，执行相机抓拍逻辑。
+        /// 抽象方法，由具体相机实现类实现，触发相机拍照逻辑。
         /// </summary>
         public abstract bool DoCapture(out string errMsg);
     }

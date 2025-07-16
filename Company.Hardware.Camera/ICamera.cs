@@ -14,6 +14,11 @@
         bool Initialized { get; }
 
         /// <summary>
+        /// 相机是否正在抓拍
+        /// </summary>
+        bool IsCapturing { get; }
+
+        /// <summary>
         /// 相机初始化
         /// </summary>
         /// <returns></returns>
@@ -26,9 +31,9 @@
         void Close();
 
         /// <summary>
-        /// 触发相机拍照
+        /// 相机抓拍
         /// </summary>
         /// <returns></returns>
-        void Trigger();
+        void Capture();
     }
 }

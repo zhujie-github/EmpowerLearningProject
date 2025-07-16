@@ -1,12 +1,12 @@
 ﻿using Company.Core.Models;
 using System.Runtime.InteropServices;
 
-namespace Company.Hardware.Camera
+namespace Company.Hardware.Detector
 {
     /// <summary>
-    /// 相机的图像数据结构
+    /// 平板探测器的图像数据结构
     /// </summary>
-    public readonly struct Photo
+    public readonly struct DetectorImage
     {
         /// <summary>
         /// 图像数据的指针
@@ -26,9 +26,9 @@ namespace Company.Hardware.Camera
         /// <summary>
         /// 占据内存总长度（字节数）
         /// </summary>
-        public readonly int Length => Width * Height * Marshal.SizeOf(typeof(ColorBGRA));
+        public readonly int Length => Width * Height * Marshal.SizeOf(typeof(ushort));
 
-        public Photo(UnmanagedArray2D<ColorBGRA> data)
+        public DetectorImage(UnmanagedArray2D<ushort> data)
         {
             if (data is null)
             {

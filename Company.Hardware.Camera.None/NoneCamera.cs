@@ -52,8 +52,9 @@ namespace Company.Hardware.Camera.None
             return true;
         }
 
-        public override void Trigger()
+        public override bool DoCapture(out string errMsg)
         {
+            errMsg = "";
             Task.Delay(50).ContinueWith(t =>
             {
                 if (_unmanagedArray != null)
@@ -61,6 +62,7 @@ namespace Company.Hardware.Camera.None
                     OnImageCaptured(new Photo(_unmanagedArray));
                 }
             });
+            return true;
         }
     }
 }
