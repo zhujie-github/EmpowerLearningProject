@@ -14,7 +14,8 @@ namespace Company.Core.Configs
 
         private static string GetFullPath(ValueType key)
         {
-            return Path.Combine(ConfigDirName, key.GetType().FullName + key.ToString() + ConfigFileExt);
+            return Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory, ConfigDirName, $"{key.GetType().FullName}.{key}{ConfigFileExt}");
         }
 
         public T? Read<T>(ValueType key)

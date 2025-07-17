@@ -1,4 +1,6 @@
-﻿using Company.Core.Ioc;
+﻿using Company.Application.Config.Services;
+using Company.Application.Share.Configs;
+using Company.Core.Ioc;
 using Company.Hardware.Camera;
 using Company.Hardware.Detector;
 
@@ -8,12 +10,14 @@ namespace Company.Application.Initialize.Services
     /// 硬件生命周期管理器
     /// </summary>
     [ExposedService(Lifetime.Singleton, true)]
-    public class HardwareLifetimeManager(ICamera camera, IDetector detector)
+    public class HardwareLifetimeManager(SystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector) //TODO
     {
         /// <summary>
         /// 所有硬件加载成功
         /// </summary>
         public bool IsInitialized { get; set; } = false;
+
+        public ISystemConfigProvider SystemConfigProvider { get; } = systemConfigProvider;
 
         public ICamera Camera { get; } = camera;
 
@@ -33,8 +37,8 @@ namespace Company.Application.Initialize.Services
                 return (false, msg);
             }
 
-            var task_camera = Task.Run(() => Camera.Init(new CameraConfig()));
-            var task_detector = Task.Run(() => Detector.Init(new DetectorConfig()));
+            var task_camera = Task.Run(() => Camera.Init(SystemConfigProvider.CameraConfig));
+            var task_detector = Task.Run(() => Detector.Init(SystemConfigProvider.DetectorConfig));
             var taskResults = await Task.WhenAll(task_camera, task_detector);
             IsInitialized = taskResults.All(r => r.Item1);
             var msgs = new List<string>();
