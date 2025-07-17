@@ -25,10 +25,8 @@ namespace Company.Core.Helpers
             }
 
             var bytes = FileHelper.Load(filePath);
-            using (var memoryStream = new MemoryStream(bytes))
-            {
-                return Image.FromStream(memoryStream) as Bitmap;
-            }
+            using var memoryStream = new MemoryStream(bytes);
+            return Image.FromStream(memoryStream) as Bitmap;
         }
 
         /// <summary>
@@ -45,12 +43,12 @@ namespace Company.Core.Helpers
             }
 
             var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var decoder = new TiffBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
             var bitmapSource = decoder.Frames[0];
             var width = bitmapSource.PixelWidth;
             var height = bitmapSource.PixelHeight;
             var stride = width * bitmapSource.Format.BitsPerPixel / 8;
-            var pixels = new ushort[width * height];
+            var pixels = new ushort[stride * height];
             bitmapSource.CopyPixels(pixels, stride, 0);
             var bitmap = bitmapSource.ToBitmap();
             var bitmapData = bitmap.LockBits();

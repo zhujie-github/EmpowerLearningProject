@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Prism;
+﻿using Company.Application.Initialize.Views;
+using Company.Application.Share.Prism;
 using Company.Core.Extensions;
 using System.Reflection;
 
@@ -16,7 +17,7 @@ namespace Company.Application.Initialize
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
-            containerRegistry.RegisterForNavigation<Views.InitializeView>();
+            containerRegistry.RegisterForNavigation<InitializeView>();
         }
     }
 }

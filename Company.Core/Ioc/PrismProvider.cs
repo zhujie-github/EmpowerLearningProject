@@ -1,10 +1,6 @@
 ﻿using Company.Core.Language;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace Company.Core.Ioc
 {
@@ -23,6 +19,8 @@ namespace Company.Core.Ioc
 
         public static IModuleManager? ModuleManager { get; private set; }
 
+        public static Dispatcher? Dispatcher { get; private set; }
+
         public PrismProvider(ILanguageManager languageManager, IContainerExtension container, IRegionManager regionManager, IDialogService dialogService, IEventAggregator eventAggregator, IModuleManager moduleManager)
         {
             LanguageManager = languageManager;
@@ -31,6 +29,7 @@ namespace Company.Core.Ioc
             DialogService = dialogService;
             EventAggregator = eventAggregator;
             ModuleManager = moduleManager;
+            Dispatcher = Application.Current.Dispatcher;
         }
     }
 }

@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="detectorConfig"></param>
         /// <returns></returns>
-        bool Init(DetectorConfig detectorConfig);
+        (bool, string?) Init(DetectorConfig detectorConfig);
 
         /// <summary>
         /// 关闭

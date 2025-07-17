@@ -31,7 +31,7 @@ namespace Shell.ViewModels
                 mainRegion.NavigationService.Navigated += NavigationService_Navigated;
 
             // 确保登录模块已加载
-            PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationLoginModule);
+            //PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationLoginModule);
 
             // 导航到登录视图
             PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
@@ -41,10 +41,20 @@ namespace Shell.ViewModels
             PrismProvider.EventAggregator?.GetEvent<LoginCancelledEvent>().Subscribe(OnLoginCancelled);
         }
 
+        public bool IsHardwareInitialized { get; private set; } = false;
+
         private void OnLoginSucceeded(CurrentUser user)
         {
-            // 登录成功后，导航到主界面或其他视图
-            PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
+            if (IsHardwareInitialized)
+            {
+                // 登录成功后，导航到主界面或其他视图
+                //PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationMainModule);
+                PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
+            }
+            else
+            {
+                PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.InitializeView);
+            }
 
             // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
             Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口

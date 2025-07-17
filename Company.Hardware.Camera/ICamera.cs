@@ -22,7 +22,7 @@
         /// 相机初始化
         /// </summary>
         /// <returns></returns>
-        bool Init(CameraConfig cameraConfig);
+        (bool, string?) Init(CameraConfig cameraConfig);
 
         /// <summary>
         /// 相机关闭

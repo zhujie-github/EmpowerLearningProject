@@ -34,6 +34,10 @@ namespace Company.Core.Extensions
             {
                 pixelFormat = PixelFormat.Format32bppArgb;
             }
+            else if (bitmapSource.Format == System.Windows.Media.PixelFormats.Bgra32)
+            {
+                pixelFormat = PixelFormat.Format32bppArgb;
+            }
             else
             {
                 throw new NotSupportedException($"Unsupported pixel format: {bitmapSource.Format}");

@@ -11,22 +11,32 @@ namespace Company.Hardware.Detector
 
         public event Action<DetectorImage>? ImageCaptured;
 
-        public bool Init(DetectorConfig detectorConfig)
+        public (bool, string?) Init(DetectorConfig detectorConfig)
         {
             DetectorConfig = detectorConfig;
+            string? msg;
 
             if (Initialized)
             {
-                throw new InvalidOperationException("Detector is already initialized.");
+                msg = "Detector is already initialized.";
+                return (false, msg);
             }
 
-            if (!DoInit(out var errMsg))
+            try
             {
-                throw new InvalidOperationException($"Detector initialization failed: {errMsg}");
+                if (!DoInit(out msg))
+                {
+                    return (false, msg);
+                }
+            }
+            catch (Exception e)
+            {
+                msg = e.Message;
+                return (false, msg);
             }
 
             Initialized = true;
-            return true;
+            return (true, msg);
         }
 
         public void Close()

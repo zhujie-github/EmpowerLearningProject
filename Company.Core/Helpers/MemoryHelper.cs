@@ -13,8 +13,8 @@ namespace Company.Core.Helpers
         /// </summary>
         /// <param name="ptr"></param>
         /// <param name="length"></param>
-        [DllImport("kernel32.dll", EntryPoint = "RtZeroMemory", CharSet = CharSet.Ansi)]
-        public static extern void ZeroMemory(nint ptr, long length);
+        [DllImport("kernel32.dll", EntryPoint = "RtlZeroMemory", CharSet = CharSet.Ansi)]
+        public static extern void ZeroMemory(IntPtr ptr, long length);
 
         /// <summary>
         /// 复制内存
@@ -22,8 +22,8 @@ namespace Company.Core.Helpers
         /// <param name="dest"></param>
         /// <param name="src"></param>
         /// <param name="length"></param>
-        [DllImport("kernel32.dll", EntryPoint = "RtMoveMemory", CharSet = CharSet.Ansi)]
-        public static extern void CopyMemory(nint dest, nint src, long length);
+        [DllImport("kernel32.dll", EntryPoint = "RtlMoveMemory", CharSet = CharSet.Ansi)]
+        public static extern void CopyMemory(IntPtr dest, IntPtr src, long length);
 
         /// <summary>
         /// 填充内存
@@ -31,7 +31,7 @@ namespace Company.Core.Helpers
         /// <param name="dest"></param>
         /// <param name="length"></param>
         /// <param name="value"></param>
-        [DllImport("kernel32.dll", EntryPoint = "RtFillMemory", CharSet = CharSet.Ansi)]
-        public static extern void FillMemory(nint dest, long length, byte value);
+        [DllImport("kernel32.dll", EntryPoint = "RtlFillMemory", CharSet = CharSet.Ansi)]
+        public static extern void FillMemory(IntPtr dest, long length, byte value);
     }
 }

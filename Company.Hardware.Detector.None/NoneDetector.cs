@@ -18,7 +18,7 @@ namespace Company.Hardware.Detector.None
                 return false;
             }
 
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", DetectorConfig!.Photo); //todo
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", DetectorConfig!.Photo);
             if (!File.Exists(filePath))
             {
                 errMsg = $"Image file not found: {filePath}";
@@ -26,10 +26,10 @@ namespace Company.Hardware.Detector.None
             }
 
             _unmanagedArray = ImageHelper.LoadTiff(filePath);
-            _unmanagedArray = _unmanagedArray ?? new UnmanagedArray2D<ushort>(DetectorConfig.Width, DetectorConfig.Height);
+            _unmanagedArray ??= new UnmanagedArray2D<ushort>(DetectorConfig.Width, DetectorConfig.Height);
             if (_unmanagedArray.Width != DetectorConfig.Width || _unmanagedArray.Height != DetectorConfig.Height)
             {
-                errMsg = "系统设置中的FPD尺寸与实际的FPD分辨率不一致";
+                errMsg = $"系统设置中的FPD尺寸({DetectorConfig.Width}*{DetectorConfig.Height})与实际的FPD分辨率({_unmanagedArray.Width}*{_unmanagedArray.Height})不一致";
                 return false;
             }
             Thread.Sleep(1000); // 模拟延时，实际应用中可能需要更复杂的逻辑

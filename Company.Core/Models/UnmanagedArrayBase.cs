@@ -11,7 +11,7 @@ namespace Company.Core.Models
         /// <summary>
         /// 图像数据的指针
         /// </summary>
-        public nint Header { get; private set; }
+        public IntPtr Header { get; private set; }
 
         /// <summary>
         /// 元素的数量
@@ -39,7 +39,7 @@ namespace Company.Core.Models
             }
             Count = count;
             Size = size;
-            Header = Marshal.AllocHGlobal(new nint(Length));
+            Header = Marshal.AllocHGlobal(new IntPtr(Length));
             if (isResetMemory)
             {
                 // 初始化内存为零
@@ -70,10 +70,10 @@ namespace Company.Core.Models
             }
 
             // 释放非托管资源
-            if (Header != nint.Zero)
+            if (Header != IntPtr.Zero)
             {
                 Marshal.FreeHGlobal(Header);
-                Header = nint.Zero;
+                Header = IntPtr.Zero;
             }
 
             _disposed = true;

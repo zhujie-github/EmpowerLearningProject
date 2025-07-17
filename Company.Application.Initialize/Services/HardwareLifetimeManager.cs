@@ -1,5 +1,4 @@
-﻿using Company.Application.Initialize.Models;
-using Company.Core.Ioc;
+﻿using Company.Core.Ioc;
 using Company.Hardware.Camera;
 using Company.Hardware.Detector;
 
@@ -9,64 +8,42 @@ namespace Company.Application.Initialize.Services
     /// 硬件生命周期管理器
     /// </summary>
     [ExposedService(Lifetime.Singleton, true)]
-    public class HardwareLifetimeManager
+    public class HardwareLifetimeManager(ICamera camera, IDetector detector)
     {
         /// <summary>
         /// 所有硬件加载成功
         /// </summary>
         public bool IsInitialized { get; set; } = false;
 
-        public ICamera Camera { get; }
+        public ICamera Camera { get; } = camera;
 
-        public IDetector Detector { get; }
-
-        public HardwareLifetimeManager(ICamera camera, IDetector detector)
-        {
-            Camera = camera;
-            Detector = detector;
-        }
+        public IDetector Detector { get; } = detector;
 
         /// <summary>
         /// 初始化所有硬件
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<InitResult> InitAsync()
+        public async Task<(bool, string?)> InitAsync()
         {
+            string? msg = null;
+
             if (IsInitialized)
             {
-                throw new Exception("重复初始化硬件");
+                msg = "重复初始化硬件";
+                return (false, msg);
             }
 
             var task_camera = Task.Run(() => Camera.Init(new CameraConfig()));
             var task_detector = Task.Run(() => Detector.Init(new DetectorConfig()));
             var taskResults = await Task.WhenAll(task_camera, task_detector);
-            var result = taskResults.All(r => r);
-            if (!result)
-            {
-                var msg = "硬件初始化失败：";
-                if (!taskResults[0])
-                {
-                    msg += "相机|";
-                }
-                if (!taskResults[1])
-                {
-                    msg += "平板探测器|";
-                }
-                msg = msg.TrimEnd('|');
-                return new InitResult
-                {
-                    Success = false,
-                    Message = msg
-                };
-            }
+            IsInitialized = taskResults.All(r => r.Item1);
+            var msgs = new List<string>();
+            if (!taskResults[0].Item1)
+                msgs.Add($"相机:{taskResults[0].Item2}".TrimEnd(':'));
+            if (!taskResults[1].Item1)
+                msgs.Add($"平板探测器:{taskResults[1].Item2}".TrimEnd(':'));
 
-            IsInitialized = true;
-            return new InitResult
-            {
-                Success = true,
-                Message = "硬件初始化成功"
-            };
+            return (IsInitialized, string.Join(" | ", msgs));
         }
 
         /// <summary>
@@ -90,7 +67,7 @@ namespace Company.Application.Initialize.Services
             {
                 // 处理探测器关闭异常 todo
             }
-            //IsInitialized = false;
+            IsInitialized = false;
         }
     }
 }

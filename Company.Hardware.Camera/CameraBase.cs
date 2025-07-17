@@ -10,24 +10,32 @@
 
         public event Action<Photo>? ImageCaptured;
 
-        public bool Init(CameraConfig cameraConfig)
+        public (bool, string?) Init(CameraConfig cameraConfig)
         {
             CameraConfig = cameraConfig;
+            string? msg;
 
             if (Initialized)
             {
-                throw new Exception("Camera is already initialized.");
-                //todo log error
+                msg = "Camera is already initialized.";
+                return (false, msg);
             }
 
-            if (!DoInit(out var errMsg))
+            try
             {
-                throw new Exception($"Camera initialization failed: {errMsg}");
-                //todo log error
+                if (!DoInit(out msg))
+                {
+                    return (false, msg);
+                }
+            }
+            catch (Exception e)
+            {
+                msg = e.Message;
+                return (false, msg);
             }
 
             Initialized = true;
-            return true;
+            return (true, msg);
         }
 
         public void Close()

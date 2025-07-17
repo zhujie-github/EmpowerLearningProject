@@ -21,7 +21,6 @@ namespace Company.Core.Models
         {
             Width = width;
             Height = height;
-
         }
 
         public UnmanagedArray2D<T> DeepClone()

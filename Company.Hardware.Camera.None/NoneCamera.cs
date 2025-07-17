@@ -18,7 +18,7 @@ namespace Company.Hardware.Camera.None
                 return false;
             }
 
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", CameraConfig!.Photo); //todo
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", CameraConfig!.Photo);
             if (!File.Exists(filePath))
             {
                 errMsg = $"Image file not found: {filePath}";
@@ -34,7 +34,7 @@ namespace Company.Hardware.Camera.None
             }
             if (_unmanagedArray.Width != bitmap.Width || _unmanagedArray.Height != bitmap.Height)
             {
-                errMsg = "系统设置中的相机尺寸与实际相机分辨率不一致";
+                errMsg = $"系统设置中的相机尺寸({CameraConfig.Width}*{CameraConfig.Height})与实际相机分辨率({_unmanagedArray.Width}*{_unmanagedArray.Height})不一致";
                 return false;
             }
 
@@ -43,6 +43,7 @@ namespace Company.Hardware.Camera.None
             MemoryHelper.CopyMemory(_unmanagedArray.Header, data.Scan0, _unmanagedArray.Length);
             bitmap.UnlockBits(data);
 
+            Thread.Sleep(1000);
             return true;
         }
 

@@ -11,7 +11,7 @@ namespace Company.Hardware.Detector
         /// <summary>
         /// 图像数据的指针
         /// </summary>
-        public nint Header { get; }
+        public IntPtr Header { get; }
 
         /// <summary>
         /// 图像宽度
@@ -41,7 +41,7 @@ namespace Company.Hardware.Detector
             Header = data.Header;
             Width = data.Width;
             Height = data.Height;
-            if (Header == nint.Zero)
+            if (Header == IntPtr.Zero)
             {
                 throw new InvalidOperationException("图像数据的指针无效");
             }
