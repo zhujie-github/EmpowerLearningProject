@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Company.Logger;
+using System.Windows;
 
 namespace Shell
 {
@@ -7,6 +8,39 @@ namespace Shell
     /// </summary>
     public partial class App : PrismApplication
     {
+        public App()
+        {
+            //程序域异常
+            AppDomain.CurrentDomain.UnhandledException += (s, e) =>
+            {
+                Logger.Error((Exception)e.ExceptionObject);
+            };
+
+            //应用程序异常
+            Current.DispatcherUnhandledException += (s, e) =>
+            {
+                Logger.Error(e.Exception);
+            };
+
+            //多线程异常
+            TaskScheduler.UnobservedTaskException += (s, e) =>
+            {
+                Logger.Error(e.Exception);
+            };
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Logger.Info("应用程序启动");
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            Logger.Info("应用程序退出");
+        }
+
         protected override Window CreateShell()
         {
             return Container.Resolve<Views.MainWindow>();

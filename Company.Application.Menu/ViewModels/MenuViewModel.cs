@@ -22,11 +22,11 @@ namespace Company.Application.Menu.ViewModels
         {
             if (result.Result == ButtonResult.OK)
             {
-                // 处理确认逻辑
+                // 处理确认逻辑 todo
             }
             else if (result.Result == ButtonResult.Cancel)
             {
-                // 处理取消逻辑
+                // 处理取消逻辑 todo
             }
         }
     }
