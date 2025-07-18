@@ -11,7 +11,7 @@ namespace Company.Application.Config.Services
     [ExposedService(Lifetime.Singleton, true, typeof(ISystemConfigProvider), typeof(ISoftwareConfigProvider), typeof(ICameraConfigProvider), typeof(IDetectorConfigProvider))]
     public class SystemConfigProvider : ISystemConfigProvider, ISoftwareConfigProvider, ICameraConfigProvider, IDetectorConfigProvider
     {
-        private SystemConfigManager _systemConfigManager;
+        private readonly SystemConfigManager _systemConfigManager;
 
         public SoftwareConfig SoftwareConfig { get; set; }
 
@@ -19,17 +19,12 @@ namespace Company.Application.Config.Services
 
         public DetectorConfig DetectorConfig { get; private set; }
 
-        public event Action ConfigChanged;
+        public event Action? ConfigChanged;
 
         public SystemConfigProvider(SystemConfigManager systemConfigManager)
         {
             _systemConfigManager = systemConfigManager;
 
-            Initialize();
-        }
-
-        private void Initialize()
-        {
             SoftwareConfig = _systemConfigManager.Config.SoftwareConfig;
             CameraConfig = _systemConfigManager.Config.CameraConfig;
             DetectorConfig = _systemConfigManager.Config.DetectorConfig;

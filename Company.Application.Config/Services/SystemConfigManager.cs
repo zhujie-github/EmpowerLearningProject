@@ -10,7 +10,7 @@ namespace Company.Application.Config.Services
     [ExposedService(Lifetime.Singleton, true)]
     public class SystemConfigManager
     {
-        private IConfigManager _configManager;
+        private readonly IConfigManager _configManager;
 
         public SystemConfigModel Config { get; set; }
 

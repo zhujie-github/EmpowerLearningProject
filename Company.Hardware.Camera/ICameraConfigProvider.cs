@@ -13,6 +13,6 @@
         /// <summary>
         /// 相机配置改变事件
         /// </summary>
-        event Action ConfigChanged;
+        event Action? ConfigChanged;
     }
 }
