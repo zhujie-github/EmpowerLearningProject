@@ -2,6 +2,6 @@
 {
     public class SoftwareConfig
     {
-        public string Name = "LearningProject";
+        public string Name { get; set; } = "LearningProject";
     }
 }

@@ -34,7 +34,7 @@ namespace Company.Hardware.Camera.None
             }
             if (_unmanagedArray.Width != bitmap.Width || _unmanagedArray.Height != bitmap.Height)
             {
-                errMsg = $"系统设置中的相机尺寸({CameraConfig.Width}*{CameraConfig.Height})与实际相机分辨率({_unmanagedArray.Width}*{_unmanagedArray.Height})不一致";
+                errMsg = $"系统设置中的相机尺寸({_unmanagedArray.Width}*{_unmanagedArray.Height})与实际相机分辨率({bitmap.Width}*{bitmap.Height})不一致";
                 return false;
             }
 

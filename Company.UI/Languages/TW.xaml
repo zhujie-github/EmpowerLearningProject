@@ -6,4 +6,5 @@
     <sys:String x:Key="密码">密碼</sys:String>
     <sys:String x:Key="登录">登入</sys:String>
     <sys:String x:Key="取消">取消</sys:String>
+    <sys:String x:Key="确定">確定</sys:String>
 </ResourceDictionary>

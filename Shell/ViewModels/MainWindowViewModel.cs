@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Events;
+﻿using Company.Application.Share.Configs;
+using Company.Application.Share.Events;
 using Company.Application.Share.Models;
 using Company.Application.Share.Prism;
 using Company.Core.Ioc;
@@ -9,7 +10,7 @@ namespace Shell.ViewModels
 {
     internal class MainWindowViewModel : BindableBase
     {
-        public string Title { get; } = "学习程序";
+        private CurrentUser? CurrentUser { get; set; }
 
         public IModuleManager ModuleManager { get; }
 
@@ -39,12 +40,15 @@ namespace Shell.ViewModels
             // 订阅登录成功、登录取消事件
             PrismProvider.EventAggregator?.GetEvent<LoginSucceededEvent>().Subscribe(OnLoginSucceeded);
             PrismProvider.EventAggregator?.GetEvent<LoginCancelledEvent>().Subscribe(OnLoginCancelled);
+            PrismProvider.EventAggregator?.GetEvent<SoftwareConfigChangedEvent>().Subscribe(OnSoftwareConfigChanged);
         }
 
         public bool IsHardwareInitialized { get; private set; } = false;
 
         private void OnLoginSucceeded(CurrentUser user)
         {
+            CurrentUser = user;
+
             if (IsHardwareInitialized)
             {
                 // 登录成功后，导航到主界面或其他视图
@@ -58,7 +62,7 @@ namespace Shell.ViewModels
 
             // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
             Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
-            Application.Current.MainWindow.Title = $"{Title} - {user.UserName}"; // 更新窗口标题
+            ChangeMainWindowTitle(); // 更新窗口标题
         }
 
         private Window MainWindow { get; } = Application.Current.MainWindow;
@@ -91,6 +95,23 @@ namespace Shell.ViewModels
         {
             // 登录取消后，可以执行一些清理操作或关闭应用程序
             Application.Current.Shutdown(); // 关闭应用程序
+        }
+
+        /// <summary>
+        /// 更新主窗口标题
+        /// </summary>
+        private void ChangeMainWindowTitle()
+        {
+            var softwareName = PrismProvider.Container?.Resolve<ISystemConfigProvider>()?.SoftwareConfig?.Name ?? "";
+            Application.Current.MainWindow.Title = $"{softwareName} - {CurrentUser?.UserName}";
+        }
+
+        /// <summary>
+        /// 软件配置修改时更新主窗体标题
+        /// </summary>
+        private void OnSoftwareConfigChanged()
+        {
+            ChangeMainWindowTitle();
         }
     }
 }

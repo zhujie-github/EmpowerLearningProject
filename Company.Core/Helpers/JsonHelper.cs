@@ -10,7 +10,7 @@ namespace Company.Core.Helpers
     /// </summary>
     public static class JsonHelper
     {
-        public static JsonSerializerOptions GeneralSerializerOptions = new()
+        public static JsonSerializerOptions GeneralSerializerOptions { get; } = new()
         {
             WriteIndented = true,
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,

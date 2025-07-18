@@ -6,17 +6,17 @@
     public class DetectorConfig
     {
         /// <summary>
-        /// 照片名称
+        /// 默认图像
         /// </summary>
         public string Photo { get; set; } = "CT.tiff";
 
         /// <summary>
-        /// 照片宽度（像素）
+        /// 图像宽度（像素）
         /// </summary>
         public int Width { get; set; } = 638;
 
         /// <summary>
-        /// 照片高度（像素）
+        /// 图像高度（像素）
         /// </summary>
         public int Height { get; set; } = 844;
     }

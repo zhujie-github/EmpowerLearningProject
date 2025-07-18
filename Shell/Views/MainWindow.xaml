@@ -10,7 +10,7 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share"
     xmlns:viewmodels="clr-namespace:Shell.ViewModels"
-    Title="{Binding Title}"
+    Title="MainWindow"
     Width="800"
     Height="450"
     d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"

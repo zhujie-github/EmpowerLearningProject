@@ -10,31 +10,41 @@ namespace Company.Application.Config.Services
     [ExposedService(Lifetime.Singleton, true)]
     public class SystemConfigManager
     {
-        private readonly IConfigManager _configManager;
+        private IConfigManager ConfigManager { get; }
 
-        public SystemConfigModel Config { get; set; }
+        public SystemConfigModel Config { get; private set; }
 
         public SystemConfigManager(IConfigManager configManager)
         {
-            _configManager = configManager;
+            ConfigManager = configManager;
 
-            Load();
+            // 加载配置
+            Config = LoadConfig();
         }
 
         /// <summary>
         /// 加载配置
         /// </summary>
-        private void Load()
+        public void Load()
         {
-            Config = _configManager.Read<SystemConfigModel>(ConfigKey.SystemConfig) ?? new SystemConfigModel();
+            Config = LoadConfig();
+        }
+
+        /// <summary>
+        /// 加载配置
+        /// </summary>
+        /// <returns></returns>
+        private SystemConfigModel LoadConfig()
+        {
+            return ConfigManager.Read<SystemConfigModel>(ConfigKey.SystemConfig) ?? new SystemConfigModel();
         }
 
         /// <summary>
         /// 保存配置
         /// </summary>
-        private void Save()
+        public void Save()
         {
-            _configManager.Write(ConfigKey.SystemConfig, Config);
+            ConfigManager.Write(ConfigKey.SystemConfig, Config);
         }
     }
 }

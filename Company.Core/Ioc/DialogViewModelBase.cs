@@ -4,6 +4,8 @@ namespace Company.Core.Ioc
 {
     public class DialogViewModelBase : ReactiveObject, IDialogAware
     {
+        public string Title { get; set; } = "";
+
         public DialogCloseListener RequestClose { get; }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Company.Core.Ioc
         {
             var dialogResult = new DialogResult
             {
-                Result = ButtonResult.OK
+                Result = buttonResult
             };
             if (dialogParameters != null)
             {
