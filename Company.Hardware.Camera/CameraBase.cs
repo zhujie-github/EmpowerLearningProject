@@ -1,8 +1,11 @@
-﻿namespace Company.Hardware.Camera
+﻿using Company.Core.Ioc;
+using Company.Core.Events;
+
+namespace Company.Hardware.Camera
 {
     public abstract class CameraBase : ICamera
     {
-        public CameraConfig? CameraConfig { get; private set; }
+        public CameraConfig? Config { get; private set; }
 
         public bool Initialized { get; private set; } = false;
 
@@ -10,9 +13,14 @@
 
         public event Action<Photo>? ImageCaptured;
 
+        public CameraBase()
+        {
+            PrismProvider.EventAggregator?.GetEvent<ConfigChangedEvent>().Subscribe(OnConfigChanged);
+        }
+
         public (bool, string?) Init(CameraConfig cameraConfig)
         {
-            CameraConfig = cameraConfig;
+            Config = cameraConfig;
             string? msg;
 
             if (Initialized)
@@ -71,6 +79,16 @@
         public void OnImageCaptured(Photo photo)
         {
             ImageCaptured?.Invoke(photo);
+        }
+
+        /// <summary>
+        /// 配置改变时触发的事件
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnConfigChanged()
+        {
+            Logger.Logger.Info(
+                $"相机配置改变：{nameof(Config.Width)}: {Config?.Width}, {nameof(Config.Height)}: {Config?.Height}");
         }
 
         /// <summary>

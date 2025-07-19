@@ -1,19 +1,26 @@
-﻿using Company.Core.Models;
+﻿using Company.Core.Events;
+using Company.Core.Ioc;
+using Company.Core.Models;
 
 namespace Company.Hardware.Detector
 {
     public abstract class DetectorBase : IDetector
     {
-        public DetectorConfig? DetectorConfig { get; private set; }
+        public DetectorConfig? Config { get; private set; }
 
         public bool Initialized { get; private set; } = false;
         public bool IsCapturing { get; protected set; } = false;
 
         public event Action<DetectorImage>? ImageCaptured;
 
+        public DetectorBase()
+        {
+            PrismProvider.EventAggregator?.GetEvent<ConfigChangedEvent>().Subscribe(OnConfigChanged);
+        }
+
         public (bool, string?) Init(DetectorConfig detectorConfig)
         {
-            DetectorConfig = detectorConfig;
+            Config = detectorConfig;
             string? msg;
 
             if (Initialized)
@@ -70,6 +77,16 @@ namespace Company.Hardware.Detector
         public void OnImageCaptured(UnmanagedArray2D<ushort> image)
         {
             ImageCaptured?.Invoke(new DetectorImage(image));
+        }
+
+        /// <summary>
+        /// 配置改变时触发的事件
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnConfigChanged()
+        {
+            Logger.Logger.Info(
+                $"平板探测器配置改变：{nameof(Config.Width)}: {Config?.Width}, {nameof(Config.Height)}: {Config?.Height}");
         }
 
         /// <summary>

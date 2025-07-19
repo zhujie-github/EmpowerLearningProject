@@ -1,4 +1,4 @@
-﻿using Company.Application.Config.Services;
+﻿using Company.Application.Share.Configs;
 using Company.Core.Ioc;
 using Company.Hardware.Camera;
 using Company.Hardware.Detector;
@@ -9,14 +9,14 @@ namespace Company.Application.Initialize.Services
     /// 硬件生命周期管理器
     /// </summary>
     [ExposedService(Lifetime.Singleton, true)]
-    public class HardwareLifetimeManager(SystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector)
+    public class HardwareLifetimeManager(ISystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector)
     {
         /// <summary>
         /// 所有硬件加载成功
         /// </summary>
         public bool IsInitialized { get; private set; } = false;
 
-        private SystemConfigProvider SystemConfigProvider { get; } = systemConfigProvider;
+        private ISystemConfigProvider SystemConfigProvider { get; } = systemConfigProvider;
 
         private ICamera Camera { get; } = camera;
 

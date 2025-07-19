@@ -53,6 +53,7 @@ namespace Shell
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
+            //按顺序初始化
             moduleCatalog.AddModule<Company.Core.CoreModule>();
             moduleCatalog.AddModule<Company.Application.Main.ApplicationMainModule>();
             moduleCatalog.AddModule<Company.Application.Login.ApplicationLoginModule>();
@@ -60,8 +61,8 @@ namespace Shell
             moduleCatalog.AddModule<Company.Application.Image.ApplicationImageModule>();
             moduleCatalog.AddModule<Company.Hardware.Camera.None.NoneCameraModule>();
             moduleCatalog.AddModule<Company.Hardware.Detector.None.NoneDetectorModule>();
-            moduleCatalog.AddModule<Company.Application.Initialize.ApplicationInitializeModule>();
             moduleCatalog.AddModule<Company.Application.Config.ApplicationConfigModule>();
+            moduleCatalog.AddModule<Company.Application.Initialize.ApplicationInitializeModule>();
         }
     }
 }

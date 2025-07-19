@@ -1,8 +1,8 @@
 ﻿using Company.Application.Share.Configs;
-using Company.Application.Share.Events;
-using Company.Application.Share.Models;
 using Company.Application.Share.Prism;
+using Company.Core.Events;
 using Company.Core.Ioc;
+using Company.Core.Models;
 using System.Windows;
 using System.Windows.Input;
 
@@ -37,10 +37,10 @@ namespace Shell.ViewModels
             // 导航到登录视图
             PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
 
-            // 订阅登录成功、登录取消事件
+            // 订阅事件
             PrismProvider.EventAggregator?.GetEvent<LoginSucceededEvent>().Subscribe(OnLoginSucceeded);
             PrismProvider.EventAggregator?.GetEvent<LoginCancelledEvent>().Subscribe(OnLoginCancelled);
-            PrismProvider.EventAggregator?.GetEvent<SoftwareConfigChangedEvent>().Subscribe(OnSoftwareConfigChanged);
+            PrismProvider.EventAggregator?.GetEvent<ConfigChangedEvent>().Subscribe(OnConfigChanged);
         }
 
         public bool IsHardwareInitialized { get; private set; } = false;
@@ -107,9 +107,9 @@ namespace Shell.ViewModels
         }
 
         /// <summary>
-        /// 软件配置修改时更新主窗体标题
+        /// 配置修改时触发该方法
         /// </summary>
-        private void OnSoftwareConfigChanged()
+        private void OnConfigChanged()
         {
             ChangeMainWindowTitle();
         }

@@ -21,6 +21,7 @@
         /// <summary>
         /// 相机初始化
         /// </summary>
+        /// <param name="cameraConfig"></param>
         /// <returns></returns>
         (bool, string?) Init(CameraConfig cameraConfig);
 

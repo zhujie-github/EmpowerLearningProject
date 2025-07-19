@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:controls="clr-namespace:Company.UI.Controls;assembly=Company.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Company.Application.Config.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -46,20 +47,7 @@
             </TabItem>
 
             <TabItem FontSize="14" Header="平板探测器参数">
-                <StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <TextBlock Width="100" Text="默认图像" />
-                        <TextBox Width="200" Text="{Binding SystemConfigProvider.DetectorConfig.Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <TextBlock Width="100" Text="图像宽度(像素)" />
-                        <TextBox Width="200" Text="{Binding SystemConfigProvider.DetectorConfig.Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <TextBlock Width="100" Text="图像高度(像素)" />
-                        <TextBox Width="200" Text="{Binding SystemConfigProvider.DetectorConfig.Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </StackPanel>
-                </StackPanel>
+                <controls:WpfPropertyGrid SelectedObject="{Binding SystemConfigProvider.DetectorConfig}" />
             </TabItem>
 
         </TabControl>

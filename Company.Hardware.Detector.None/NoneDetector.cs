@@ -12,13 +12,13 @@ namespace Company.Hardware.Detector.None
         protected override bool DoInit(out string errMsg)
         {
             errMsg = "";
-            if (DetectorConfig == null)
+            if (Config == null)
             {
-                errMsg = $"{nameof(DetectorConfig)} cannot be null.";
+                errMsg = $"{nameof(Config)} cannot be null.";
                 return false;
             }
 
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", DetectorConfig!.Photo);
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", Config!.Photo);
             if (!File.Exists(filePath))
             {
                 errMsg = $"Image file not found: {filePath}";
@@ -26,10 +26,10 @@ namespace Company.Hardware.Detector.None
             }
 
             _unmanagedArray = ImageHelper.LoadTiff(filePath);
-            _unmanagedArray ??= new UnmanagedArray2D<ushort>(DetectorConfig.Width, DetectorConfig.Height);
-            if (_unmanagedArray.Width != DetectorConfig.Width || _unmanagedArray.Height != DetectorConfig.Height)
+            _unmanagedArray ??= new UnmanagedArray2D<ushort>(Config.Width, Config.Height);
+            if (_unmanagedArray.Width != Config.Width || _unmanagedArray.Height != Config.Height)
             {
-                errMsg = $"系统设置中的FPD尺寸({DetectorConfig.Width}*{DetectorConfig.Height})与实际的FPD分辨率({_unmanagedArray.Width}*{_unmanagedArray.Height})不一致";
+                errMsg = $"系统设置中的FPD尺寸({Config.Width}*{Config.Height})与实际的FPD分辨率({_unmanagedArray.Width}*{_unmanagedArray.Height})不一致";
                 return false;
             }
             Thread.Sleep(1000); // 模拟延时，实际应用中可能需要更复杂的逻辑

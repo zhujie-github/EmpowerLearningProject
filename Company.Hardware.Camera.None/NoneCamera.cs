@@ -12,20 +12,20 @@ namespace Company.Hardware.Camera.None
         protected override bool DoInit(out string errMsg)
         {
             errMsg = "";
-            if (CameraConfig == null)
+            if (Config == null)
             {
-                errMsg = $"{nameof(CameraConfig)} cannot be null.";
+                errMsg = $"{nameof(Config)} cannot be null.";
                 return false;
             }
 
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", CameraConfig!.Photo);
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", Config!.Photo);
             if (!File.Exists(filePath))
             {
                 errMsg = $"Image file not found: {filePath}";
                 return false;
             }
 
-            _unmanagedArray = new UnmanagedArray2D<ColorBGRA>(CameraConfig!.Width, CameraConfig.Height);
+            _unmanagedArray = new UnmanagedArray2D<ColorBGRA>(Config!.Width, Config.Height);
             var bitmap = ImageHelper.Load(filePath);
             if (bitmap == null)
             {

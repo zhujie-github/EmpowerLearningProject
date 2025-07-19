@@ -1,5 +1,5 @@
 ﻿using Company.Application.Config.Services;
-using Company.Application.Share.Events;
+using Company.Core.Events;
 using Company.Core.Ioc;
 using ReactiveUI;
 using System.Windows.Input;
@@ -28,7 +28,7 @@ namespace Company.Application.Config.ViewModels
 
             CloseDialog(ButtonResult.OK);
 
-            PrismProvider.EventAggregator?.GetEvent<SoftwareConfigChangedEvent>().Publish();
+            PrismProvider.EventAggregator?.GetEvent<ConfigChangedEvent>().Publish();
         }
     }
 }
