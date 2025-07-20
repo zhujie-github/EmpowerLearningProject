@@ -8,7 +8,7 @@ namespace Company.Application.Initialize.Services
     /// <summary>
     /// 硬件生命周期管理器
     /// </summary>
-    [ExposedService(Lifetime.Singleton, true)]
+    [ExposedService]
     public class HardwareLifetimeManager(ISystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector)
     {
         /// <summary>

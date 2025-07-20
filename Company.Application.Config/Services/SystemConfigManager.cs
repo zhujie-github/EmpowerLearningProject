@@ -7,7 +7,7 @@ namespace Company.Application.Config.Services
     /// <summary>
     /// 系统配置管理者，作用是整个系统所有配置的读写工作
     /// </summary>
-    [ExposedService(Lifetime.Singleton, true)]
+    [ExposedService]
     public class SystemConfigManager
     {
         private IConfigManager ConfigManager { get; }

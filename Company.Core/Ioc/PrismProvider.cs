@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 namespace Company.Core.Ioc
 {
-    [ExposedService(Lifetime.Singleton, true)]
+    [ExposedService]
     public sealed class PrismProvider
     {
         public static ILanguageManager? LanguageManager { get; private set; }
