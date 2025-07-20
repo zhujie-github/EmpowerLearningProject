@@ -1,15 +1,18 @@
-﻿using Company.Application.Share.Events;
-using Company.Application.Share.Models;
+﻿using Company.Core.Cache;
 using Company.Core.Dialogs;
+using Company.Core.Events;
 using Company.Core.Ioc;
+using Company.Core.Models;
+using ReactiveUI.Fody.Helpers;
 
 namespace Company.Application.Login.ViewModels
 {
     public class LoginViewModel : BindableBase
     {
         private CurrentUser CurrentUser { get; set; } = new CurrentUser();
+        private ICacheManager CacheManager { get; }
 
-        private string? _login = "admin";
+        private string? _login;
         public string? Login
         {
             get => _login;
@@ -20,7 +23,7 @@ namespace Company.Application.Login.ViewModels
             }
         }
 
-        private string? _password = "123";
+        private string? _password;
         public string? Password
         {
             get => _password;
@@ -31,19 +34,32 @@ namespace Company.Application.Login.ViewModels
             }
         }
 
+        [Reactive]
+        public bool IsRemember { get; set; }
+
+        [Reactive]
+        public bool IsAutoLogin { get; set; }
+
         public DelegateCommand LogInCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
 
-        public LoginViewModel()
+        public LoginViewModel(ICacheManager cacheManager)
         {
+            CacheManager = cacheManager;
             LogInCommand = new DelegateCommand(OnLogIn, CanLogIn);
             CancelCommand = new DelegateCommand(OnCancel);
+            LoadUserCache();
+
+            if (IsAutoLogin)
+            {
+                Task.Delay(1500).ContinueWith(t => {
+                    LogInCommand.Execute();
+                });
+            }
         }
 
         private bool CanLogIn()
         {
-            //return string.Equals(Login, "admin", StringComparison.OrdinalIgnoreCase) &&
-            //string.Equals(Password, "123", StringComparison.Ordinal);
             return true;
         }
 
@@ -59,12 +75,45 @@ namespace Company.Application.Login.ViewModels
             CurrentUser.UserName = Login;
             CurrentUser.Password = Password;
             CurrentUser.LastLoginTime = DateTime.Now;
+
+            if (IsRemember)
+            {
+                CacheManager.Set(CacheKey.User, CurrentUser);
+            }
+            else
+            {
+                CacheManager.Delete(CacheKey.User);
+            }
+            CacheManager.Set(CacheKey.IsRemember, IsRemember);
+            CacheManager.Set(CacheKey.IsAutoLogin, IsAutoLogin);
+
             PrismProvider.EventAggregator?.GetEvent<LoginSucceededEvent>().Publish(CurrentUser);
         }
 
         private void OnCancel()
         {
             PrismProvider.EventAggregator?.GetEvent<LoginCancelledEvent>().Publish();
+        }
+
+        /// <summary>
+        /// 获取用户缓存
+        /// </summary>
+        private void LoadUserCache()
+        {
+            if (CacheManager.Get(CacheKey.User, out CurrentUser? user) && user != null)
+            {
+                CurrentUser = user;
+                Login = user.UserName;
+                Password = user.Password;
+            }
+            if (CacheManager.Get(CacheKey.IsRemember, out bool isRemember))
+            {
+                IsRemember = isRemember;
+            }
+            if (CacheManager.Get(CacheKey.IsAutoLogin, out bool isAutoLogin))
+            {
+                IsAutoLogin = isAutoLogin;
+            }
         }
     }
 }

@@ -13,32 +13,32 @@ namespace Shell
             //程序域异常
             AppDomain.CurrentDomain.UnhandledException += (s, e) =>
             {
-                Logger.Error((Exception)e.ExceptionObject);
+                NLogger.Error((Exception)e.ExceptionObject);
             };
 
             //应用程序异常
             Current.DispatcherUnhandledException += (s, e) =>
             {
-                Logger.Error(e.Exception);
+                NLogger.Error(e.Exception);
             };
 
             //多线程异常
             TaskScheduler.UnobservedTaskException += (s, e) =>
             {
-                Logger.Error(e.Exception);
+                NLogger.Error(e.Exception);
             };
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Logger.Info("应用程序启动");
+            NLogger.Info("应用程序启动");
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            Logger.Info("应用程序退出");
+            NLogger.Info("应用程序退出");
         }
 
         protected override Window CreateShell()

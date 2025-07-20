@@ -10,14 +10,17 @@ namespace Company.Core.Helpers
     /// </summary>
     public static class JsonHelper
     {
+        /// <summary>
+        /// 通用序列化器选项
+        /// </summary>
         public static JsonSerializerOptions GeneralSerializerOptions { get; } = new()
         {
             WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // 允许非 ASCII 字符（如中文）  
-            PropertyNameCaseInsensitive = true,                    // 不区分大小写反序列化  
-            DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,      // 字典 Key 转 camelCase   
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // 忽略 null 值  
+            //PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // 允许非 ASCII 字符（如中文）
+            PropertyNameCaseInsensitive = true,                    // 不区分大小写反序列化
+            //DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,      // 字典 Key 转 camelCase
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // 忽略 null 值
         };
 
         /// <summary>
@@ -26,9 +29,19 @@ namespace Company.Core.Helpers
         /// <param name="obj"></param>
         /// <param name="indented"></param>
         /// <returns></returns>
-        private static string Serialize(object obj)
+        public static string Serialize(object obj, bool intended = true)
         {
-            return JsonSerializer.Serialize(obj, GeneralSerializerOptions);
+            var option = new JsonSerializerOptions()
+            {
+                WriteIndented = intended,
+                PropertyNamingPolicy = GeneralSerializerOptions.PropertyNamingPolicy,
+                Encoder = GeneralSerializerOptions.Encoder,
+                PropertyNameCaseInsensitive = GeneralSerializerOptions.PropertyNameCaseInsensitive,
+                DictionaryKeyPolicy = GeneralSerializerOptions.DictionaryKeyPolicy,
+                DefaultIgnoreCondition = GeneralSerializerOptions.DefaultIgnoreCondition
+            };
+            option!.WriteIndented = intended;
+            return JsonSerializer.Serialize(obj, option);
         }
 
         /// <summary>
@@ -37,7 +50,7 @@ namespace Company.Core.Helpers
         /// <typeparam name="T"></typeparam>
         /// <param name="content"></param>
         /// <returns></returns>
-        private static T? Deserialize<T>(string content)
+        public static T? Deserialize<T>(string content)
         {
             return JsonSerializer.Deserialize<T>(content, GeneralSerializerOptions);
         }
@@ -65,9 +78,9 @@ namespace Company.Core.Helpers
         /// <param name="obj"></param>
         /// <param name="filePath"></param>
         /// <param name="indented"></param>
-        public static void Save(object obj, string filePath)
+        public static void Save(object obj, string filePath, bool intended = true)
         {
-            var content = Serialize(obj);
+            var content = Serialize(obj, intended);
             File.WriteAllText(filePath, content);
         }
     }

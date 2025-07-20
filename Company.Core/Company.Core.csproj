@@ -14,4 +14,8 @@
     <PackageReference Include="System.Drawing.Common" Version="9.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -70,6 +70,18 @@
                         FontSize="20"
                         Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
+                <Grid Margin="8,0,5,0">
+                    <CheckBox
+                        HorizontalAlignment="Left"
+                        Content="记住密码"
+                        FontSize="20"
+                        IsChecked="{Binding IsRemember}" />
+                    <CheckBox
+                        HorizontalAlignment="Right"
+                        Content="自动登录"
+                        FontSize="20"
+                        IsChecked="{Binding IsAutoLogin}" />
+                </Grid>
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock Width="90" Margin="5" />
                     <Button
