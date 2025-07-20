@@ -1,11 +1,8 @@
-﻿using NLog;
-using System.Diagnostics;
-
-namespace Company.Logger
+﻿namespace Company.Logger
 {
-    public static class Logger
+    public static class NLogger
     {
-        private static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public static void Trace(string message)
         {

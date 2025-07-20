@@ -1,6 +1,7 @@
 ﻿using Company.Core.Events;
 using Company.Core.Ioc;
 using Company.Core.Models;
+using Company.Logger;
 
 namespace Company.Hardware.Detector
 {
@@ -85,7 +86,7 @@ namespace Company.Hardware.Detector
         /// <exception cref="NotImplementedException"></exception>
         private void OnConfigChanged()
         {
-            Logger.Logger.Info(
+            NLogger.Info(
                 $"平板探测器配置改变：{nameof(Config.Width)}: {Config?.Width}, {nameof(Config.Height)}: {Config?.Height}");
         }
 

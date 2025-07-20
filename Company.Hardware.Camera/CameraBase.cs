@@ -1,5 +1,6 @@
-﻿using Company.Core.Ioc;
-using Company.Core.Events;
+﻿using Company.Core.Events;
+using Company.Core.Ioc;
+using Company.Logger;
 
 namespace Company.Hardware.Camera
 {
@@ -87,7 +88,7 @@ namespace Company.Hardware.Camera
         /// <exception cref="NotImplementedException"></exception>
         private void OnConfigChanged()
         {
-            Logger.Logger.Info(
+            NLogger.Info(
                 $"相机配置改变：{nameof(Config.Width)}: {Config?.Width}, {nameof(Config.Height)}: {Config?.Height}");
         }
 
