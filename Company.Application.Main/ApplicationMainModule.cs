@@ -11,7 +11,7 @@ namespace Company.Application.Main
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            containerProvider.Resolve<IRegionManager>().RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
+            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<MainView>(RegionNames.MainRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -5,6 +5,7 @@ using Company.Core.Ioc;
 using Company.Core.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Company.Application.Login.ViewModels
 {
@@ -31,7 +32,6 @@ namespace Company.Application.Login.ViewModels
             LoadedCommand = new DelegateCommand(Loaded);
             LogInCommand = new DelegateCommand(LogIn);
             CancelCommand = new DelegateCommand(Cancel);
-            CurrentUser = new CurrentUser();
             LoadUserCache();
         }
 
@@ -79,13 +79,11 @@ namespace Company.Application.Login.ViewModels
         /// <summary>
         /// 获取用户缓存
         /// </summary>
+        [MemberNotNull(nameof(CurrentUser))]
         private void LoadUserCache()
         {
-            if (CacheManager.Get(CacheKey.User, out CurrentUser? user) && user != null)
-            {
-                CurrentUser.UserName = user.UserName;
-                CurrentUser.Password = user.Password;
-            }
+            CacheManager.Get(CacheKey.User, out CurrentUser? user);
+            CurrentUser = user ?? new CurrentUser();
 
             CacheManager.Get(CacheKey.IsRemember, out bool isRemember);
             IsRemember = isRemember;

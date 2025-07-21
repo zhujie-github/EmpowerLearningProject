@@ -11,7 +11,7 @@ namespace Company.Application.Login
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            containerProvider.Resolve<IRegionManager>().RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
+            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<LoginView>(RegionNames.MainRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

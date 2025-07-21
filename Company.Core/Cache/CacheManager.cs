@@ -3,6 +3,7 @@ using Company.Core.Extensions;
 using Company.Core.Helpers;
 using Company.Core.Ioc;
 using Company.Logger;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Company.Core.Cache
 {
@@ -10,12 +11,18 @@ namespace Company.Core.Cache
     public class CacheManager : ICacheManager
     {
         private readonly IConfigManager _configManager;
-        private readonly Dictionary<string, string> _cacheNames;
+        private Dictionary<string, string> _cacheNames;
         private readonly object _lock = new();
 
         public CacheManager(IConfigManager configManager)
         {
             _configManager = configManager;
+            Read();
+        }
+
+        [MemberNotNull(nameof(_cacheNames))]
+        private void Read()
+        {
             _cacheNames = _configManager.Read<Dictionary<string, string>>(ConfigKey.CacheConfig) ?? [];
         }
 

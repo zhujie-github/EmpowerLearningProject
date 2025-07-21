@@ -45,23 +45,26 @@ namespace Shell.ViewModels
 
         private void OnLoginSucceeded(CurrentUser user)
         {
-            CurrentUser = user;
-
-            if (IsHardwareInitialized)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                // 登录成功后，导航到主界面或其他视图
-                PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationMainModule);
-                PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
-            }
-            else
-            {
-                PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationInitializeModule);
-                PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.InitializeView);
-            }
+                CurrentUser = user;
 
-            // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
-            Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
-            ChangeMainWindowTitle(); // 更新窗口标题
+                if (IsHardwareInitialized)
+                {
+                    // 登录成功后，导航到主界面或其他视图
+                    PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationMainModule);
+                    PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
+                }
+                else
+                {
+                    PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationInitializeModule);
+                    PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.InitializeView);
+                }
+
+                // 可以在这里处理登录成功后的逻辑，比如显示欢迎信息等
+                Application.Current.MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
+                ChangeMainWindowTitle(); // 更新窗口标题
+            });
         }
 
         private Window MainWindow { get; } = Application.Current.MainWindow;
