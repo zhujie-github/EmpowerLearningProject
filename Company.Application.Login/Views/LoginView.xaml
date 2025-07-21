@@ -8,11 +8,17 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewmodels="clr-namespace:Company.Application.Login.ViewModels"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*" />
@@ -57,7 +63,7 @@
                     <TextBox
                         Width="200"
                         FontSize="20"
-                        Text="{Binding Login, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding CurrentUser.UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <TextBlock
@@ -68,17 +74,17 @@
                     <TextBox
                         Width="200"
                         FontSize="20"
-                        Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding CurrentUser.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <Grid Margin="8,0,5,0">
                     <CheckBox
                         HorizontalAlignment="Left"
-                        Content="记住密码"
+                        Content="{DynamicResource 记住我}"
                         FontSize="20"
                         IsChecked="{Binding IsRemember}" />
                     <CheckBox
                         HorizontalAlignment="Right"
-                        Content="自动登录"
+                        Content="{DynamicResource 自动登录}"
                         FontSize="20"
                         IsChecked="{Binding IsAutoLogin}" />
                 </Grid>
@@ -88,7 +94,7 @@
                         Width="96"
                         Background="#7B2ED9"
                         Command="{Binding LogInCommand}"
-                        Content="登录"
+                        Content="{DynamicResource 登录}"
                         FontSize="20"
                         Foreground="White" />
                     <Button
@@ -96,7 +102,7 @@
                         Margin="8,0,0,0"
                         Background="#7B2ED9"
                         Command="{Binding CancelCommand}"
-                        Content="取消"
+                        Content="{DynamicResource 取消}"
                         FontSize="20"
                         Foreground="White" />
                 </StackPanel>

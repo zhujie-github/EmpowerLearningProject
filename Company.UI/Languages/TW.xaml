@@ -7,6 +7,6 @@
     <sys:String x:Key="登录">登入</sys:String>
     <sys:String x:Key="取消">取消</sys:String>
     <sys:String x:Key="确定">確定</sys:String>
-    <sys:String x:Key="记住密码">記住密碼</sys:String>
+    <sys:String x:Key="记住我">記住我</sys:String>
     <sys:String x:Key="自动登录">自動登入</sys:String>
 </ResourceDictionary>

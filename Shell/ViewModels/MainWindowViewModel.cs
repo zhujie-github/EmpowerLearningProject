@@ -22,19 +22,17 @@ namespace Shell.ViewModels
         {
             ModuleManager = moduleManager;
             RegionManager = regionManager;
-            LoadedCommand = new DelegateCommand(OnLoaded);
+            LoadedCommand = new DelegateCommand(Loaded);
         }
 
-        private void OnLoaded()
+        private void Loaded()
         {
             var mainRegion = PrismProvider.RegionManager?.Regions[RegionNames.MainRegion];
             if (mainRegion != null)
                 mainRegion.NavigationService.Navigated += NavigationService_Navigated;
 
-            // 确保登录模块已加载
-            //PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationLoginModule);
-
             // 导航到登录视图
+            PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationLoginModule); //确保登录模块已加载
             PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.LoginView);
 
             // 订阅事件
@@ -52,11 +50,12 @@ namespace Shell.ViewModels
             if (IsHardwareInitialized)
             {
                 // 登录成功后，导航到主界面或其他视图
-                //PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationMainModule);
+                PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationMainModule);
                 PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.MainView);
             }
             else
             {
+                PrismProvider.ModuleManager?.LoadModule(ModuleNames.ApplicationInitializeModule);
                 PrismProvider.RegionManager?.RequestNavigate(RegionNames.MainRegion, ViewNames.InitializeView);
             }
 
