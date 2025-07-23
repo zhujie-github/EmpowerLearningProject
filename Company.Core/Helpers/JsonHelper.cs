@@ -11,7 +11,7 @@ namespace Company.Core.Helpers
     public static class JsonHelper
     {
         /// <summary>
-        /// 通用序列化器选项
+        /// 通用序列化器选项-缩进
         /// </summary>
         public static JsonSerializerOptions GeneralSerializerOptions { get; } = new()
         {
@@ -24,6 +24,17 @@ namespace Company.Core.Helpers
         };
 
         /// <summary>
+        /// 通用序列化器选项-不缩进
+        /// </summary>
+        public static JsonSerializerOptions GeneralSerializerOptions2 { get; } = new()
+        {
+            WriteIndented = false,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, // 允许非 ASCII 字符（如中文）
+            PropertyNameCaseInsensitive = true,                    // 不区分大小写反序列化
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // 忽略 null 值
+        };
+
+        /// <summary>
         /// 序列化
         /// </summary>
         /// <param name="obj"></param>
@@ -31,16 +42,7 @@ namespace Company.Core.Helpers
         /// <returns></returns>
         public static string Serialize(object obj, bool intended = true)
         {
-            var option = new JsonSerializerOptions()
-            {
-                WriteIndented = intended,
-                PropertyNamingPolicy = GeneralSerializerOptions.PropertyNamingPolicy,
-                Encoder = GeneralSerializerOptions.Encoder,
-                PropertyNameCaseInsensitive = GeneralSerializerOptions.PropertyNameCaseInsensitive,
-                DictionaryKeyPolicy = GeneralSerializerOptions.DictionaryKeyPolicy,
-                DefaultIgnoreCondition = GeneralSerializerOptions.DefaultIgnoreCondition
-            };
-            option!.WriteIndented = intended;
+            var option = intended ? GeneralSerializerOptions : GeneralSerializerOptions2;
             return JsonSerializer.Serialize(obj, option);
         }
 

@@ -24,6 +24,7 @@
     <ProjectReference Include="..\Company.Application.Menu\Company.Application.Menu.csproj" />
     <ProjectReference Include="..\Company.Application.Share\Company.Application.Share.csproj" />
     <ProjectReference Include="..\Company.Core\Company.Core.csproj" />
+    <ProjectReference Include="..\Company.Hardware.Camera.HIK\Company.Hardware.Camera.HIK.csproj" />
     <ProjectReference Include="..\Company.Hardware.Camera.None\Company.Hardware.Camera.None.csproj" />
     <ProjectReference Include="..\Company.Hardware.Detector.None\Company.Hardware.Detector.None.csproj" />
     <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
