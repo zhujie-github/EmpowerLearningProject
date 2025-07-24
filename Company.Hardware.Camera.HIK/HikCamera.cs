@@ -136,7 +136,33 @@ namespace Company.Hardware.Camera.HIK
 
         protected override bool DoClose(out string errMsg)
         {
-            throw new NotImplementedException();
+            errMsg = string.Empty;
+
+            var result = Camera?.MV_CC_StopGrabbing_NET() ?? -1;
+            if (result != MyCamera.MV_OK)
+            {
+                errMsg = $"停止抓取失败: {result}";
+                NLogger.Error(errMsg);
+                return false;
+            }
+
+            result = Camera?.MV_CC_CloseDevice_NET() ?? -1;
+            if (result != MyCamera.MV_OK)
+            {
+                errMsg = $"关闭设备失败: {result}";
+                NLogger.Error(errMsg);
+                return false;
+            }
+
+            result = Camera?.MV_CC_DestroyDevice_NET() ?? -1;
+            if (result != MyCamera.MV_OK)
+            {
+                errMsg = $"销毁设备失败: {result}";
+                NLogger.Error(errMsg);
+                return false;
+            }
+
+            return true;
         }
 
         public override bool DoCapture(out string errMsg)
