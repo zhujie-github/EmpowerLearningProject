@@ -53,8 +53,8 @@ namespace Company.Hardware.Camera
             {
                 if (!DoClose(out var errMsg))
                 {
-                    throw new Exception($"Camera close failed: {errMsg}");
-                    //todo log error
+                    NLogger.Error($"Camera close failed: {errMsg}");
+                    return;
                 }
                 Initialized = false;
                 IsCapturing = false; // 确保关闭时重置抓拍状态
@@ -67,8 +67,8 @@ namespace Company.Hardware.Camera
             {
                 if (!DoCapture(out var errMsg))
                 {
-                    throw new Exception($"Camera capture failed: {errMsg}");
-                    //todo log error
+                    NLogger.Error($"Camera capture failed: {errMsg}");
+                    return;
                 }
             }
         }

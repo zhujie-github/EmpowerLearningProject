@@ -1,12 +1,7 @@
-﻿using Company.Core.Models;
-using Company.Logger;
+﻿using Company.Core.Helpers;
+using Company.Core.Models;
 using MvCamCtrl.NET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Company.Hardware.Camera.HIK
 {
@@ -25,7 +20,8 @@ namespace Company.Hardware.Camera.HIK
         {
             if (!FindDevice(out var device, out errMsg))
             {
-                NLogger.Error($"查找海康相机失败：{errMsg}");
+                errMsg = $"查找海康相机失败：{errMsg}";
+                return false;
             }
 
             Camera ??= new MyCamera();
@@ -34,7 +30,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"创建设备失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -43,7 +38,6 @@ namespace Company.Hardware.Camera.HIK
             {
                 Camera.MV_CC_DestroyDevice_NET();
                 errMsg = $"打开设备失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -56,15 +50,12 @@ namespace Company.Hardware.Camera.HIK
                     if (result != MyCamera.MV_OK)
                     {
                         errMsg = $"设置包大小失败: {result}";
-                        NLogger.Error(errMsg);
                         return false;
-
                     }
                 }
                 else
                 {
                     errMsg = $"获取最佳包大小失败: {packetSize}";
-                    NLogger.Error(errMsg);
                     return false;
                 }
             }
@@ -73,7 +64,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"开启触发模式失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -81,7 +71,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"设置软触发失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -90,7 +79,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"注册回调函数失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -98,16 +86,24 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"开始抓取失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
             return true;
         }
 
-        private void OnCallback(nint pData, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo, nint pUser)
+        /// <summary>
+        /// 相机回调函数
+        /// </summary>
+        /// <param name="pData"></param>
+        /// <param name="pFrameInfo"></param>
+        /// <param name="pUser"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnCallback(IntPtr pData, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo, nint pUser)
         {
-            throw new NotImplementedException();
+            BufferBgra ??= new UnmanagedArray2D<ColorBGRA>(pFrameInfo.nWidth, pFrameInfo.nHeight);
+            MemoryHelper.CopyMemory(BufferBgra.Header, pData, BufferBgra.Length);
+            OnImageCaptured(new Photo(BufferBgra));
         }
 
         private static bool FindDevice(out MyCamera.MV_CC_DEVICE_INFO device, out string errMsg)
@@ -116,7 +112,7 @@ namespace Company.Hardware.Camera.HIK
             errMsg = "";
 
             MyCamera.MV_CC_DEVICE_INFO_LIST list = default;
-            int result = MyCamera.MV_CC_EnumDevices_NET(MyCamera.MV_GIGE_DEVICE | MyCamera.MV_USB_DEVICE, ref list);
+            var result = MyCamera.MV_CC_EnumDevices_NET(MyCamera.MV_GIGE_DEVICE | MyCamera.MV_USB_DEVICE, ref list);
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"Failed to enumerate devices";
@@ -142,7 +138,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"停止抓取失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -150,7 +145,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"关闭设备失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -158,7 +152,6 @@ namespace Company.Hardware.Camera.HIK
             if (result != MyCamera.MV_OK)
             {
                 errMsg = $"销毁设备失败: {result}";
-                NLogger.Error(errMsg);
                 return false;
             }
 
@@ -167,7 +160,14 @@ namespace Company.Hardware.Camera.HIK
 
         public override bool DoCapture(out string errMsg)
         {
-            throw new NotImplementedException();
+            errMsg = string.Empty;
+            var result = Camera?.MV_CC_SetCommandValue_NET("TriggerSoftware"); //软触发
+            if (result != MyCamera.MV_OK)
+            {
+                errMsg = $"相机软触发失败:{result}";
+                return false;
+            }
+            return true;
         }
     }
 }

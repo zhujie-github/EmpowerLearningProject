@@ -59,8 +59,8 @@ namespace Shell
             moduleCatalog.AddModule<Company.Application.Login.ApplicationLoginModule>();
             moduleCatalog.AddModule<Company.Application.Menu.ApplicationMenuModule>();
             moduleCatalog.AddModule<Company.Application.Image.ApplicationImageModule>();
-            moduleCatalog.AddModule<Company.Hardware.Camera.None.NoneCameraModule>();
             moduleCatalog.AddModule<Company.Hardware.Camera.HIK.HikCameraModule>();
+            moduleCatalog.AddModule<Company.Hardware.Camera.None.NoneCameraModule>();
             moduleCatalog.AddModule<Company.Hardware.Detector.None.NoneDetectorModule>();
             moduleCatalog.AddModule<Company.Application.Config.ApplicationConfigModule>();
             moduleCatalog.AddModule<Company.Application.Initialize.ApplicationInitializeModule>();

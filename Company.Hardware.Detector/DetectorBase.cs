@@ -53,7 +53,8 @@ namespace Company.Hardware.Detector
             {
                 if (!DoClose(out var errMsg))
                 {
-                    throw new InvalidOperationException($"Detector close failed: {errMsg}");
+                    NLogger.Error($"Detector close failed: {errMsg}");
+                    return;
                 }
                 Initialized = false;
                 IsCapturing = false; // 确保关闭时重置抓拍状态
@@ -66,7 +67,8 @@ namespace Company.Hardware.Detector
             {
                 if (!DoCapture(out var errMsg))
                 {
-                    throw new InvalidOperationException($"Detector capture failed: {errMsg}");
+                    NLogger.Error($"Detector capture failed: {errMsg}");
+                    return;
                 }
             }
         }
