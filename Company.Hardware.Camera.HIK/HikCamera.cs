@@ -16,7 +16,7 @@ namespace Company.Hardware.Camera.HIK
         /// </summary>
         /// <param name="errMsg"></param>
         /// <returns></returns>
-        protected override bool DoInit(out string errMsg)
+        protected override bool DoInit(out string? errMsg)
         {
             if (!FindDevice(out var device, out errMsg))
             {
@@ -106,7 +106,7 @@ namespace Company.Hardware.Camera.HIK
             OnImageCaptured(new Photo(BufferBgra));
         }
 
-        private static bool FindDevice(out MyCamera.MV_CC_DEVICE_INFO device, out string errMsg)
+        private static bool FindDevice(out MyCamera.MV_CC_DEVICE_INFO device, out string? errMsg)
         {
             device = default;
             errMsg = "";
@@ -130,7 +130,7 @@ namespace Company.Hardware.Camera.HIK
             return true;
         }
 
-        protected override bool DoClose(out string errMsg)
+        protected override bool DoClose(out string? errMsg)
         {
             errMsg = string.Empty;
 
@@ -158,7 +158,7 @@ namespace Company.Hardware.Camera.HIK
             return true;
         }
 
-        public override bool DoCapture(out string errMsg)
+        public override bool DoCapture(out string? errMsg)
         {
             errMsg = string.Empty;
             var result = Camera?.MV_CC_SetCommandValue_NET("TriggerSoftware"); //软触发

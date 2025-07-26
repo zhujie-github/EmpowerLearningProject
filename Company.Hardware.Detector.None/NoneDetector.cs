@@ -9,7 +9,7 @@ namespace Company.Hardware.Detector.None
         private UnmanagedArray2D<ushort>? _unmanagedArray;
         private Task? _task;
 
-        protected override bool DoInit(out string errMsg)
+        protected override bool DoInit(out string? errMsg)
         {
             errMsg = "";
             if (Config == null)
@@ -36,13 +36,13 @@ namespace Company.Hardware.Detector.None
             return true;
         }
 
-        protected override bool DoClose(out string errMsg)
+        protected override bool DoClose(out string? errMsg)
         {
             errMsg = "";
             return true;
         }
 
-        public override bool DoCapture(out string errMsg)
+        public override bool DoCapture(out string? errMsg)
         {
             errMsg = "";
 

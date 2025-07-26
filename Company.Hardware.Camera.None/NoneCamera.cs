@@ -9,7 +9,7 @@ namespace Company.Hardware.Camera.None
     {
         private UnmanagedArray2D<ColorBGRA>? _unmanagedArray;
 
-        protected override bool DoInit(out string errMsg)
+        protected override bool DoInit(out string? errMsg)
         {
             errMsg = "";
             if (Config == null)
@@ -47,13 +47,13 @@ namespace Company.Hardware.Camera.None
             return true;
         }
 
-        protected override bool DoClose(out string errMsg)
+        protected override bool DoClose(out string? errMsg)
         {
             errMsg = "";
             return true;
         }
 
-        public override bool DoCapture(out string errMsg)
+        public override bool DoCapture(out string? errMsg)
         {
             errMsg = "";
             Task.Delay(50).ContinueWith(t =>

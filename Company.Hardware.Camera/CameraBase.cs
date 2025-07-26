@@ -97,18 +97,18 @@ namespace Company.Hardware.Camera
         /// </summary>
         /// <param name="errMsg"></param>
         /// <returns></returns>
-        protected abstract bool DoInit(out string errMsg);
+        protected abstract bool DoInit(out string? errMsg);
 
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，执行相机关闭逻辑。
         /// </summary>
         /// <param name="errMsg"></param>
         /// <returns></returns>
-        protected abstract bool DoClose(out string errMsg);
+        protected abstract bool DoClose(out string? errMsg);
 
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，执行相机抓拍逻辑。
         /// </summary>
-        public abstract bool DoCapture(out string errMsg);
+        public abstract bool DoCapture(out string? errMsg);
     }
 }
