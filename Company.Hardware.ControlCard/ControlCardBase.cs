@@ -28,6 +28,11 @@ namespace Company.Hardware.ControlCard
         /// </summary>
         public ControlCardConfig? Config { get; private set; }
 
+        /// <summary>
+        /// AxisType枚举的元素集合
+        /// </summary>
+        protected IEnumerable<AxisType> AxisTypes { get; private set; } = Enum.GetValues(typeof(AxisType)).Cast<AxisType>();
+
         public void Close()
         {
             if (Initialized)

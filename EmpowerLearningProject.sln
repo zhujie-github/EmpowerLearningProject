@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Hardware.Camera.HIK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Hardware.ControlCard", "Company.Hardware.ControlCard\Company.Hardware.ControlCard.csproj", "{8EA13F18-033D-4407-8082-8229FEC9DAEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Hardware.ControlCard.None", "Company.Hardware.ControlCard.None\Company.Hardware.ControlCard.None.csproj", "{B227C8BE-4552-4046-B4CB-C529EE1436DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{8EA13F18-033D-4407-8082-8229FEC9DAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EA13F18-033D-4407-8082-8229FEC9DAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EA13F18-033D-4407-8082-8229FEC9DAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B227C8BE-4552-4046-B4CB-C529EE1436DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B227C8BE-4552-4046-B4CB-C529EE1436DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B227C8BE-4552-4046-B4CB-C529EE1436DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B227C8BE-4552-4046-B4CB-C529EE1436DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +150,7 @@ Global
 		{4B98DC48-3CE9-434A-8BCA-2B01EF11D4DA} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
 		{3B4C600D-5610-4B95-A38A-5708461F4F23} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
 		{8EA13F18-033D-4407-8082-8229FEC9DAEB} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
+		{B227C8BE-4552-4046-B4CB-C529EE1436DC} = {DD9F2018-BB14-4A12-9F98-EB9C5D8C158B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77E1C007-B2CE-476B-A879-0F2F7B232048}
