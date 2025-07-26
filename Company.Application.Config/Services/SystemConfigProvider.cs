@@ -28,5 +28,10 @@ namespace Company.Application.Config.Services
             CameraConfig = SystemConfigManager.Config.CameraConfig;
             DetectorConfig = SystemConfigManager.Config.DetectorConfig;
         }
+
+        public void NotifyConfigChanged()
+        {
+            ConfigChanged?.Invoke();
+        }
     }
 }

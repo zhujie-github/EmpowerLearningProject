@@ -66,6 +66,6 @@
         /// 停止轴运动
         /// </summary>
         /// <param name="axisType"></param>
-        void Stop(AxisType axisType);
+        void Stop(AxisType? axisType);
     }
 }
