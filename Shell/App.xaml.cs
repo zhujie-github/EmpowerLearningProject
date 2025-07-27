@@ -1,4 +1,5 @@
-﻿using Company.Logger;
+﻿using Company.Application.Share.Prism;
+using Company.Logger;
 using System.Windows;
 
 namespace Shell
@@ -53,17 +54,18 @@ namespace Shell
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            //按顺序初始化
+            base.ConfigureModuleCatalog(moduleCatalog);
+
             moduleCatalog.AddModule<Company.Core.CoreModule>();
-            moduleCatalog.AddModule<Company.Application.Main.ApplicationMainModule>();
-            moduleCatalog.AddModule<Company.Application.Login.ApplicationLoginModule>();
-            moduleCatalog.AddModule<Company.Application.Menu.ApplicationMenuModule>();
-            moduleCatalog.AddModule<Company.Application.Image.ApplicationImageModule>();
-            moduleCatalog.AddModule<Company.Hardware.Camera.HIK.HikCameraModule>();
-            moduleCatalog.AddModule<Company.Hardware.Camera.None.NoneCameraModule>();
-            moduleCatalog.AddModule<Company.Hardware.Detector.None.NoneDetectorModule>();
-            moduleCatalog.AddModule<Company.Application.Config.ApplicationConfigModule>();
-            moduleCatalog.AddModule<Company.Application.Initialize.ApplicationInitializeModule>();
+        }
+
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            //使用目录模块
+            return new DirectoryModuleCatalog
+            {
+                ModulePath = ModuleNames.ModulePath
+            };
         }
     }
 }

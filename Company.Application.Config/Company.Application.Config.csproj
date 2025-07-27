@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Company.UI\Company.UI.csproj" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\$(ProjectName).dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S" />
+  </Target>
+
 </Project>

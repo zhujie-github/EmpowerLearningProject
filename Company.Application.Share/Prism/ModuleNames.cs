@@ -2,6 +2,8 @@
 {
     public class ModuleNames
     {
+        public const string ModulePath = @".\Modules";
+
         /// <summary>
         /// 登录模块
         /// </summary>

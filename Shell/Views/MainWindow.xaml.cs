@@ -1,9 +1,4 @@
-﻿using Company.Application.Login;
-using Company.Application.Login.Views;
-using Company.Application.Share.Prism;
-using MahApps.Metro.Controls;
-using Shell.ViewModels;
-using System.Windows;
+﻿using MahApps.Metro.Controls;
 
 namespace Shell.Views
 {
