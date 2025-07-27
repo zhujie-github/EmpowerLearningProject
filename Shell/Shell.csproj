@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Company.Application.Config\Company.Application.Config.csproj" />
+    <ProjectReference Include="..\Company.Application.Image\Company.Application.Image.csproj" />
+    <ProjectReference Include="..\Company.Application.Main\Company.Application.Main.csproj" />
+    <ProjectReference Include="..\Company.Application.Menu\Company.Application.Menu.csproj" />
     <ProjectReference Include="..\Company.Application.Share\Company.Application.Share.csproj" />
     <ProjectReference Include="..\Company.Core\Company.Core.csproj" />
     <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />

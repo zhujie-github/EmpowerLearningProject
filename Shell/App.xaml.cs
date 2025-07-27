@@ -1,4 +1,9 @@
-﻿using Company.Application.Share.Prism;
+﻿using Company.Application.Config;
+using Company.Application.Image;
+using Company.Application.Main;
+using Company.Application.Menu;
+using Company.Application.Share.Prism;
+using Company.Core;
 using Company.Logger;
 using System.Windows;
 
@@ -32,14 +37,14 @@ namespace Shell
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            NLogger.Info("应用程序开始启动");
             base.OnStartup(e);
-            NLogger.Info("应用程序启动");
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
             base.OnExit(e);
-            NLogger.Info("应用程序退出");
+            NLogger.Info("应用程序已经退出");
         }
 
         protected override Window CreateShell()
@@ -56,7 +61,11 @@ namespace Shell
         {
             base.ConfigureModuleCatalog(moduleCatalog);
 
-            moduleCatalog.AddModule<Company.Core.CoreModule>();
+            moduleCatalog.AddModule<CoreModule>();
+            moduleCatalog.AddModule<ApplicationMainModule>();
+            moduleCatalog.AddModule<ApplicationMenuModule>();
+            moduleCatalog.AddModule<ApplicationImageModule>();
+            moduleCatalog.AddModule<ApplicationConfigModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
