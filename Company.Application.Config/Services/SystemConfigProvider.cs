@@ -1,6 +1,7 @@
 ﻿using Company.Application.Share.Configs;
 using Company.Core.Ioc;
 using Company.Hardware.Camera;
+using Company.Hardware.ControlCard;
 using Company.Hardware.Detector;
 
 namespace Company.Application.Config.Services
@@ -8,8 +9,10 @@ namespace Company.Application.Config.Services
     /// <summary>
     /// 系统配置提供者，作用是将系统配置传给不同的模块，用接口实现数据通讯
     /// </summary>
-    [ExposedService(Lifetime.Singleton, true, typeof(ISystemConfigProvider), typeof(ISoftwareConfigProvider), typeof(ICameraConfigProvider), typeof(IDetectorConfigProvider))]
-    public class SystemConfigProvider : ISystemConfigProvider, ISoftwareConfigProvider, ICameraConfigProvider, IDetectorConfigProvider
+    [ExposedService(Lifetime.Singleton, true, typeof(ISystemConfigProvider), typeof(ISoftwareConfigProvider),
+        typeof(ICameraConfigProvider), typeof(IDetectorConfigProvider), typeof(IControlCardConfigProvider))]
+    public class SystemConfigProvider : ISystemConfigProvider, ISoftwareConfigProvider,
+        ICameraConfigProvider, IDetectorConfigProvider, IControlCardConfigProvider
     {
         private SystemConfigManager SystemConfigManager { get; }
 
@@ -19,6 +22,8 @@ namespace Company.Application.Config.Services
 
         public DetectorConfig DetectorConfig { get; private set; }
 
+        public ControlCardConfig ControlCardConfig { get; private set; }
+
         public event Action? ConfigChanged;
 
         public SystemConfigProvider(SystemConfigManager systemConfigManager)
@@ -27,6 +32,7 @@ namespace Company.Application.Config.Services
             SoftwareConfig = SystemConfigManager.Config.SoftwareConfig;
             CameraConfig = SystemConfigManager.Config.CameraConfig;
             DetectorConfig = SystemConfigManager.Config.DetectorConfig;
+            ControlCardConfig = SystemConfigManager.Config.ControlCardConfig;
         }
 
         public void NotifyConfigChanged()

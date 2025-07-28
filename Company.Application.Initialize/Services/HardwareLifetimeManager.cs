@@ -1,6 +1,7 @@
 ﻿using Company.Application.Share.Configs;
 using Company.Core.Ioc;
 using Company.Hardware.Camera;
+using Company.Hardware.ControlCard;
 using Company.Hardware.Detector;
 
 namespace Company.Application.Initialize.Services
@@ -9,7 +10,8 @@ namespace Company.Application.Initialize.Services
     /// 硬件生命周期管理器
     /// </summary>
     [ExposedService]
-    public class HardwareLifetimeManager(ISystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector)
+    public class HardwareLifetimeManager(ISystemConfigProvider systemConfigProvider, ICamera camera, IDetector detector,
+        IControlCard controlCard)
     {
         /// <summary>
         /// 所有硬件加载成功
@@ -21,6 +23,8 @@ namespace Company.Application.Initialize.Services
         private ICamera Camera { get; } = camera;
 
         private IDetector Detector { get; } = detector;
+
+        private IControlCard ControlCard { get; } = controlCard;
 
         /// <summary>
         /// 初始化所有硬件
@@ -38,13 +42,16 @@ namespace Company.Application.Initialize.Services
 
             var task_camera = Task.Run(() => Camera.Init(SystemConfigProvider.CameraConfig));
             var task_detector = Task.Run(() => Detector.Init(SystemConfigProvider.DetectorConfig));
-            var taskResults = await Task.WhenAll(task_camera, task_detector);
+            var task_controlCard = Task.Run(() => ControlCard.Init(SystemConfigProvider.ControlCardConfig));
+            var taskResults = await Task.WhenAll(task_camera, task_detector, task_controlCard);
             IsInitialized = taskResults.All(r => r.Item1);
             var msgs = new List<string>();
             if (!taskResults[0].Item1)
                 msgs.Add($"相机:{taskResults[0].Item2}".TrimEnd(':'));
             if (!taskResults[1].Item1)
                 msgs.Add($"平板探测器:{taskResults[1].Item2}".TrimEnd(':'));
+            if (!taskResults[2].Item1)
+                msgs.Add($"控制卡:{taskResults[2].Item2}".TrimEnd(':'));
 
             return (IsInitialized, string.Join(" | ", msgs));
         }
