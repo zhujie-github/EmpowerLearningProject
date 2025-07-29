@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿#pragma warning disable
 
-namespace ADT_CARD_632XE
+namespace Company.Hardware.ControlCard.AdTech.Api
 {
     public enum ERR_CODE
     {
@@ -134,3 +132,5 @@ namespace ADT_CARD_632XE
         ERR_HOME_INNER = -1030,     //其他回零错误
     }
 }
+
+#pragma warning restore

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#pragma warning disable
+
 using System.Runtime.InteropServices;
 
-namespace ADT_CARD_632XE
+namespace Company.Hardware.ControlCard.AdTech.Api
 {
     class adt_card_632xe
     {
@@ -1267,3 +1265,5 @@ namespace ADT_CARD_632XE
         public static extern Int32 adt_set_encoder_pos(Int32 cardno, Int32 grade, Int32 pos);
     }
 }
+
+#pragma warning restore

@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\$(ProjectName).dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S&#xD;&#xA;xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\MvCameraControl.Net.dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S" />
+    <Exec Command="rem xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\$(ProjectName).dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S&#xD;&#xA;rem xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\MvCameraControl.Net.dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S" />
   </Target>
 
 </Project>

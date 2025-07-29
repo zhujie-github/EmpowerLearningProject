@@ -11,6 +11,11 @@ namespace Company.Hardware.ControlCard.None
             return true;
         }
 
+        public override bool DoSetAxisEnabled(AxisType axisType, bool enabled = true)
+        {
+            return true;
+        }
+
         public override bool DoGetAxisStopped(AxisType axisType)
         {
             return true;
@@ -81,6 +86,7 @@ namespace Company.Hardware.ControlCard.None
         private static void StopAxis(AxisType axisType)
         {
             Thread.Sleep(100); // 模拟延时
+            NLogger.Info($"Stopped axis {axisType}");
         }
     }
 }

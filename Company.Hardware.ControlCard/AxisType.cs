@@ -5,7 +5,7 @@
     /// </summary>
     public enum AxisType
     {
-        X,
+        X = 1,
         Y,
         Z,
         Up,

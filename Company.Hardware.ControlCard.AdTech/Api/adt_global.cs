@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ADT_CARD_632XE;
+﻿#pragma warning disable
 
-namespace DEMO632XE
+namespace Company.Hardware.ControlCard.AdTech.Api
 {
     class adt_global
     {
@@ -196,3 +192,5 @@ namespace DEMO632XE
         }
     }
 }
+
+#pragma warning restore

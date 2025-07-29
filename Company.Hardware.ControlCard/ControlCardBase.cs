@@ -14,7 +14,7 @@ namespace Company.Hardware.ControlCard
         /// <summary>
         /// 运动轴已回零
         /// </summary>
-        public bool IsAxisHomed { get; private set; }
+        public bool IsAxisHomed { get; set; }
 
         /// <summary>
         /// 运动轴正在回零
@@ -212,10 +212,10 @@ namespace Company.Hardware.ControlCard
             }
             finally
             {
-                IsAxisHomed = true;
                 IsAxisHoming = false;
             }
 
+            IsAxisHomed = true;
             return true;
         }
 
@@ -261,6 +261,14 @@ namespace Company.Hardware.ControlCard
         /// <param name="axisType"></param>
         /// <returns></returns>
         public abstract bool DoGetAxisEnabled(AxisType axisType);
+
+        /// <summary>
+        /// 设置轴是否使能的具体实现方法，由子类实现。
+        /// </summary>
+        /// <param name="axisType"></param>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
+        public abstract bool DoSetAxisEnabled(AxisType axisType, bool enabled = true);
 
         /// <summary>
         /// 移动轴的具体实现方法，由子类实现。
