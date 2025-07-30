@@ -7,8 +7,9 @@ namespace Company.Application.Main
     /// 主模块 - 按需延迟加载
     /// </summary>
     [Module(ModuleName = ModuleNames.ApplicationMainModule, OnDemand = true)]
-    [ModuleDependency(ModuleNames.ApplicationImageModule)]
     [ModuleDependency(ModuleNames.ApplicationMenuModule)]
+    [ModuleDependency(ModuleNames.ApplicationImageModule)]
+    [ModuleDependency(ModuleNames.ApplicationProcessModule)]
     public class ApplicationMainModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

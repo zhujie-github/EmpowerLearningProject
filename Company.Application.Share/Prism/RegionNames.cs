@@ -45,7 +45,6 @@ namespace Company.Application.Share.Prism
         /// <summary>
         /// ÕºœÒ¥¶¿Ì«¯”Ú
         /// </summary>
-
         public const string ProcessRegion = "ProcessRegion";
 
         /// <summary>

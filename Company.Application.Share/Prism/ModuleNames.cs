@@ -20,7 +20,7 @@
         public const string ApplicationMenuModule = "ApplicationMenuModule";
 
         /// <summary>
-        /// 图片模块
+        /// 图像展示模块
         /// </summary>
         public const string ApplicationImageModule = "ApplicationImageModule";
 
@@ -33,5 +33,10 @@
         /// 配置模块
         /// </summary>
         public const string ApplicationConfigModule = "ApplicationConfigModule";
+
+        /// <summary>
+        /// 图像处理模块
+        /// </summary>
+        public const string ApplicationProcessModule = "ApplicationProcessModule";
     }
 }
