@@ -10,7 +10,7 @@ namespace Company.Hardware.Detector
         public DetectorConfig? Config { get; private set; }
 
         public bool Initialized { get; private set; } = false;
-        public bool IsCapturing { get; protected set; } = false;
+        public bool IsGrabbing { get; protected set; } = false;
 
         public event Action<DetectorImage>? OnGrabbed;
 
@@ -57,17 +57,17 @@ namespace Company.Hardware.Detector
                     return;
                 }
                 Initialized = false;
-                IsCapturing = false; // 确保关闭时重置抓拍状态
+                IsGrabbing = false; // 确保关闭时重置抓拍状态
             }
         }
 
-        public void Capture()
+        public void Grab()
         {
             if (Initialized)
             {
-                if (!DoCapture(out var errMsg))
+                if (!DoGrab(out var errMsg))
                 {
-                    NLogger.Error($"Detector capture failed: {errMsg}");
+                    NLogger.Error($"Detector grab failed: {errMsg}");
                     return;
                 }
             }
@@ -114,6 +114,6 @@ namespace Company.Hardware.Detector
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，触发相机拍照逻辑。
         /// </summary>
-        public abstract bool DoCapture(out string? errMsg);
+        public abstract bool DoGrab(out string? errMsg);
     }
 }

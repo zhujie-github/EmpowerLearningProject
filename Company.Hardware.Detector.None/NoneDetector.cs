@@ -42,13 +42,13 @@ namespace Company.Hardware.Detector.None
             return true;
         }
 
-        public override bool DoCapture(out string? errMsg)
+        public override bool DoGrab(out string? errMsg)
         {
             errMsg = "";
 
             if (_task == null || _task.IsCompleted)
             {
-                IsCapturing = true;
+                IsGrabbing = true;
                 _task = Task.Factory.StartNew(RunCapture, TaskCreationOptions.LongRunning);
             }
 
@@ -60,7 +60,7 @@ namespace Company.Hardware.Detector.None
             if (_unmanagedArray == null)
                 return;
 
-            while (IsCapturing)
+            while (IsGrabbing)
             {
                 //定时输出图像
                 using (var temp = _unmanagedArray.DeepClone())

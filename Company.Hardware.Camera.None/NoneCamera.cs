@@ -53,7 +53,7 @@ namespace Company.Hardware.Camera.None
             return true;
         }
 
-        public override bool DoCapture(out string? errMsg)
+        public override bool DoGrab(out string? errMsg)
         {
             errMsg = "";
             Task.Delay(50).ContinueWith(t =>

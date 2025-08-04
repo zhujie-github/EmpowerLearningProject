@@ -16,7 +16,7 @@
         /// <summary>
         /// 相机是否正在抓拍
         /// </summary>
-        bool IsCapturing { get; }
+        bool IsGrabbing { get; }
 
         /// <summary>
         /// 相机初始化
@@ -35,6 +35,6 @@
         /// 相机抓拍
         /// </summary>
         /// <returns></returns>
-        void Capture();
+        void Grab();
     }
 }

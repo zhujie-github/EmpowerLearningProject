@@ -13,7 +13,7 @@
     mc:Ignorable="d">
     <Grid x:Name="viewport" Background="Gray">
         <Canvas ClipToBounds="True">
-            <Image />
+            <Image Source="{Binding Gray16ImageSource.ImageSource}"/>
         </Canvas>
     </Grid>
 </UserControl>

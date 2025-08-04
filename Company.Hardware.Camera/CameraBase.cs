@@ -10,7 +10,7 @@ namespace Company.Hardware.Camera
 
         public bool Initialized { get; private set; } = false;
 
-        public bool IsCapturing { get; protected set; } = false;
+        public bool IsGrabbing { get; protected set; } = false;
 
         public event Action<Photo>? OnGrabbed;
 
@@ -57,17 +57,17 @@ namespace Company.Hardware.Camera
                     return;
                 }
                 Initialized = false;
-                IsCapturing = false; // 确保关闭时重置抓拍状态
+                IsGrabbing = false; // 确保关闭时重置抓拍状态
             }
         }
 
-        public void Capture()
+        public void Grab()
         {
             if (Initialized)
             {
-                if (!DoCapture(out var errMsg))
+                if (!DoGrab(out var errMsg))
                 {
-                    NLogger.Error($"Camera capture failed: {errMsg}");
+                    NLogger.Error($"Camera grab failed: {errMsg}");
                     return;
                 }
             }
@@ -114,6 +114,6 @@ namespace Company.Hardware.Camera
         /// <summary>
         /// 抽象方法，由具体相机实现类实现，执行相机抓拍逻辑。
         /// </summary>
-        public abstract bool DoCapture(out string? errMsg);
+        public abstract bool DoGrab(out string? errMsg);
     }
 }

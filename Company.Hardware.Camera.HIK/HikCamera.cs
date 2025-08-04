@@ -158,7 +158,7 @@ namespace Company.Hardware.Camera.HIK
             return true;
         }
 
-        public override bool DoCapture(out string? errMsg)
+        public override bool DoGrab(out string? errMsg)
         {
             errMsg = string.Empty;
             var result = Camera?.MV_CC_SetCommandValue_NET("TriggerSoftware"); //软触发
