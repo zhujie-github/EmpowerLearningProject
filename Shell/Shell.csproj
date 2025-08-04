@@ -18,10 +18,16 @@
   <ItemGroup>
     <ProjectReference Include="..\Company.Application.Config\Company.Application.Config.csproj" />
     <ProjectReference Include="..\Company.Application.Image\Company.Application.Image.csproj" />
+    <ProjectReference Include="..\Company.Application.Initialize\Company.Application.Initialize.csproj" />
+    <ProjectReference Include="..\Company.Application.Login\Company.Application.Login.csproj" />
     <ProjectReference Include="..\Company.Application.Main\Company.Application.Main.csproj" />
     <ProjectReference Include="..\Company.Application.Menu\Company.Application.Menu.csproj" />
+    <ProjectReference Include="..\Company.Application.Process\Company.Application.Process.csproj" />
     <ProjectReference Include="..\Company.Application.Share\Company.Application.Share.csproj" />
     <ProjectReference Include="..\Company.Core\Company.Core.csproj" />
+    <ProjectReference Include="..\Company.Hardware.Camera.None\Company.Hardware.Camera.None.csproj" />
+    <ProjectReference Include="..\Company.Hardware.ControlCard.None\Company.Hardware.ControlCard.None.csproj" />
+    <ProjectReference Include="..\Company.Hardware.Detector.None\Company.Hardware.Detector.None.csproj" />
     <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
     <ProjectReference Include="..\Company.UI\Company.UI.csproj" />
   </ItemGroup>

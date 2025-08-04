@@ -9,6 +9,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBlock Text="图像处理" FontSize="40"></TextBlock>
     </Grid>
 </UserControl>

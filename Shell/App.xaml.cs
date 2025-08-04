@@ -1,9 +1,14 @@
 ﻿using Company.Application.Config;
 using Company.Application.Image;
+using Company.Application.Initialize;
+using Company.Application.Login;
 using Company.Application.Main;
 using Company.Application.Menu;
-using Company.Application.Share.Prism;
+using Company.Application.Process;
 using Company.Core;
+using Company.Hardware.Camera.None;
+using Company.Hardware.ControlCard.None;
+using Company.Hardware.Detector.None;
 using Company.Logger;
 using System.Windows;
 
@@ -62,19 +67,26 @@ namespace Shell
             base.ConfigureModuleCatalog(moduleCatalog);
 
             moduleCatalog.AddModule<CoreModule>();
+            moduleCatalog.AddModule<NoneCameraModule>();
+            moduleCatalog.AddModule<NoneControlCardModule>();
+            moduleCatalog.AddModule<NoneDetectorModule>();
             moduleCatalog.AddModule<ApplicationMainModule>();
+            moduleCatalog.AddModule<ApplicationLoginModule>();
             moduleCatalog.AddModule<ApplicationMenuModule>();
             moduleCatalog.AddModule<ApplicationImageModule>();
+            moduleCatalog.AddModule<ApplicationProcessModule>();
             moduleCatalog.AddModule<ApplicationConfigModule>();
+            moduleCatalog.AddModule<ApplicationInitializeModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
         {
             //使用目录模块
-            return new DirectoryModuleCatalog
-            {
-                ModulePath = ModuleNames.ModulePath
-            };
+            //return new DirectoryModuleCatalog
+            //{
+            //    ModulePath = ModuleNames.ModulePath
+            //};
+            return base.CreateModuleCatalog();
         }
     }
 }

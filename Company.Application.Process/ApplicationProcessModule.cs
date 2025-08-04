@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Prism;
+﻿using Company.Application.Process.Views;
+using Company.Application.Share.Prism;
 using Company.Core.Extensions;
 using System.Reflection;
 
@@ -10,6 +11,7 @@ namespace Company.Application.Process
         public void OnInitialized(IContainerProvider containerProvider)
         {
             containerProvider.InitializeAssembly(Assembly.GetExecutingAssembly());
+            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<ProcessView>(RegionNames.ProcessRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

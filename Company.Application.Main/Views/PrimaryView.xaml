@@ -14,7 +14,7 @@
         <TabItem Header="图像处理">
             <ContentControl prism:RegionManager.RegionName="{x:Static share:RegionNames.ProcessRegion}"></ContentControl>
         </TabItem>
-        <TabItem Header="绘图标记">
+        <TabItem Header="绘图工具">
             <ContentControl prism:RegionManager.RegionName="{x:Static share:RegionNames.DrawToolRegion}"></ContentControl>
         </TabItem>
     </TabControl>

@@ -6,6 +6,9 @@ using ReactiveUI;
 
 namespace Company.Application.Process.Models
 {
+    /// <summary>
+    /// 相机BGRA32位图像处理模型
+    /// </summary>
     [ExposedService(types:typeof(ICameraProcessModel))]
     public class CameraProcessModel : ReactiveObject, ICameraProcessModel
     {
