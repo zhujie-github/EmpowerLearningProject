@@ -20,10 +20,6 @@
     <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy &quot;$(ProjectDir)\bin\$(Configuration)\$(TargetFramework)\$(ProjectName).dll&quot; &quot;$(SolutionDir)\Shell\bin\$(Configuration)\$(TargetFramework)\Modules\&quot; /Y /S" />
   </Target>

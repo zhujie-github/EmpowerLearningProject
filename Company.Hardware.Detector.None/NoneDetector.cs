@@ -65,7 +65,7 @@ namespace Company.Hardware.Detector.None
                 //定时输出图像
                 using (var temp = _unmanagedArray.DeepClone())
                 {
-                    OnImageCaptured(temp);
+                    InvokeOnGrabbed(temp);
                 }
 
                 Thread.Sleep(50); // 模拟延时，实际应用中可能需要更复杂的逻辑

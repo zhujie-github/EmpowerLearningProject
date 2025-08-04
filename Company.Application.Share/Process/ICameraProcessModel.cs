@@ -10,7 +10,7 @@ namespace Company.Application.Share.Process
         /// <summary>
         /// 图像数据观察者
         /// </summary>
-        IObservable<UnmanagedArray2D<ColorBGRA>>? Observable { get; }
+        IObservable<UnmanagedArray2D<ColorBGRA>?> Observable { get; }
 
         /// <summary>
         /// 图像数据

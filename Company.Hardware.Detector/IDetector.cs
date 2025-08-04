@@ -8,7 +8,7 @@
         /// <summary>
         /// 事件：平板探测器拍照完成
         /// </summary>
-        event Action<DetectorImage>? ImageCaptured;
+        event Action<DetectorImage>? OnGrabbed;
 
         /// <summary>
         /// 是否初始化完成

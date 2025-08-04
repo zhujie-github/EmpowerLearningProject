@@ -60,7 +60,7 @@ namespace Company.Hardware.Camera.None
             {
                 if (_unmanagedArray != null)
                 {
-                    OnImageCaptured(new Photo(_unmanagedArray));
+                    InvokeOnGrabbed(new Photo(_unmanagedArray));
                 }
             });
             return true;

@@ -60,25 +60,19 @@ namespace Company.Core.Models
             Write(buffer.Header, buffer.Width, buffer.Height);
         }
 
-        private void Write(IntPtr header, int width, int height)
+        public void Write(IntPtr header, int width, int height)
         {
             UnmanagedArray2D<T>? result = null;
             var next = BufferType.Buffer1;
             switch(BufferType)
             {
                 case BufferType.Buffer1:
-                    if (Buffer2 == null)
-                    {
-                        Buffer2 = new UnmanagedArray2D<T>(width, height);
-                    }
+                    Buffer2 ??= new UnmanagedArray2D<T>(width, height);
                     result = Buffer2;
                     next = BufferType.Buffer2;
                     break;
                 case BufferType.Buffer2:
-                    if (Buffer1 == null)
-                    {
-                        Buffer1 = new UnmanagedArray2D<T>(width, height);
-                    }
+                    Buffer1 ??= new UnmanagedArray2D<T>(width, height);
                     result = Buffer1;
                     next = BufferType.Buffer1;
                     break;

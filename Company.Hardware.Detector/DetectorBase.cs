@@ -12,7 +12,7 @@ namespace Company.Hardware.Detector
         public bool Initialized { get; private set; } = false;
         public bool IsCapturing { get; protected set; } = false;
 
-        public event Action<DetectorImage>? ImageCaptured;
+        public event Action<DetectorImage>? OnGrabbed;
 
         public DetectorBase()
         {
@@ -77,9 +77,14 @@ namespace Company.Hardware.Detector
         /// 拍照时触发的事件
         /// </summary>
         /// <param name="image"></param>
-        public void OnImageCaptured(UnmanagedArray2D<ushort> image)
+        public void InvokeOnGrabbed(UnmanagedArray2D<ushort> image)
         {
-            ImageCaptured?.Invoke(new DetectorImage(image));
+            if (OnGrabbed == null) return;
+
+            foreach (Action<DetectorImage> item in OnGrabbed.GetInvocationList().Cast<Action<DetectorImage>>())
+            {
+                item.Invoke(new DetectorImage(image));
+            }
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Company.Hardware.Camera
 
         public bool IsCapturing { get; protected set; } = false;
 
-        public event Action<Photo>? ImageCaptured;
+        public event Action<Photo>? OnGrabbed;
 
         public CameraBase()
         {
@@ -77,9 +77,14 @@ namespace Company.Hardware.Camera
         /// 拍照时触发的事件
         /// </summary>
         /// <param name="photo"></param>
-        public void OnImageCaptured(Photo photo)
+        public void InvokeOnGrabbed(Photo photo)
         {
-            ImageCaptured?.Invoke(photo);
+            if (OnGrabbed == null) return;
+
+            foreach (Action<Photo> item in OnGrabbed.GetInvocationList().Cast<Action<Photo>>())
+            {
+                item.Invoke(photo);
+            }
         }
 
         /// <summary>

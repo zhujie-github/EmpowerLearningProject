@@ -103,7 +103,7 @@ namespace Company.Hardware.Camera.HIK
         {
             BufferBgra ??= new UnmanagedArray2D<ColorBGRA>(pFrameInfo.nWidth, pFrameInfo.nHeight);
             MemoryHelper.CopyMemory(BufferBgra.Header, pData, BufferBgra.Length);
-            OnImageCaptured(new Photo(BufferBgra));
+            InvokeOnGrabbed(new Photo(BufferBgra));
         }
 
         private static bool FindDevice(out MyCamera.MV_CC_DEVICE_INFO device, out string? errMsg)
