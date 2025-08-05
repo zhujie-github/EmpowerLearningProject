@@ -74,8 +74,8 @@ namespace Shell
             moduleCatalog.AddModule<ApplicationLoginModule>();
             moduleCatalog.AddModule<ApplicationMenuModule>();
             moduleCatalog.AddModule<ApplicationProcessModule>();
-            moduleCatalog.AddModule<ApplicationImageModule>();
             moduleCatalog.AddModule<ApplicationConfigModule>();
+            moduleCatalog.AddModule<ApplicationImageModule>();
             moduleCatalog.AddModule<ApplicationInitializeModule>();
         }
 

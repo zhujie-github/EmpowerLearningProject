@@ -17,12 +17,12 @@ namespace Company.Hardware.Detector
         /// 图像宽度（像素）
         /// </summary>
         [DisplayName("图像宽度")]
-        public int Width { get; set; } = 638;
+        public int Width { get; set; } = 1500;
 
         /// <summary>
         /// 图像高度（像素）
         /// </summary>
         [DisplayName("图像高度")]
-        public int Height { get; set; } = 844;
+        public int Height { get; set; } = 1500;
     }
 }

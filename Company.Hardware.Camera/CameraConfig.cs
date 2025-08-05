@@ -10,11 +10,11 @@
         /// <summary>
         /// 图像宽度（像素）
         /// </summary>
-        public int Width { get; set; } = 500;
+        public int Width { get; set; } = 2644;
 
         /// <summary>
         /// 图像高度（像素）
         /// </summary>
-        public int Height { get; set; } = 386;
+        public int Height { get; set; } = 2041;
     }
 }

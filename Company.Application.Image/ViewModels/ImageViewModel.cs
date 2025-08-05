@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Process;
+﻿using Company.Application.Share.Configs;
+using Company.Application.Share.Process;
 using Company.Core.Models;
 using Company.Hardware.Detector;
 using ReactiveUI;
@@ -7,10 +8,15 @@ namespace Company.Application.Image.ViewModels
 {
     public class ImageViewModel : ReactiveObject
     {
-        public Gray16ImageSource Gray16ImageSource { get; set; } = new Gray16ImageSource(638, 844);
+        private ISystemConfigProvider SystemConfigProvider { get; }
 
-        public ImageViewModel(IDetectorProcessModel detectorProcessModel, IDetector detector)
+        public Gray16ImageSource Gray16ImageSource { get; set; }
+
+        public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel,
+            IDetector detector)
         {
+            SystemConfigProvider = systemConfigProvider;
+            Gray16ImageSource = new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
             detectorProcessModel.SourceObservable.Subscribe(source =>
             {
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -18,7 +24,6 @@ namespace Company.Application.Image.ViewModels
                     Gray16ImageSource.Write(source);
                 });
             });
-
             detector.Grab();
         }
     }
