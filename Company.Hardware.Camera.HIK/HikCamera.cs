@@ -125,7 +125,7 @@ namespace Company.Hardware.Camera.HIK
                 return false;
             }
 
-            device = (MyCamera.MV_CC_DEVICE_INFO)Marshal.PtrToStructure(list.pDeviceInfo[0], typeof(MyCamera.MV_CC_DEVICE_INFO_LIST));
+            device = (MyCamera.MV_CC_DEVICE_INFO)Marshal.PtrToStructure(list.pDeviceInfo[0], typeof(MyCamera.MV_CC_DEVICE_INFO_LIST))!;
 
             return true;
         }
