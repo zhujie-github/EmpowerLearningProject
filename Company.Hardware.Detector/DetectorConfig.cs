@@ -11,18 +11,18 @@ namespace Company.Hardware.Detector
         /// 默认图像
         /// </summary>
         [DisplayName("默认图像")]
-        public string Photo { get; set; } = "CT.tiff";
+        public string Photo { get; set; } = "1.tif";
 
         /// <summary>
         /// 图像宽度（像素）
         /// </summary>
         [DisplayName("图像宽度")]
-        public int Width { get; set; } = 1500;
+        public int Width { get; set; } = 1420;
 
         /// <summary>
         /// 图像高度（像素）
         /// </summary>
         [DisplayName("图像高度")]
-        public int Height { get; set; } = 1500;
+        public int Height { get; set; } = 1002;
     }
 }

@@ -8,7 +8,7 @@ namespace Company.Core.Extensions
 {
     public static class ComboBoxExtension
     {
-        public static string GetEnumDescription(this object obj)
+        private static string GetEnumDescription(this object obj)
         {
             Assert.NotNull(obj);
             var type = obj.GetType();
@@ -31,7 +31,7 @@ namespace Company.Core.Extensions
         private static IEnumerable<BindableSourceItem<T>> GetBindableSourceItems<T>(this object obj,
             Func<T, bool>? filter = null) where T : struct
         {
-            var type = obj.GetType();
+            var type = typeof(T);
             if (!type.IsEnum)
             {
                 throw new Exception($"{type.FullName}必须为枚举类型");

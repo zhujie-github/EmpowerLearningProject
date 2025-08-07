@@ -5,7 +5,7 @@
         /// <summary>
         /// 默认图像
         /// </summary>
-        public string Photo { get; set; } = "PCB主板.jpg";
+        public string Photo { get; set; } = "1.jpg";
 
         /// <summary>
         /// 图像宽度（像素）
