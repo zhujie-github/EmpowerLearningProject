@@ -3,6 +3,7 @@ using Company.Core.Ioc;
 using Company.Hardware.Camera;
 using Company.Hardware.ControlCard;
 using Company.Hardware.Detector;
+using Company.Logger;
 
 namespace Company.Application.Initialize.Services
 {
@@ -18,14 +19,6 @@ namespace Company.Application.Initialize.Services
         /// </summary>
         public bool IsInitialized { get; private set; } = false;
 
-        private ISystemConfigProvider SystemConfigProvider { get; } = systemConfigProvider;
-
-        private ICamera Camera { get; } = camera;
-
-        private IDetector Detector { get; } = detector;
-
-        private IControlCard ControlCard { get; } = controlCard;
-
         /// <summary>
         /// 初始化所有硬件
         /// </summary>
@@ -40,9 +33,9 @@ namespace Company.Application.Initialize.Services
                 return (false, msg);
             }
 
-            var task_camera = Task.Run(() => Camera.Init(SystemConfigProvider.CameraConfig));
-            var task_detector = Task.Run(() => Detector.Init(SystemConfigProvider.DetectorConfig));
-            var task_controlCard = Task.Run(() => ControlCard.Init(SystemConfigProvider.ControlCardConfig));
+            var task_camera = Task.Run(() => camera.Init(systemConfigProvider.CameraConfig));
+            var task_detector = Task.Run(() => detector.Init(systemConfigProvider.DetectorConfig));
+            var task_controlCard = Task.Run(() => controlCard.Init(systemConfigProvider.ControlCardConfig));
             var taskResults = await Task.WhenAll(task_camera, task_detector, task_controlCard);
             IsInitialized = taskResults.All(r => r.Item1);
             var msgs = new List<string>();
@@ -63,21 +56,33 @@ namespace Company.Application.Initialize.Services
         {
             try
             {
-                Camera.Close();
+                camera.Close();
             }
-            catch// (Exception ex)
+            catch (Exception ex)
             {
-                // 处理相机关闭异常 todo
+                NLogger.Error(ex);
             }
+
             try
             {
-                Detector.Close();
+                detector.Close();
             }
-            catch// (Exception ex)
+            catch (Exception ex)
             {
-                // 处理探测器关闭异常 todo
+                NLogger.Error(ex);
             }
+
+            try
+            {
+                controlCard.Close();
+            }
+            catch (Exception ex)
+            {
+                NLogger.Error(ex);
+            }
+
             IsInitialized = false;
+            NLogger.Info("所有硬件已关闭");
         }
     }
 }

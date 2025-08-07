@@ -6,6 +6,8 @@ using Company.Application.Main;
 using Company.Application.Menu;
 using Company.Application.Process;
 using Company.Core;
+using Company.Core.Events;
+using Company.Core.Ioc;
 using Company.Hardware.Camera.None;
 using Company.Hardware.ControlCard.None;
 using Company.Hardware.Detector.None;
@@ -48,6 +50,7 @@ namespace Shell
 
         protected override void OnExit(ExitEventArgs e)
         {
+            PrismProvider.EventAggregator.GetEvent<CloseAllHardwareEvent>().Publish();
             base.OnExit(e);
             NLogger.Info("应用程序已经退出");
         }

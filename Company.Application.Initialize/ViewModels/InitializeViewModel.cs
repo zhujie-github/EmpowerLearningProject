@@ -1,5 +1,6 @@
 ﻿using Company.Application.Initialize.Services;
 using Company.Application.Share.Prism;
+using Company.Core.Events;
 using Company.Core.Ioc;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -21,6 +22,7 @@ namespace Company.Application.Initialize.ViewModels
             _hardwareLifetimeManager = hardwareLifetimeManager;
 
             LoadedCommand = ReactiveCommand.Create(Loaded);
+            PrismProvider.EventAggregator.GetEvent<CloseAllHardwareEvent>().Subscribe(_hardwareLifetimeManager.Close);
         }
 
         private async Task Loaded()
