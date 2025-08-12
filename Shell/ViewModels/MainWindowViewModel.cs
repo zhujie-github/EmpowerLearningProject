@@ -75,18 +75,18 @@ namespace Shell.ViewModels
             {
                 case ViewNames.LoginView:
                     // 登录视图被导航到时，可以执行一些特定的操作
-                    MainWindow.ResizeMode = ResizeMode.NoResize; // 禁止调整大小
-                    MainWindow.SizeToContent = SizeToContent.WidthAndHeight; // 根据内容自动调整大小
-                    MainWindow.WindowState = WindowState.Normal; // 确保窗口处于正常状态
-                    MainWindow.WindowStyle = WindowStyle.None; // 设置窗口样式为无边框
+                    //MainWindow.ResizeMode = ResizeMode.NoResize; // 禁止调整大小
+                    //MainWindow.SizeToContent = SizeToContent.WidthAndHeight; // 根据内容自动调整大小
+                    //MainWindow.WindowState = WindowState.Normal; // 确保窗口处于正常状态
+                    //MainWindow.WindowStyle = WindowStyle.None; // 设置窗口样式为无边框
                     break;
 
                 case ViewNames.MainView:
                     // 主视图被导航到时，可以执行一些特定的操作
-                    MainWindow.ResizeMode = ResizeMode.CanResize; // 允许调整大小
-                    MainWindow.SizeToContent = SizeToContent.Manual; // 手动设置大小
                     MainWindow.WindowState = WindowState.Maximized; // 最大化窗口
-                    MainWindow.WindowStyle = WindowStyle.SingleBorderWindow; // 设置窗口样式为单边框窗口
+                    //MainWindow.ResizeMode = ResizeMode.CanResize; // 允许调整大小
+                    //MainWindow.SizeToContent = SizeToContent.Manual; // 手动设置大小
+                    //MainWindow.WindowStyle = WindowStyle.SingleBorderWindow; // 设置窗口样式为单边框窗口
                     break;
                 default:
                     break;

@@ -12,13 +12,31 @@
     d:DesignWidth="800"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
-    <Grid x:Name="viewport" Background="Gray">
+    <Grid x:Name="viewport" Background="Gray" Tag="{Binding ElementName=imagebox}">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
                 <prism:InvokeCommandAction Command="{Binding ViewportLoadedCommand}"></prism:InvokeCommandAction>
             </i:EventTrigger>
+            <i:EventTrigger EventName="SizeChanged">
+                <prism:InvokeCommandAction Command="{Binding SizeChangedCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeftButtonUp">
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseRightButtonDown">
+                <prism:InvokeCommandAction Command="{Binding MouseRightButtonDownCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseRightButtonUp">
+                <prism:InvokeCommandAction Command="{Binding MouseRightButtonUpCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
             <i:EventTrigger EventName="MouseMove">
                 <prism:InvokeCommandAction Command="{Binding MouseMoveCommand}"></prism:InvokeCommandAction>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeave">
+                <prism:InvokeCommandAction Command="{Binding MouseLeaveCommand}"></prism:InvokeCommandAction>
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <Canvas ClipToBounds="True">
