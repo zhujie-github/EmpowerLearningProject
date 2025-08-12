@@ -35,8 +35,8 @@
                 <Button Content="&#xf044;" Style="{StaticResource IconButtonStyle}"></Button>
                 <Button Content="&#xf293;" Style="{StaticResource IconButtonStyle}"></Button>
                 <Button Content="&#xf240;" Style="{StaticResource IconButtonStyle}"></Button>
-                <Button Content="&#xf030;" Style="{StaticResource IconButtonStyle}" ToolTip="相机拍照"></Button>
-                <Button Content="&#xf03e;" Style="{StaticResource IconButtonStyle}" ToolTip="打开探测器"></Button>
+                <Button Content="&#xf030;" Style="{StaticResource IconButtonStyle}" ToolTip="拍照采集（相机+探测器）" Command="{Binding GrabPhotoCommand}"></Button>
+                <Button Content="&#xf03e;" Style="{StaticResource IconButtonStyle}"></Button>
                 <CheckBox x:Name="mouseWorkMode" Content="&#xf0b2;" Style="{StaticResource IconCheckBoxStyle}"></CheckBox>
                 <ComboBox x:Name="comboBox" Height="25" MinWidth="70" IsEnabled="{Binding ElementName=mouseWorkMode, Path=IsChecked}"></ComboBox>
             </StackPanel>

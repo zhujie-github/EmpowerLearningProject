@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Company.Hardware.Camera;
+using Company.Hardware.Detector;
+using System.Windows.Input;
 
 namespace Company.Application.Main.ViewModels
 {
-    internal class MainViewModel : BindableBase
+    public class MainViewModel : BindableBase
     {
+        private ICamera Camera { get; }
+        private IDetector Detector { get; }
+
+        public ICommand GrabPhotoCommand { get; }
+
+        public MainViewModel(ICamera camera, IDetector detector)
+        {
+            Camera = camera;
+            Detector = detector;
+            GrabPhotoCommand = new DelegateCommand(GrabPhoto);
+        }
+
+        private void GrabPhoto()
+        {
+            Camera.Grab();
+            Detector.Grab();
+        }
     }
 }
