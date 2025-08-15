@@ -1,5 +1,7 @@
 ﻿using Company.Application.Share.Configs;
+using Company.Application.Share.Main;
 using Company.Application.Share.Process;
+using Company.Core.Enums;
 using Company.Core.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -15,10 +17,11 @@ namespace Company.Application.Image.ViewModels
         private ISystemConfigProvider SystemConfigProvider { get; }
         private Grid? Viewport { get; set; }
         private Grid? ImageBox { get; set; }
-        private readonly ScaleTransform _scaleTransform = new();
-        private readonly TranslateTransform _translateTransform = new();
+        private ScaleTransform ScaleTransform { get; } = new();
+        private TranslateTransform TranslateTransform { get; } = new();
+        private Gray16ImageSource Gray16ImageSource { get; set; }
+        private MouseWorkMode MouseWorkMode { get; set; } = MouseWorkMode.默认操作;
 
-        public Gray16ImageSource Gray16ImageSource { get; set; }
         [Reactive]
         public Point MousePoint { get; private set; } = new Point(-1, -1);
         [Reactive]
@@ -43,9 +46,11 @@ namespace Company.Application.Image.ViewModels
         public ICommand MouseRightButtonUpCommand { get; }
         public ICommand SizeChangedCommand { get; }
 
-        public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel)
+        public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel,
+            IMouseWorkModeProvider mouseWorkModeProvider)
         {
             SystemConfigProvider = systemConfigProvider;
+
             Gray16ImageSource = new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
             detectorProcessModel.SourceObservable.Subscribe(source =>
             {
@@ -55,8 +60,13 @@ namespace Company.Application.Image.ViewModels
                 });
             });
 
-            TransformGroup.Children.Add(_scaleTransform);
-            TransformGroup.Children.Add(_translateTransform);
+            mouseWorkModeProvider.MouseWorkModeObservable.Subscribe(source =>
+            {
+                MouseWorkMode = source;
+            });
+
+            TransformGroup.Children.Add(ScaleTransform);
+            TransformGroup.Children.Add(TranslateTransform);
 
             ViewportLoadedCommand = ReactiveCommand.Create<RoutedEventArgs>(ViewportLoaded);
             MouseMoveCommand = ReactiveCommand.Create<MouseEventArgs>(MouseMove);
@@ -87,12 +97,12 @@ namespace Company.Application.Image.ViewModels
         private void SetTransform()
         {
             var scale = Math.Min(1.0 * ViewportWidth / ImageBoxWidth, 1.0 * ViewportHeight / ImageBoxHeight);
-            _scaleTransform.ScaleX = scale;
-            _scaleTransform.ScaleY = scale;
+            ScaleTransform.ScaleX = scale;
+            ScaleTransform.ScaleY = scale;
             var translateX = (ViewportWidth - ImageBoxWidth * scale) / 2;
             var translateY = (ViewportHeight - ImageBoxHeight * scale) / 2;
-            _translateTransform.X = translateX;
-            _translateTransform.Y = translateY;
+            TranslateTransform.X = translateX;
+            TranslateTransform.Y = translateY;
         }
 
         private void MouseMove(MouseEventArgs e)
