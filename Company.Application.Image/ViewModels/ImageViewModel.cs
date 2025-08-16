@@ -19,11 +19,20 @@ namespace Company.Application.Image.ViewModels
         private Grid? ImageBox { get; set; }
         private ScaleTransform ScaleTransform { get; } = new();
         private TranslateTransform TranslateTransform { get; } = new();
-        private Gray16ImageSource Gray16ImageSource { get; set; }
         private MouseWorkMode MouseWorkMode { get; set; } = MouseWorkMode.默认操作;
+        private bool MousePressed { get; set; }
 
+        public Gray16ImageSource Gray16ImageSource { get; set; }
+        /// <summary>
+        /// 十字架所引用的点位
+        /// </summary>
         [Reactive]
         public Point MousePoint { get; private set; } = new Point(-1, -1);
+        /// <summary>
+        /// 鼠标按下的位置
+        /// </summary>
+        [Reactive]
+        public Point MouseDownPoint { get; private set; } = new Point(-1, -1);
         [Reactive]
         public Visibility LineVisibility { get; set; } = Visibility.Visible;
         [Reactive]
@@ -108,6 +117,23 @@ namespace Company.Application.Image.ViewModels
         private void MouseMove(MouseEventArgs e)
         {
             MousePoint = e.GetPosition(Viewport);
+            if (MousePressed)
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+
+                }
+                else if (e.RightButton == MouseButtonState.Pressed)
+                {
+                    if (MouseWorkMode == MouseWorkMode.图片查看)
+                    {
+                        TranslateTransform.X += MousePoint.X - MouseDownPoint.X;
+                        TranslateTransform.Y += MousePoint.Y - MouseDownPoint.Y;
+                    }
+                }
+
+                MouseDownPoint = MousePoint;
+            }
         }
 
         private void MouseLeave(MouseEventArgs e)
@@ -127,12 +153,16 @@ namespace Company.Application.Image.ViewModels
 
         private void MouseRightButtonDown(MouseEventArgs e)
         {
-            
+            MousePressed = true;
+            MouseDownPoint = e.GetPosition(Viewport);
+            Viewport?.CaptureMouse(); //立刻触发Move事件
         }
 
         private void MouseRightButtonUp(MouseEventArgs e)
         {
-
+            MousePressed = false;
+            MouseDownPoint = e.GetPosition(Viewport);
+            Viewport?.ReleaseMouseCapture();
         }
 
         private void ViewportSizeChanged(SizeChangedEventArgs e)
