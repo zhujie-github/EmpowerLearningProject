@@ -19,7 +19,8 @@ namespace Company.Application.Image.ViewModels
         private Grid? ImageBox { get; set; }
         private ScaleTransform ScaleTransform { get; } = new();
         private TranslateTransform TranslateTransform { get; } = new();
-        private MouseWorkMode MouseWorkMode { get; set; } = MouseWorkMode.默认操作;
+        private MouseWorkMode MouseWorkMode { get; set; }
+        private ZoomMode ZoomMode { get; set; }
         private bool MousePressed { get; set; }
 
         public Gray16ImageSource Gray16ImageSource { get; set; }
@@ -54,9 +55,10 @@ namespace Company.Application.Image.ViewModels
         public ICommand MouseRightButtonDownCommand { get; }
         public ICommand MouseRightButtonUpCommand { get; }
         public ICommand SizeChangedCommand { get; }
+        public ICommand MouseWheelCommand { get; }
 
         public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel,
-            IMouseWorkModeProvider mouseWorkModeProvider)
+            IMouseWorkModeProvider mouseWorkModeProvider, IZoomModeProvider zoomModeProvider)
         {
             SystemConfigProvider = systemConfigProvider;
 
@@ -74,6 +76,11 @@ namespace Company.Application.Image.ViewModels
                 MouseWorkMode = source;
             });
 
+            zoomModeProvider.ZoomModeObservable.Subscribe(source =>
+            {
+                ZoomModeChanged(source);
+            });
+
             TransformGroup.Children.Add(ScaleTransform);
             TransformGroup.Children.Add(TranslateTransform);
 
@@ -85,6 +92,7 @@ namespace Company.Application.Image.ViewModels
             MouseRightButtonDownCommand = ReactiveCommand.Create<MouseEventArgs>(MouseRightButtonDown);
             MouseRightButtonUpCommand = ReactiveCommand.Create<MouseEventArgs>(MouseRightButtonUp);
             SizeChangedCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ViewportSizeChanged);
+            MouseWheelCommand = ReactiveCommand.Create<MouseWheelEventArgs>(MouseWheel);
         }
 
         private void ViewportLoaded(RoutedEventArgs e)
@@ -99,19 +107,26 @@ namespace Company.Application.Image.ViewModels
             ViewportLoadedCommand = null; //只执行一次
         }
 
+        private double GetScaleByZoomMode(ZoomMode mode)
+        {
+            return mode switch
+            {
+                ZoomMode.Uniform => Math.Min(1.0 * ViewportWidth / ImageBoxWidth, 1.0 * ViewportHeight / ImageBoxHeight),
+                _ => (int)mode,
+            };
+        }
+
         /// <summary>
         /// 根据Viewport尺寸，设置图像缩放平移
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
         private void SetTransform()
         {
-            var scale = Math.Min(1.0 * ViewportWidth / ImageBoxWidth, 1.0 * ViewportHeight / ImageBoxHeight);
+            var scale = GetScaleByZoomMode(ZoomMode);
             ScaleTransform.ScaleX = scale;
             ScaleTransform.ScaleY = scale;
-            var translateX = (ViewportWidth - ImageBoxWidth * scale) / 2;
-            var translateY = (ViewportHeight - ImageBoxHeight * scale) / 2;
-            TranslateTransform.X = translateX;
-            TranslateTransform.Y = translateY;
+            TranslateTransform.X = (ViewportWidth - ImageBoxWidth * scale) / 2;
+            TranslateTransform.Y = (ViewportHeight - ImageBoxHeight * scale) / 2;
         }
 
         private void MouseMove(MouseEventArgs e)
@@ -167,6 +182,39 @@ namespace Company.Application.Image.ViewModels
 
         private void ViewportSizeChanged(SizeChangedEventArgs e)
         {
+        }
+
+        private void MouseWheel(MouseWheelEventArgs e)
+        {
+            if (MouseWorkMode != MouseWorkMode.图片查看)
+                return;
+
+            var scale = e.Delta * 0.0005;
+            if (ScaleTransform.ScaleX + scale < 0.2)
+                return;
+
+            var point = e.GetPosition(Viewport);
+            var inversed = TransformGroup.Inverse.Transform(point);
+
+            ScaleTransform.ScaleX += scale;
+            ScaleTransform.ScaleY += scale;
+
+            TranslateTransform.X = -(inversed.X * ScaleTransform.ScaleX - point.X);
+            TranslateTransform.Y = -(inversed.Y * ScaleTransform.ScaleY - point.Y);
+        }
+
+        /// <summary>
+        /// 图像缩放模式发生改变时触发该方法
+        /// </summary>
+        /// <param name="mode"></param>
+        private void ZoomModeChanged(ZoomMode mode)
+        {
+            ZoomMode = mode;
+
+            if (MouseWorkMode != MouseWorkMode.图片查看)
+                return;
+
+            SetTransform();
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using Company.Application.Main.Models;
+using Company.Core.Enums;
 using Company.Hardware.Camera;
 using Company.Hardware.Detector;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Company.Core.Enums;
-using DynamicData.Kernel;
 
 namespace Company.Application.Main.ViewModels
 {

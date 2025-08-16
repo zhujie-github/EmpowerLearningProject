@@ -38,6 +38,9 @@
             <i:EventTrigger EventName="MouseLeave">
                 <prism:InvokeCommandAction Command="{Binding MouseLeaveCommand}"></prism:InvokeCommandAction>
             </i:EventTrigger>
+            <i:EventTrigger EventName="MouseWheel">
+                <prism:InvokeCommandAction Command="{Binding MouseWheelCommand}"/>
+            </i:EventTrigger>
         </i:Interaction.Triggers>
         <Canvas ClipToBounds="True">
             <Grid x:Name="imagebox" RenderTransform="{Binding TransformGroup}">
