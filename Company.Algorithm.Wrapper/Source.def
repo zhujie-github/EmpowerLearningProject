@@ -1,0 +1,4 @@
+LIBRARY "Company.Algorithm.Wrapper"
+EXPORTS
+Hello			@1 NONAME
+
