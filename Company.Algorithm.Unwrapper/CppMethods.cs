@@ -11,5 +11,14 @@ namespace Company.Algorithm.Unwrapper
 
         [DllImport(DllName, EntryPoint = "#1", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Hello();
+
+        /// <summary>
+        /// 遍历整张图像，并给每个像素点增加一个V
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="v"></param>
+        [DllImport(DllName, EntryPoint = "#2", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void CppTest(CppImage16UC1 src, CppImage16UC1 dst, ushort v);
     }
 }

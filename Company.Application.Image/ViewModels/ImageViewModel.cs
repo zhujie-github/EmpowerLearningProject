@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Configs;
+﻿using Company.Algorithm.Unwrapper;
+using Company.Application.Share.Configs;
 using Company.Application.Share.Main;
 using Company.Application.Share.Process;
 using Company.Core.Enums;
@@ -63,11 +64,15 @@ namespace Company.Application.Image.ViewModels
             SystemConfigProvider = systemConfigProvider;
 
             Gray16ImageSource = new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
-            detectorProcessModel.SourceObservable.Subscribe(source =>
+            detectorProcessModel.SourceObservable.Subscribe(image =>
             {
+                if (image == null) return;
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Gray16ImageSource.Write(source);
+                    using var temp = image.DeepClone();
+                    var cppImage = new CppImage16UC1(temp);
+                    CppMethods.CppTest(cppImage, cppImage, 5000);
+                    Gray16ImageSource.Write(temp);
                 });
             });
 

@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include <opencv2/opencv.hpp>
+using namespace company;
 using namespace cv;
 
 // 当使用预编译的头时，需要使用此源文件，编译才能成功。
@@ -10,4 +11,20 @@ void Hello()
 	Mat src = imread("Images/1.jpg", IMREAD_COLOR);
 	namedWindow("图像", WINDOW_FREERATIO);
 	imshow("图像", src);
+}
+
+void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
+{
+	Mat src = CppImageToMat(src_image);
+	Mat dst = CppImageToMat(dst_image);
+
+	//数组访问
+	for (size_t i = 0; i < src.cols; i++)
+	{
+		for (size_t j = 0; j < src.rows; j++)
+		{
+			int pv = dst.at<ushort>(i, j);//获取某行某行的像素点
+			dst.at<ushort>(i, j) = v + pv;
+		}
+	}
 }

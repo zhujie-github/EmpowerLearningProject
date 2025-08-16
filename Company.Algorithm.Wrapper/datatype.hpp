@@ -13,11 +13,11 @@ namespace company
 		int height; //图像的高度
 	};
 
-	typedef _Image<uchar, 1> Image8UC1; //8位单通道
-	typedef _Image<uchar, 3> Image8UC3; //24位单通道
-	typedef _Image<uchar, 4> Image8UC4; //32位单通道
-	typedef _Image<ushort, 1> Image16UC1; //16位单通道
-	typedef _Image<float, 1> Image32FC1; //32位单通道
+	typedef _Image<uchar, 1> Image8UC1; //8位单通道图像
+	typedef _Image<uchar, 3> Image8UC3; //24位单通道图像
+	typedef _Image<uchar, 4> Image8UC4; //32位单通道图像
+	typedef _Image<ushort, 1> Image16UC1; //16位单通道图像
+	typedef _Image<float, 1> Image32FC1; //32位单通道图像
 
 	struct ColorBGRA
 	{

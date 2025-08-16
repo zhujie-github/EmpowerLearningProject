@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Company.Algorithm.Unwrapper;
+using System.Windows.Controls;
 
 namespace Company.Application.Image.Views
 {
@@ -11,7 +12,7 @@ namespace Company.Application.Image.Views
         {
             InitializeComponent();
 
-            //CppMethods.Hello();
+            CppMethods.Hello();
         }
     }
 }

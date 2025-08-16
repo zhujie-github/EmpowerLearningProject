@@ -241,7 +241,6 @@ namespace gapi
  *
  * @brief G-API functions and classes for serialization and deserialization.
  */
-
 /** @brief Wraps deserialized output GRunArgs to GRunArgsP which can be used by GCompiled.
  *
  * Since it's impossible to get modifiable output arguments from deserialization
@@ -255,7 +254,6 @@ namespace gapi
  * @see deserialize
  */
 GAPI_EXPORTS cv::GRunArgsP bind(cv::GRunArgs &out_args);
-
 /** @brief Wraps output GRunArgsP available during graph execution to GRunArgs which can be serialized.
  *
  * GRunArgsP is pointer-to-value, so to be serialized they need to be binded to real values

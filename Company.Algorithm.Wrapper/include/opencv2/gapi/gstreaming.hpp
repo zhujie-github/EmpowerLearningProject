@@ -388,6 +388,7 @@ protected:
     /// @private
     std::shared_ptr<Priv> m_priv;
 };
+/** @} */
 
 namespace gapi {
 
@@ -408,10 +409,11 @@ namespace streaming {
 struct GAPI_EXPORTS_W_SIMPLE queue_capacity
 {
     GAPI_WRAP
-    explicit queue_capacity(size_t cap = 1) : capacity(cap) { }
+    explicit queue_capacity(size_t cap = 1) : capacity(cap) { };
     GAPI_PROP_RW
     size_t capacity;
 };
+/** @} */
 } // namespace streaming
 } // namespace gapi
 
@@ -422,8 +424,6 @@ template<> struct CompileArgTag<cv::gapi::streaming::queue_capacity>
     static const char* tag() { return "gapi.queue_capacity"; }
 };
 }
-
-/** @} gapi_main_classes */
 
 }
 
