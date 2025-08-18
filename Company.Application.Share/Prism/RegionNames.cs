@@ -51,5 +51,10 @@ namespace Company.Application.Share.Prism
         /// 绘图工具区域
         /// </summary>
         public const string DrawToolRegion = "DrawToolRegion";
+
+        /// <summary>
+        /// 图像处理流程区域
+        /// </summary>
+        public const string FlowRegion = "FlowRegion";
     }
 }

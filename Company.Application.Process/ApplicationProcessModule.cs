@@ -6,6 +6,7 @@ using System.Reflection;
 namespace Company.Application.Process
 {
     [Module(ModuleName = ModuleNames.ApplicationProcessModule, OnDemand = true)]
+    [ModuleDependency(ModuleNames.ApplicationFlowModule)]
     public class ApplicationProcessModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
