@@ -19,9 +19,9 @@ void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
 	Mat dst = CppImageToMat(dst_image);
 
 	//数组访问
-	for (size_t i = 0; i < src.cols; i++)
+	for (size_t i = 0; i < src_image.height; i++)
 	{
-		for (size_t j = 0; j < src.rows; j++)
+		for (size_t j = 0; j < src_image.width; j++)
 		{
 			int pv = dst.at<ushort>(i, j);//获取某行某行的像素点
 			dst.at<ushort>(i, j) = v + pv;

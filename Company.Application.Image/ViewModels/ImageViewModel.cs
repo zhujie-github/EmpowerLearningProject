@@ -71,7 +71,7 @@ namespace Company.Application.Image.ViewModels
                 {
                     using var temp = image.DeepClone();
                     var cppImage = new CppImage16UC1(temp);
-                    CppMethods.CppTest(cppImage, cppImage, 5000);
+                    //CppMethods.CppTest(cppImage, cppImage, 5000);
                     Gray16ImageSource.Write(temp);
                 });
             });

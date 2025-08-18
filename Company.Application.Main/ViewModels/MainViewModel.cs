@@ -12,6 +12,7 @@ namespace Company.Application.Main.ViewModels
         private ICamera Camera { get; }
         private IDetector Detector { get; }
         public MainModel MainModel { get; }
+        public ICommand LoadedCommand { get; }
         public ICommand GrabPhotoCommand { get; }
         public ICommand MouseWorkModeCommand { get; }
 
@@ -20,8 +21,17 @@ namespace Company.Application.Main.ViewModels
             Camera = camera;
             Detector = detector;
             MainModel = mainModel;
+            LoadedCommand = new DelegateCommand(Loaded);
             GrabPhotoCommand = new DelegateCommand(GrabPhoto);
             MouseWorkModeCommand = new DelegateCommand<CheckBox>(GetMouseWorkMode);
+        }
+
+        private async void Loaded()
+        {
+            await Task.Delay(100).ContinueWith(task =>
+            {
+                GrabPhoto();
+            });
         }
 
         private void GrabPhoto()

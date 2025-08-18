@@ -12,7 +12,7 @@ namespace Company.Application.Image.Views
         {
             InitializeComponent();
 
-            CppMethods.Hello();
+            //CppMethods.Hello();
         }
     }
 }

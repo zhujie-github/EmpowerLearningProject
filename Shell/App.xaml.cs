@@ -73,13 +73,13 @@ namespace Shell
             moduleCatalog.AddModule<NoneCameraModule>();
             moduleCatalog.AddModule<NoneControlCardModule>();
             moduleCatalog.AddModule<NoneDetectorModule>();
+            moduleCatalog.AddModule<ApplicationConfigModule>();
+            moduleCatalog.AddModule<ApplicationInitializeModule>();
             moduleCatalog.AddModule<ApplicationMainModule>();
             moduleCatalog.AddModule<ApplicationLoginModule>();
             moduleCatalog.AddModule<ApplicationMenuModule>();
             moduleCatalog.AddModule<ApplicationProcessModule>();
-            moduleCatalog.AddModule<ApplicationConfigModule>();
             moduleCatalog.AddModule<ApplicationImageModule>();
-            moduleCatalog.AddModule<ApplicationInitializeModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
