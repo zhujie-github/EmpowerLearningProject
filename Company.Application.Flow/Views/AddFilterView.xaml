@@ -11,6 +11,23 @@
              Width="300" Height="500"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding DisplayModels, Mode=OneWay}" SelectedItem="{Binding DisplayModel}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Height="25" Orientation="Horizontal">
+                        <Image Source="{Binding Icon}"/>
+                        <TextBlock Text="{Binding Name}" Margin="3" FontSize="16"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <DockPanel Grid.Row="1" HorizontalAlignment="Right">
+            <Button Content="确定" Width="60" Margin="5" Command="{Binding SubmitCommand}"/>
+            <Button Content="取消" Width="60" Margin="5" IsCancel="True"/>
+        </DockPanel>
     </Grid>
 </UserControl>
