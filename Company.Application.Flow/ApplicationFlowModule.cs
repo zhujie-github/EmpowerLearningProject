@@ -6,6 +6,7 @@ using System.Reflection;
 namespace Company.Application.Flow
 {
     [Module(ModuleName = ModuleNames.ApplicationFlowModule, OnDemand = true)]
+    [ModuleDependency(ModuleNames.ApplicationFilterModule)]
     public class ApplicationFlowModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

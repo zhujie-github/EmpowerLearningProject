@@ -43,5 +43,10 @@
         /// 图像处理流程模块
         /// </summary>
         public const string ApplicationFlowModule = "ApplicationFlowModule";
+
+        /// <summary>
+        /// 图像处理滤波模块
+        /// </summary>
+        public const string ApplicationFilterModule = "ApplicationFilterModule";
     }
 }
