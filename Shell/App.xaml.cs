@@ -1,4 +1,5 @@
 ﻿using Company.Application.Config;
+using Company.Application.Flow;
 using Company.Application.Image;
 using Company.Application.Initialize;
 using Company.Application.Login;
@@ -78,6 +79,7 @@ namespace Shell
             moduleCatalog.AddModule<ApplicationMainModule>();
             moduleCatalog.AddModule<ApplicationLoginModule>();
             moduleCatalog.AddModule<ApplicationMenuModule>();
+            moduleCatalog.AddModule<ApplicationFlowModule>();
             moduleCatalog.AddModule<ApplicationProcessModule>();
             moduleCatalog.AddModule<ApplicationImageModule>();
         }

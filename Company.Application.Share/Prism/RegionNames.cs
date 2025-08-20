@@ -56,5 +56,10 @@ namespace Company.Application.Share.Prism
         /// 图像处理流程区域
         /// </summary>
         public const string FlowRegion = "FlowRegion";
+
+        /// <summary>
+        /// 图像过滤算法区域
+        /// </summary>
+        public const string FilterRegion = "FilterRegion";
     }
 }
