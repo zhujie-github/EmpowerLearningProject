@@ -18,8 +18,8 @@
         <ListBox ItemsSource="{Binding DisplayModels, Mode=OneWay}" SelectedItem="{Binding DisplayModel}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Height="25" Orientation="Horizontal">
-                        <Image Source="{Binding Icon}"/>
+                    <StackPanel Height="25" Margin="8" Orientation="Horizontal">
+                        <Image Source="{Binding Icon, Converter={StaticResource IconToImageConverter}}"/>
                         <TextBlock Text="{Binding Name}" Margin="3" FontSize="16"/>
                     </StackPanel>
                 </DataTemplate>

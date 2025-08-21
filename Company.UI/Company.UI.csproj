@@ -10,6 +10,40 @@
 
   <ItemGroup>
     <None Remove="Fonts\FontAwesome.otf" />
+    <None Remove="Icons\010_云文档.png" />
+    <None Remove="Icons\010_全部功能.png" />
+    <None Remove="Icons\010_出差申请.png" />
+    <None Remove="Icons\010_发现更多.png" />
+    <None Remove="Icons\010_外出申请.png" />
+    <None Remove="Icons\010_外出签到.png" />
+    <None Remove="Icons\010_工作日志.png" />
+    <None Remove="Icons\010_工作餐预定.png" />
+    <None Remove="Icons\010_我的主页.png" />
+    <None Remove="Icons\010_我的团队.png" />
+    <None Remove="Icons\010_我的待办.png" />
+    <None Remove="Icons\010_我的日程.png" />
+    <None Remove="Icons\010_打卡签到.png" />
+    <None Remove="Icons\010_扫一扫.png" />
+    <None Remove="Icons\010_收藏.png" />
+    <None Remove="Icons\010_新建流程.png" />
+    <None Remove="Icons\010_更多.png" />
+    <None Remove="Icons\010_流程审批.png" />
+    <None Remove="Icons\010_消息通知.png" />
+    <None Remove="Icons\010_现场出勤.png" />
+    <None Remove="Icons\010_用印审批.png" />
+    <None Remove="Icons\010_福利平台.png" />
+    <None Remove="Icons\010_组织架构.png" />
+    <None Remove="Icons\010_视频会议.png" />
+    <None Remove="Icons\010_设置.png" />
+    <None Remove="Icons\010_请假申请-02.png" />
+    <None Remove="Icons\010_请假申请-21.png" />
+    <None Remove="Icons\010_费用报销.png" />
+    <None Remove="Icons\010_远程办公.png" />
+    <None Remove="Icons\010_通知.png" />
+    <None Remove="Icons\010_通讯录联系人.png" />
+    <None Remove="Icons\010_面试日程.png" />
+    <None Remove="Icons\010_风险事件.png" />
+    <None Remove="Icons\icon-kfckfc.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +66,40 @@
     <Resource Include="Fonts\FontAwesome.otf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\010_云文档.png" />
+    <Resource Include="Icons\010_全部功能.png" />
+    <Resource Include="Icons\010_出差申请.png" />
+    <Resource Include="Icons\010_发现更多.png" />
+    <Resource Include="Icons\010_外出申请.png" />
+    <Resource Include="Icons\010_外出签到.png" />
+    <Resource Include="Icons\010_工作日志.png" />
+    <Resource Include="Icons\010_工作餐预定.png" />
+    <Resource Include="Icons\010_我的主页.png" />
+    <Resource Include="Icons\010_我的团队.png" />
+    <Resource Include="Icons\010_我的待办.png" />
+    <Resource Include="Icons\010_我的日程.png" />
+    <Resource Include="Icons\010_打卡签到.png" />
+    <Resource Include="Icons\010_扫一扫.png" />
+    <Resource Include="Icons\010_收藏.png" />
+    <Resource Include="Icons\010_新建流程.png" />
+    <Resource Include="Icons\010_更多.png" />
+    <Resource Include="Icons\010_流程审批.png" />
+    <Resource Include="Icons\010_消息通知.png" />
+    <Resource Include="Icons\010_现场出勤.png" />
+    <Resource Include="Icons\010_用印审批.png" />
+    <Resource Include="Icons\010_福利平台.png" />
+    <Resource Include="Icons\010_组织架构.png" />
+    <Resource Include="Icons\010_视频会议.png" />
+    <Resource Include="Icons\010_设置.png" />
+    <Resource Include="Icons\010_请假申请-02.png" />
+    <Resource Include="Icons\010_请假申请-21.png" />
+    <Resource Include="Icons\010_费用报销.png" />
+    <Resource Include="Icons\010_远程办公.png" />
+    <Resource Include="Icons\010_通知.png" />
+    <Resource Include="Icons\010_通讯录联系人.png" />
+    <Resource Include="Icons\010_面试日程.png" />
+    <Resource Include="Icons\010_风险事件.png" />
+    <Resource Include="Icons\icon-kfckfc.png" />
   </ItemGroup>
 
 </Project>
