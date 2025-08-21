@@ -1,4 +1,5 @@
 ﻿using Company.Algorithm.Unwrapper;
+using Company.Application.Filter.Attributes;
 using Company.Application.Filter.Views;
 using Company.Core.Models;
 using ReactiveUI;
@@ -8,6 +9,7 @@ using System.Reactive.Linq;
 
 namespace Company.Application.Filter.Models
 {
+    [Filter(Index = 0, IsEnabled = true)]
     public class TestFilterModel : FilterModelBase
     {
         [Reactive]

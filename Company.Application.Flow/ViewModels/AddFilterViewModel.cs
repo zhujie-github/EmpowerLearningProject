@@ -19,10 +19,10 @@ namespace Company.Application.Flow.ViewModels
         /// </summary>
         public IFilterModel? DisplayModel { get; set; }
 
-        public AddFilterViewModel()
+        public AddFilterViewModel(IFilterFactory filterFactory)
         {
             Title = "选择滤波算法";
-            DisplayModels = []; //todo
+            DisplayModels = filterFactory.CreateFilterModels();
             SubmitCommand = ReactiveCommand.Create(Submit);
         }
 
