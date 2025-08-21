@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Company.Application.Config\Company.Application.Config.csproj" />
+    <ProjectReference Include="..\Company.Application.Filter\Company.Application.Filter.csproj" />
     <ProjectReference Include="..\Company.Application.Flow\Company.Application.Flow.csproj" />
     <ProjectReference Include="..\Company.Application.Image\Company.Application.Image.csproj" />
     <ProjectReference Include="..\Company.Application.Initialize\Company.Application.Initialize.csproj" />

@@ -1,6 +1,8 @@
-﻿namespace Company.Application.Filter.ViewModels
+﻿using Company.Application.Filter.Models;
+
+namespace Company.Application.Filter.ViewModels
 {
-    public class TestFilterViewModel : FilterViewModelBase
+    public class TestFilterViewModel : FilterViewModelBase<TestFilterModel>
     {
     }
 }

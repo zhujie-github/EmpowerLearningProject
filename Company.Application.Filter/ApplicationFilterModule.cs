@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Prism;
+﻿using Company.Application.Filter.Views;
+using Company.Application.Share.Prism;
 using Company.Core.Extensions;
 using System.Reflection;
 
@@ -15,6 +16,7 @@ namespace Company.Application.Filter
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
+            containerRegistry.RegisterForNavigation<TestFilterView>();
         }
     }
 }
