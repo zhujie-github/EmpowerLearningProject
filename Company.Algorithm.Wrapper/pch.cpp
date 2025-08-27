@@ -28,3 +28,18 @@ void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
 		}
 	}
 }
+
+void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v)
+{
+	Mat src = CppImageToMat(src_image);
+	Mat dst = CppImageToMat(dst_image);
+	Mat matx;
+	Mat maty;
+
+	Sobel(src, matx, CV_64F, 1, 0, v);
+	Sobel(src, maty, CV_64F, 1, 0, v);
+
+	Mat result;
+	magnitude(matx, maty, result);
+	result.convertTo(src, src.type());
+}

@@ -20,5 +20,14 @@ namespace Company.Algorithm.Unwrapper
         /// <param name="v"></param>
         [DllImport(DllName, EntryPoint = "#2", CallingConvention = CallingConvention.Cdecl)]
         public static extern void CppTest(CppImage16UC1 src, CppImage16UC1 dst, ushort v);
+
+        /// <summary>
+        /// 索贝尔算法
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="v"></param>
+        [DllImport(DllName, EntryPoint = "#3", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void CppSobel(CppImage16UC1 src, CppImage16UC1 dst, int v);
     }
 }

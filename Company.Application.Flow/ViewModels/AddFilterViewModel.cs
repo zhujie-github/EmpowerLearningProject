@@ -28,7 +28,15 @@ namespace Company.Application.Flow.ViewModels
 
         private void Submit()
         {
-            //todo
+            if (DisplayModel == null)
+            {
+                return;
+            }
+            var parameters = new DialogParameters
+            {
+                { nameof(DisplayModel), DisplayModel }
+            };
+            CloseDialog(ButtonResult.OK, parameters);
         }
     }
 }
