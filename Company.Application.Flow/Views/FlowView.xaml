@@ -11,12 +11,23 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <ScrollViewer>
             <StackPanel>
-                <ListBox/>
+                <ListBox ItemsSource="{Binding FlowModel.Filters}" SelectedItem="{Binding FlowModel.Filter}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsEnabled}" Style="{StaticResource CheckBoxFilterStyle}" Width="45" Height="45" VerticalAlignment="Center">
+                                    <Image Source="{Binding Icon, Converter={StaticResource IconToImageConverter}}"/>
+                                </CheckBox>
+                                <TextBlock Text="{Binding Name}" FontSize="16" Margin="3" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Button Content="添加算法模型" Command="{Binding AddFilterCommand}"/>
             </StackPanel>
         </ScrollViewer>

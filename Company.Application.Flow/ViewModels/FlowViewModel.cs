@@ -1,22 +1,30 @@
-﻿using Company.Core.Ioc;
-using Company.Core.Extensions;
-using ReactiveUI;
-using System.Windows.Input;
+﻿using Company.Application.Flow.Models;
 using Company.Application.Flow.Views;
 using Company.Application.Share.Filter;
+using Company.Core.Extensions;
 using Company.Core.Helpers;
-using Company.Application.Flow.Models;
+using Company.Core.Ioc;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using System.Windows.Input;
 
 namespace Company.Application.Flow.ViewModels
 {
     public class FlowViewModel : ReactiveObject
     {
-        public FlowModel? FlowModel { get; }
+        public FlowModel FlowModel { get; }
+
+        /// <summary>
+        /// 是否启用流程服务
+        /// </summary>
+        [Reactive]
+        public bool IsEnabled { get; private set; }
 
         public ICommand AddFilterCommand { get; }
 
-        public FlowViewModel()
+        public FlowViewModel(FlowModel flowModel)
         {
+            FlowModel = flowModel;
             AddFilterCommand = ReactiveCommand.Create(AddFilter);
         }
 
@@ -31,7 +39,7 @@ namespace Company.Application.Flow.ViewModels
                 {
                     var model = p.Parameters.GetValue<IFilterModel>("DisplayModel");
                     Assert.NotNull(model);
-                    FlowModel?.AddFilter(model);
+                    FlowModel.AddFilter(model);
                 }
             });
         }

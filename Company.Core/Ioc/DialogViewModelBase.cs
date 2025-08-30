@@ -50,7 +50,7 @@ namespace Company.Core.Ioc
             };
             if (dialogParameters != null)
             {
-                dialogResult.Parameters = new DialogParameters { { "MyParameter", dialogParameters } };
+                dialogResult.Parameters = dialogParameters;
             }
 
             RequestClose.Invoke(dialogResult);
