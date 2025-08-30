@@ -21,7 +21,7 @@ namespace Company.Application.Filter.Models
 
         public override string Icon => "Icon_Sobel";
 
-        public override void Filter(UnmanagedArray2D<ushort> photo)
+        public override void DoFilter(UnmanagedArray2D<ushort> photo)
         {
             CppMethods.CppSobel(new CppImage16UC1(photo), new CppImage16UC1(photo), Value);
         }

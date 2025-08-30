@@ -17,7 +17,7 @@ namespace Company.Application.Filter.Models
         [Reactive]
         public bool IsEnabled { get; set; }
 
-        public abstract void Filter(UnmanagedArray2D<ushort> photo);
+        public abstract void DoFilter(UnmanagedArray2D<ushort> photo);
 
         public abstract IObservable<Unit> GetObservable();
     }

@@ -32,7 +32,7 @@ namespace Company.Application.Share.Filter
         /// 执行当前算法
         /// </summary>
         /// <param name="photo"></param>
-        void Filter(UnmanagedArray2D<ushort> photo);
+        void DoFilter(UnmanagedArray2D<ushort> photo);
 
         /// <summary>
         /// 获取当前算法的观察者
