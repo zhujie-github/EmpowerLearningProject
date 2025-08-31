@@ -49,13 +49,13 @@ namespace Company.Hardware.Detector.None
             if (_task == null || _task.IsCompleted)
             {
                 IsGrabbing = true;
-                _task = Task.Factory.StartNew(RunCapture, TaskCreationOptions.LongRunning);
+                _task = Task.Factory.StartNew(RunGrab, TaskCreationOptions.LongRunning);
             }
 
             return true;
         }
 
-        private void RunCapture()
+        private void RunGrab()
         {
             if (_unmanagedArray == null)
                 return;

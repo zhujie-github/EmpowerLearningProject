@@ -51,7 +51,7 @@ namespace Company.Core.Models
 
         public void Write(UnmanagedArray2D<T> buffer)
         {
-            if (Buffer1 == null)
+            if (buffer == null)
             {
                 Current = null;
                 return;

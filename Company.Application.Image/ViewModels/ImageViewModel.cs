@@ -1,4 +1,4 @@
-﻿using Company.Algorithm.Unwrapper;
+﻿using Company.Application.Image.Models;
 using Company.Application.Share.Configs;
 using Company.Application.Share.Main;
 using Company.Application.Share.Process;
@@ -6,6 +6,7 @@ using Company.Core.Enums;
 using Company.Core.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -59,22 +60,24 @@ namespace Company.Application.Image.ViewModels
         public ICommand MouseWheelCommand { get; }
 
         public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel,
-            IMouseWorkModeProvider mouseWorkModeProvider, IZoomModeProvider zoomModeProvider)
+            DetectorDisplayModel detectorDisplayModel, IMouseWorkModeProvider mouseWorkModeProvider,
+            IZoomModeProvider zoomModeProvider)
         {
             SystemConfigProvider = systemConfigProvider;
 
             Gray16ImageSource = new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
-            detectorProcessModel.SourceObservable.Subscribe(image =>
-            {
-                if (image == null) return;
-                System.Windows.Application.Current.Dispatcher.Invoke(() =>
-                {
-                    using var temp = image.DeepClone();
-                    var cppImage = new CppImage16UC1(temp);
-                    //CppMethods.CppTest(cppImage, cppImage, 5000);
-                    Gray16ImageSource.Write(temp);
-                });
-            });
+            detectorDisplayModel.Observable.Skip(1).ObserveOn(RxApp.MainThreadScheduler).Subscribe(TargetPhotoChanged);
+            //detectorProcessModel.SourceObservable.Subscribe(image =>
+            //{
+            //    if (image == null) return;
+            //    System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            //    {
+            //        using var temp = image.DeepClone();
+            //        var cppImage = new CppImage16UC1(temp);
+            //        //CppMethods.CppTest(cppImage, cppImage, 5000);
+            //        Gray16ImageSource.Write(temp);
+            //    });
+            //});
 
             mouseWorkModeProvider.MouseWorkModeObservable.Subscribe(source =>
             {
@@ -220,6 +223,12 @@ namespace Company.Application.Image.ViewModels
                 return;
 
             SetTransform();
+        }
+
+        private void TargetPhotoChanged(UnmanagedArray2D<ushort>? photo)
+        {
+            if (photo == null) return;
+            Gray16ImageSource.Write(photo);
         }
     }
 }
