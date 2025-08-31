@@ -15,7 +15,7 @@ namespace Company.Application.Filter.Models
         public abstract string Icon { get; }
 
         [Reactive]
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
         public abstract void DoFilter(UnmanagedArray2D<ushort> photo);
 

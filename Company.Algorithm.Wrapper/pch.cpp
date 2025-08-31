@@ -29,6 +29,7 @@ void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
 	}
 }
 
+//索贝尔算法
 void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v)
 {
 	Mat src = CppImageToMat(src_image);
@@ -42,4 +43,13 @@ void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v)
 	Mat result;
 	magnitude(matx, maty, result);
 	result.convertTo(src, src.type());
+}
+
+//中值滤波算法
+void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v)
+{
+	Mat src = CppImageToMat(src_image);
+	Mat dst = CppImageToMat(dst_image);
+
+	medianBlur(src, dst, v);
 }

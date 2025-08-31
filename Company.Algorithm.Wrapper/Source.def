@@ -3,3 +3,4 @@ EXPORTS
 Hello			@1 NONAME
 CppTest			@2 NONAME
 CppSobel		@3 NONAME
+CppMedianBlur	@4 NONAME
