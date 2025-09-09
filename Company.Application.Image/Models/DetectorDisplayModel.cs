@@ -12,9 +12,9 @@ namespace Company.Application.Image.Models
     [ExposedService(types: [typeof(IDetectorDisplayModel)])]
     public class DetectorDisplayModel : IDetectorDisplayModel
     {
-        private DoubleBuffer<ushort> _buffer { get; set; } = new();
+        private DoubleBuffer<ushort> Buffer { get; set; } = new();
 
-        public UnmanagedArray2D<ushort>? Photo => _buffer.Current;
+        public UnmanagedArray2D<ushort>? Photo => Buffer.Current;
 
         public IObservable<UnmanagedArray2D<ushort>?> Observable { get; set; }
 
@@ -24,13 +24,13 @@ namespace Company.Application.Image.Models
         {
             _processModel = processModel;
             processModel.TargetObservable.Subscribe(x => UpdateImageSource());
-            Observable = this.WhenAnyValue(x => x._buffer.Current);
+            Observable = this.WhenAnyValue(x => x.Buffer.Current);
         }
 
         private void UpdateImageSource()
         {
             if (_processModel.TargetPhoto == null) return;
-            _buffer.Write(_processModel.TargetPhoto);
+            Buffer.Write(_processModel.TargetPhoto);
         }
     }
 }

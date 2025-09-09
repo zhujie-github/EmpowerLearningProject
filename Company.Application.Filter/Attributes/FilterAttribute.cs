@@ -9,11 +9,11 @@
         /// <summary>
         /// 用于排序的索引
         /// </summary>
-        public int Index { get; set; }
+        public int Index { get; set; } = 0;
 
         /// <summary>
         /// 是否启用
         /// </summary>
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
     }
 }

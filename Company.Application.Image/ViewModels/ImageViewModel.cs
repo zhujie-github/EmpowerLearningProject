@@ -59,7 +59,7 @@ namespace Company.Application.Image.ViewModels
         public ICommand SizeChangedCommand { get; }
         public ICommand MouseWheelCommand { get; }
 
-        public ImageViewModel(ISystemConfigProvider systemConfigProvider, IDetectorProcessModel detectorProcessModel,
+        public ImageViewModel(ISystemConfigProvider systemConfigProvider,/* IDetectorProcessModel detectorProcessModel,*/
             DetectorDisplayModel detectorDisplayModel, IMouseWorkModeProvider mouseWorkModeProvider,
             IZoomModeProvider zoomModeProvider)
         {

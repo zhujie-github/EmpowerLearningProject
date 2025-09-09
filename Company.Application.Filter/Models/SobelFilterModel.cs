@@ -9,11 +9,11 @@ using System.Reactive.Linq;
 
 namespace Company.Application.Filter.Models
 {
-    [Filter(Index = 1, IsEnabled = true)]
+    [Filter]
     public class SobelFilterModel : FilterModelBase
     {
         [Reactive]
-        public int Value { get; set; }
+        public int Value { get; set; } = 3;
 
         public override string Name => "索贝尔算法";
 

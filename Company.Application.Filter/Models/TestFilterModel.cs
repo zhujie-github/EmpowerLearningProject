@@ -9,7 +9,7 @@ using System.Reactive.Linq;
 
 namespace Company.Application.Filter.Models
 {
-    [Filter(Index = 0, IsEnabled = true)]
+    [Filter]
     public class TestFilterModel : FilterModelBase
     {
         [Reactive]

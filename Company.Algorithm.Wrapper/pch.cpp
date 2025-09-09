@@ -1,20 +1,21 @@
 ﻿// pch.cpp: 与预编译标头对应的源文件
 
 #include "pch.h"
+
+// 当使用预编译的头时，需要使用此源文件，编译才能成功。
+
 #include <opencv2/opencv.hpp>
 using namespace company;
 using namespace cv;
 
-// 当使用预编译的头时，需要使用此源文件，编译才能成功。
-void Hello()
-{
+static void Hello() {
 	Mat src = imread("Images/1.jpg", IMREAD_COLOR);
 	namedWindow("图像", WINDOW_FREERATIO);
 	imshow("图像", src);
 }
 
-void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
-{
+//数组访问
+static void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v) {
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
 
@@ -30,10 +31,11 @@ void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
 }
 
 //索贝尔算法
-void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v)
-{
+static void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
+	if (v % 2 == 0) return;
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
+
 	Mat matx;
 	Mat maty;
 
@@ -45,9 +47,8 @@ void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v)
 	result.convertTo(src, src.type());
 }
 
-//中值滤波算法
-void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v)
-{
+//中值滤波器算法
+static void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
 

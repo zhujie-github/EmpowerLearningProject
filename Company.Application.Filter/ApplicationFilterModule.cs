@@ -17,6 +17,8 @@ namespace Company.Application.Filter
         {
             containerRegistry.RegisterAssembly(Assembly.GetExecutingAssembly());
             containerRegistry.RegisterForNavigation<TestFilterView>();
+            containerRegistry.RegisterForNavigation<SobelFilterView>();
+            containerRegistry.RegisterForNavigation<MedianBlurFilterView>();
         }
     }
 }

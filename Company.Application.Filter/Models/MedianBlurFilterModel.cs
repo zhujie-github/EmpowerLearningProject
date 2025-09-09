@@ -9,11 +9,11 @@ using System.Reactive.Linq;
 
 namespace Company.Application.Filter.Models
 {
-    [Filter(Index = 2, IsEnabled = true)]
+    [Filter]
     public class MedianBlurFilterModel : FilterModelBase
     {
         /// <summary>
-        /// 孔径大小，3 5 7（卷积核大小）
+        /// 孔径大小，1 3 5 7 9（卷积核大小）
         /// </summary>
         [Reactive]
         public int Value { get; set; } = 3;
