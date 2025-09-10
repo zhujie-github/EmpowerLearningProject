@@ -28,8 +28,13 @@
         public const string InitializeView = "InitializeView";
 
         /// <summary>
-        /// 配置试图
+        /// 配置视图
         /// </summary>
         public const string ConfigView = "ConfigView";
+
+        /// <summary>
+        /// 轴控制视图
+        /// </summary>
+        public const string AxisView = "AxisView";
     }
 }

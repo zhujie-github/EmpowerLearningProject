@@ -1,4 +1,5 @@
-﻿using Company.Application.Config;
+﻿using Company.Application.Axis;
+using Company.Application.Config;
 using Company.Application.Filter;
 using Company.Application.Flow;
 using Company.Application.Image;
@@ -84,6 +85,7 @@ namespace Shell
             moduleCatalog.AddModule<ApplicationFilterModule>();
             moduleCatalog.AddModule<ApplicationProcessModule>();
             moduleCatalog.AddModule<ApplicationImageModule>();
+            moduleCatalog.AddModule<ApplicationAxisModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

@@ -48,5 +48,10 @@
         /// 图像处理滤波模块
         /// </summary>
         public const string ApplicationFilterModule = "ApplicationFilterModule";
+
+        /// <summary>
+        /// 轴控制模块
+        /// </summary>
+        public const string ApplicationAxisModule = "ApplicationAxisModule";
     }
 }
