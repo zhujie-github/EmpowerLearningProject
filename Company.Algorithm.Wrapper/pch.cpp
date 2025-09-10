@@ -54,3 +54,11 @@ void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
 
 	medianBlur(src, dst, v);
 }
+
+//高斯滤波算法
+void CppGaussianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int width, int height) {
+	Mat src = CppImageToMat(src_image);
+	Mat dst = CppImageToMat(dst_image);
+
+	GaussianBlur(src, dst, Size(width, height), 0, 0);
+}

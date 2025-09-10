@@ -38,5 +38,15 @@ namespace Company.Algorithm.Unwrapper
         /// <param name="v"></param>
         [DllImport(DllName, EntryPoint = "#4", CallingConvention = CallingConvention.Cdecl)]
         public static extern void CppMedianBlur(CppImage16UC1 src, CppImage16UC1 dst, int v);
+
+        /// <summary>
+        /// 高斯滤波算法
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        [DllImport(DllName, EntryPoint = "#5", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void CppGaussianBlur(CppImage16UC1 src, CppImage16UC1 dst, int width, int height);
     }
 }

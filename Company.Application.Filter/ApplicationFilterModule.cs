@@ -19,6 +19,7 @@ namespace Company.Application.Filter
             containerRegistry.RegisterForNavigation<TestFilterView>();
             containerRegistry.RegisterForNavigation<SobelFilterView>();
             containerRegistry.RegisterForNavigation<MedianBlurFilterView>();
+            containerRegistry.RegisterForNavigation<GaussianBlurFilterView>();
         }
     }
 }
