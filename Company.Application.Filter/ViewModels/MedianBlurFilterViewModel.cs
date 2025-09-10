@@ -2,7 +2,7 @@
 
 namespace Company.Application.Filter.ViewModels
 {
-    public class MedianBlurViewModel : FilterViewModelBase<MedianBlurFilterModel>
+    public class MedianBlurFilterViewModel : FilterViewModelBase<MedianBlurFilterModel>
     {
     }
 }

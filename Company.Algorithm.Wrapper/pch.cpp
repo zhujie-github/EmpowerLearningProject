@@ -8,14 +8,14 @@
 using namespace company;
 using namespace cv;
 
-static void Hello() {
+void Hello() {
 	Mat src = imread("Images/1.jpg", IMREAD_COLOR);
 	namedWindow("图像", WINDOW_FREERATIO);
 	imshow("图像", src);
 }
 
 //数组访问
-static void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v) {
+void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v) {
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
 
@@ -31,7 +31,7 @@ static void CppTest(const Image16UC1& src_image, Image16UC1 dst_image, ushort v)
 }
 
 //索贝尔算法
-static void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
+void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
 	if (v % 2 == 0) return;
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
@@ -48,7 +48,7 @@ static void CppSobel(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
 }
 
 //中值滤波器算法
-static void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
+void CppMedianBlur(const Image16UC1& src_image, Image16UC1 dst_image, int v) {
 	Mat src = CppImageToMat(src_image);
 	Mat dst = CppImageToMat(dst_image);
 
