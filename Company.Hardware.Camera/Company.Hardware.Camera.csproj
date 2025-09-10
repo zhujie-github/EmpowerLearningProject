@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ReactiveUI.WPF" Version="21.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Company.Core\Company.Core.csproj" />
     <ProjectReference Include="..\Company.Logger\Company.Logger.csproj" />
   </ItemGroup>
