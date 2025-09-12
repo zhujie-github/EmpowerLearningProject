@@ -46,66 +46,176 @@
                     </i:Interaction.Triggers>
                 </Button>
                 <Button Grid.Row="2" Grid.Column="1" Content="下" Width="50" Height="50" FontSize="20" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="Y" Direction="反向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="Y" Direction="反向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-		</Button>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
                 <Button Grid.Row="1" Grid.Column="0" Content="左" Width="50" Height="50" FontSize="20" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="X" Direction="反向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="X" Direction="反向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-		</Button>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
                 <Button Grid.Row="1" Grid.Column="2" Content="右" Width="50" Height="50" FontSize="20" >
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="X" Direction="正向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
-                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
-                            <i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                <i:InvokeCommandAction.CommandParameter>
                                     <models:AxisMoveParameter AxisType="X" Direction="正向" />
-                            </i:InvokeCommandAction.CommandParameter>
-                        </i:InvokeCommandAction>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-		</Button>
+                                </i:InvokeCommandAction.CommandParameter>
+                            </i:InvokeCommandAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Button>
 
                 <!--stop 所有轴-->
                 <Button Grid.Row="1" Grid.Column="1" Content="停止" Width="50" Height="50" FontSize="20" 
                         Command="{Binding StopMoveCommand}"/>
             </Grid>
             <Grid Grid.Column="1">
-                <TextBlock Text="{Binding IsMoving, Converter={StaticResource BoolToMovingConverter}}"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Canvas>
+                    <Button Style="{StaticResource AxisButtonStyle}" Width="200" Height="200" Canvas.Left="120" Canvas.Top="58" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="X" Direction="正向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="X" Direction="正向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Style="{StaticResource AxisButtonStyle}" Width="200" Height="200" Canvas.Left="-55" Canvas.Top="33" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="X" Direction="反向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="X" Direction="反向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Style="{StaticResource AxisButtonStyle}" Width="200" Height="200" Canvas.Left="20" Canvas.Top="-42" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" >
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="Y" Direction="正向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="Y" Direction="正向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Style="{StaticResource AxisButtonStyle}" Width="200" Height="200" Canvas.Left="20" Canvas.Top="108" HorizontalAlignment="Center" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.75" ScaleY="0.75"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="Y" Direction="反向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                                    <i:InvokeCommandAction.CommandParameter>
+                                        <models:AxisMoveParameter AxisType="Y" Direction="反向" />
+                                    </i:InvokeCommandAction.CommandParameter>
+                                </i:InvokeCommandAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Canvas>
+                <TextBlock Grid.Row="1" Text="{Binding IsMoving, Converter={StaticResource BoolToMovingConverter}}"/>
             </Grid>
         </Grid>
     </GroupBox>

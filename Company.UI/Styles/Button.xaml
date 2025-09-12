@@ -36,4 +36,36 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!--运动轴扇形按钮样式-->
+    <Style x:Key="AxisButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Path Stroke="LightBlue" Fill="{TemplateBinding Background}">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,100">
+                                        <LineSegment Point="100,0"/>
+                                        <ArcSegment Point="100,200" Size="300,200" SweepDirection="Clockwise"/>
+                                        <LineSegment Point="0,100"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <TextBlock Text="➜" FontSize="50" Foreground="DarkGreen" Panel.ZIndex="99" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="LightGreen"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="OrangeRed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
