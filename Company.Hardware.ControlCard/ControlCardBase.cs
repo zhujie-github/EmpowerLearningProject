@@ -53,7 +53,7 @@ namespace Company.Hardware.ControlCard
             }
         }
 
-        public (bool, string?) Init(ControlCardConfig controlCardConfig)
+        public (bool, string?) Init(ControlCardConfig controlCardConfig, bool isToGoHome = false)
         {
             Config = controlCardConfig;
             string? msg;
@@ -83,6 +83,12 @@ namespace Company.Hardware.ControlCard
             }
 
             Initialized = true;
+
+            if (isToGoHome && !GoHome(out msg))
+            {
+                return (false, msg);
+            }
+
             return (true, msg);
         }
 

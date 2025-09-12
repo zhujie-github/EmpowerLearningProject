@@ -35,7 +35,7 @@ namespace Company.Application.Initialize.Services
 
             var task_camera = Task.Run(() => camera.Init(systemConfigProvider.CameraConfig));
             var task_detector = Task.Run(() => detector.Init(systemConfigProvider.DetectorConfig));
-            var task_controlCard = Task.Run(() => controlCard.Init(systemConfigProvider.ControlCardConfig));
+            var task_controlCard = Task.Run(() => controlCard.Init(systemConfigProvider.ControlCardConfig, true));
             var taskResults = await Task.WhenAll(task_camera, task_detector, task_controlCard);
             IsInitialized = taskResults.All(r => r.Item1);
             var msgs = new List<string>();

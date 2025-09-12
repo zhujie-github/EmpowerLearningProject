@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="controlCardConfig"></param>
         /// <returns></returns>
-        (bool, string?) Init(ControlCardConfig controlCardConfig);
+        (bool, string?) Init(ControlCardConfig controlCardConfig, bool isToGoHome = false);
 
         /// <summary>
         /// 控制卡关闭

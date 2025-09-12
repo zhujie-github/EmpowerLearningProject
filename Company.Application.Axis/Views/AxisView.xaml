@@ -4,23 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Company.Application.Axis.Views"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" Background="Transparent"
+             xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share" xmlns:models="clr-namespace:Company.Application.Axis.Models"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:models="clr-namespace:Company.Application.Axis.Models"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Transparent">
+             d:DesignHeight="300" d:DesignWidth="500">
     <GroupBox Header="运动轴控制" FontSize="16" Margin="5 0 5 5">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid>
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -45,11 +45,68 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
-                <Button Grid.Row="2" Grid.Column="1" Content="下" Width="50" Height="50" FontSize="20" />
-                <Button Grid.Row="1" Grid.Column="0" Content="左" Width="50" Height="50" FontSize="20" />
-                <Button Grid.Row="1" Grid.Column="2" Content="右" Width="50" Height="50" FontSize="20" />
+                <Button Grid.Row="2" Grid.Column="1" Content="下" Width="50" Height="50" FontSize="20" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="Y" Direction="反向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="Y" Direction="反向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+		</Button>
+                <Button Grid.Row="1" Grid.Column="0" Content="左" Width="50" Height="50" FontSize="20" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="X" Direction="反向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="X" Direction="反向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+		</Button>
+                <Button Grid.Row="1" Grid.Column="2" Content="右" Width="50" Height="50" FontSize="20" >
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding StartMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="X" Direction="正向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
+                        <i:InvokeCommandAction Command="{Binding EndMoveCommand}">
+                            <i:InvokeCommandAction.CommandParameter>
+                                    <models:AxisMoveParameter AxisType="X" Direction="正向" />
+                            </i:InvokeCommandAction.CommandParameter>
+                        </i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+		</Button>
+
+                <!--stop 所有轴-->
+                <Button Grid.Row="1" Grid.Column="1" Content="停止" Width="50" Height="50" FontSize="20" 
+                        Command="{Binding StopMoveCommand}"/>
             </Grid>
-            <Grid Grid.Column="1"></Grid>
+            <Grid Grid.Column="1">
+                <TextBlock Text="{Binding IsMoving, Converter={StaticResource BoolToMovingConverter}}"/>
+            </Grid>
         </Grid>
     </GroupBox>
 </UserControl>
