@@ -37,6 +37,8 @@ namespace Company.Application.Flow.Models
 
         public void AddFilter(IFilterModel filter)
         {
+            if (Filters.FirstOrDefault(i => filter.GetType().FullName == i.GetType().FullName) != null)
+                return;
             Filters.Add(filter);
             Filter = filter;
         }

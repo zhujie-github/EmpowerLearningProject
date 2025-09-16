@@ -19,5 +19,15 @@
         /// 是否记住用户名、密码
         /// </summary>
         IsRemember,
+
+        /// <summary>
+        /// 缓存数据
+        /// </summary>
+        AppData,
+
+        /// <summary>
+        /// 过滤器算法缓存数据
+        /// </summary>
+        Filters,
     }
 }
