@@ -36,5 +36,10 @@
         /// 轴控制视图
         /// </summary>
         public const string AxisView = "AxisView";
+
+        /// <summary>
+        /// 预览视图
+        /// </summary>
+        public const string PreviewView = "PreviewView";
     }
 }

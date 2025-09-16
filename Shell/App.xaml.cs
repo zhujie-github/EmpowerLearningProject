@@ -7,6 +7,7 @@ using Company.Application.Initialize;
 using Company.Application.Login;
 using Company.Application.Main;
 using Company.Application.Menu;
+using Company.Application.Preview;
 using Company.Application.Process;
 using Company.Core;
 using Company.Core.Events;
@@ -86,6 +87,7 @@ namespace Shell
             moduleCatalog.AddModule<ApplicationProcessModule>();
             moduleCatalog.AddModule<ApplicationImageModule>();
             moduleCatalog.AddModule<ApplicationAxisModule>();
+            moduleCatalog.AddModule<ApplicationPreviewModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()

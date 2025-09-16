@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Company.Application.Login\Company.Application.Login.csproj" />
     <ProjectReference Include="..\Company.Application.Main\Company.Application.Main.csproj" />
     <ProjectReference Include="..\Company.Application.Menu\Company.Application.Menu.csproj" />
+    <ProjectReference Include="..\Company.Application.Preview\Company.Application.Preview.csproj" />
     <ProjectReference Include="..\Company.Application.Process\Company.Application.Process.csproj" />
     <ProjectReference Include="..\Company.Application.Share\Company.Application.Share.csproj" />
     <ProjectReference Include="..\Company.Core\Company.Core.csproj" />

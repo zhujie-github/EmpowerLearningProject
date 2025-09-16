@@ -53,5 +53,10 @@
         /// 轴控制模块
         /// </summary>
         public const string ApplicationAxisModule = "ApplicationAxisModule";
+
+        /// <summary>
+        /// 预览模块
+        /// </summary>
+        public const string ApplicationPreviewModule = "ApplicationPreviewModule";
     }
 }
