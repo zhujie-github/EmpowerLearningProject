@@ -1,7 +1,6 @@
 ﻿using Company.Application.Image.Models;
 using Company.Application.Share.Configs;
 using Company.Application.Share.Main;
-using Company.Application.Share.Process;
 using Company.Core.Enums;
 using Company.Core.Models;
 using ReactiveUI;
@@ -56,7 +55,7 @@ namespace Company.Application.Image.ViewModels
         public ICommand MouseLeftButtonUpCommand { get; }
         public ICommand MouseRightButtonDownCommand { get; }
         public ICommand MouseRightButtonUpCommand { get; }
-        public ICommand SizeChangedCommand { get; }
+        public ICommand ViewportSizeChangedCommand { get; }
         public ICommand MouseWheelCommand { get; }
 
         public ImageViewModel(ISystemConfigProvider systemConfigProvider,/* IDetectorProcessModel detectorProcessModel,*/
@@ -99,7 +98,7 @@ namespace Company.Application.Image.ViewModels
             MouseLeftButtonUpCommand = ReactiveCommand.Create<MouseEventArgs>(MouseLeftButtonUp);
             MouseRightButtonDownCommand = ReactiveCommand.Create<MouseEventArgs>(MouseRightButtonDown);
             MouseRightButtonUpCommand = ReactiveCommand.Create<MouseEventArgs>(MouseRightButtonUp);
-            SizeChangedCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ViewportSizeChanged);
+            ViewportSizeChangedCommand = ReactiveCommand.Create<SizeChangedEventArgs>(ViewportSizeChanged);
             MouseWheelCommand = ReactiveCommand.Create<MouseWheelEventArgs>(MouseWheel);
         }
 

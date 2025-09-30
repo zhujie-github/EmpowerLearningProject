@@ -6,5 +6,6 @@
         <ResourceDictionary Source="/Company.UI;component/Styles/CheckBox.xaml" />
         <ResourceDictionary Source="/Company.UI;component/Styles/Converter.xaml" />
         <ResourceDictionary Source="/Company.UI;component/Styles/Icon.xaml" />
+        <ResourceDictionary Source="/Company.UI;component/Styles/GroupBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

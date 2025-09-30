@@ -4,12 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Company.Application.Preview.Views"
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share"
+             xmlns:prism="http://prismlibrary.com/" xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="Red">
-    <Grid>
-            
-    </Grid>
+             d:DesignHeight="450" d:DesignWidth="800">
+    <GroupBox Header="{Binding}" FontSize="14" Margin="5 0 5 5" Style="{StaticResource GroupBoxPreviewCameraStyle}">
+        <GroupBox.HeaderTemplate>
+            <DataTemplate>
+                <!--menu-->
+                <Menu FontSize="14" Background="Transparent" Foreground="White">
+                    <MenuItem Header="相机操作" Background="#3393DF">
+                        <MenuItem Header="触发相机" Background="#3393DF"/>
+                        <MenuItem Header="保存图像" Background="#3393DF"/>
+                        <MenuItem Header="重启相机" Background="#3393DF"/>
+                        <MenuItem Header="关闭相机" Background="#3393DF"/>
+                    </MenuItem>
+                </Menu>
+            </DataTemplate>
+        </GroupBox.HeaderTemplate>
+        <!--camera -->
+        <Grid x:Name="viewport" Background="Gray" Tag="{Binding ElementName=imagebox}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                        <prism:InvokeCommandAction Command="{Binding ViewportLoadedCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="SizeChanged">
+                        <prism:InvokeCommandAction Command="{Binding ViewportSizeChangedCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeftButtonUp">
+                        <prism:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseRightButtonDown">
+                        <prism:InvokeCommandAction Command="{Binding MouseRightButtonDownCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseRightButtonUp">
+                        <prism:InvokeCommandAction Command="{Binding MouseRightButtonUpCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseMove">
+                        <prism:InvokeCommandAction Command="{Binding MouseMoveCommand}"/>
+                    </i:EventTrigger>
+                <i:EventTrigger EventName="MouseLeave">
+                    <prism:InvokeCommandAction Command="{Binding MouseLeaveCommand}"/>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseWheel">
+                    <prism:InvokeCommandAction Command="{Binding MouseWheelCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <Canvas ClipToBounds="True">
+                <Grid x:Name="imagebox" RenderTransform="{Binding TransformGroup}">
+                    <Image Source="{Binding BitmapSourceGDI.ImageSource}"/>
+                </Grid>
+            </Canvas>
+        </Grid>
+    </GroupBox>
 </UserControl>

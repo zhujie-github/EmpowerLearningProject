@@ -18,7 +18,7 @@
                 <prism:InvokeCommandAction Command="{Binding ViewportLoadedCommand}"></prism:InvokeCommandAction>
             </i:EventTrigger>
             <i:EventTrigger EventName="SizeChanged">
-                <prism:InvokeCommandAction Command="{Binding SizeChangedCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding ViewportSizeChangedCommand}"></prism:InvokeCommandAction>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseLeftButtonDown">
                 <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"></prism:InvokeCommandAction>

@@ -1,6 +1,7 @@
 ﻿using Company.Core.Helpers;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.CompilerServices;
 using System.Windows;
 
 namespace Company.Core.Extensions
@@ -68,6 +69,18 @@ namespace Company.Core.Extensions
             var rect = new Rectangle(System.Drawing.Point.Empty, bitmap.Size);
             var bitmapData = bitmap.LockBits(rect, ImageLockMode.WriteOnly, bitmap.PixelFormat);
             return bitmapData;
+        }
+
+        /// <summary>
+        /// 是否为32位位图
+        /// </summary>
+        /// <param name="bitmap"></param>
+        /// <returns></returns>
+        public static bool IsBitmap32Bit(this Bitmap bitmap)
+        {
+            return bitmap.PixelFormat == PixelFormat.Format32bppArgb ||
+                bitmap.PixelFormat == PixelFormat.Format32bppPArgb ||
+                bitmap.PixelFormat == PixelFormat.Format32bppRgb;
         }
     }
 }
