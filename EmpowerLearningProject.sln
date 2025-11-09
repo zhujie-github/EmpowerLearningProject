@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11010.61 d18.0
+VisualStudioVersion = 18.0.11010.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Shell\Shell.csproj", "{33449F07-9D76-4D13-AD04-3EFF42A2638A}"
 EndProject
@@ -64,6 +64,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Axis", "Company.Application.Axis\Company.Application.Axis.csproj", "{A6009E50-EC13-4829-9DAF-C2AD2965CD43}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company.Application.Preview", "Company.Application.Preview\Company.Application.Preview.csproj", "{A1D85263-FF58-4A65-9A44-0B5C36427DCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tool", "Tool", "{2BF3D621-BE1E-4347-B9C8-D047842BA6F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntervalTreeApp", "IntervalTreeApp\IntervalTreeApp.csproj", "{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -399,6 +403,18 @@ Global
 		{A1D85263-FF58-4A65-9A44-0B5C36427DCF}.Release|x64.Build.0 = Release|Any CPU
 		{A1D85263-FF58-4A65-9A44-0B5C36427DCF}.Release|x86.ActiveCfg = Release|Any CPU
 		{A1D85263-FF58-4A65-9A44-0B5C36427DCF}.Release|x86.Build.0 = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|x64.Build.0 = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -430,6 +446,7 @@ Global
 		{DC034B7A-FE2C-425C-8F76-C2BADE2CD046} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A6009E50-EC13-4829-9DAF-C2AD2965CD43} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A1D85263-FF58-4A65-9A44-0B5C36427DCF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5A805A8B-D071-BCC4-2D0E-ADC6144616AF} = {2BF3D621-BE1E-4347-B9C8-D047842BA6F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {77E1C007-B2CE-476B-A879-0F2F7B232048}
