@@ -13,6 +13,7 @@ namespace Company.Application.Main
     [ModuleDependency(ModuleNames.ApplicationImageModule)]
     [ModuleDependency(ModuleNames.ApplicationProcessModule)]
     [ModuleDependency(ModuleNames.ApplicationAxisModule)]
+    [ModuleDependency(ModuleNames.ApplicationDrawModule)]
     public class ApplicationMainModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

@@ -58,5 +58,10 @@
         /// 预览模块
         /// </summary>
         public const string ApplicationPreviewModule = "ApplicationPreviewModule";
+
+        /// <summary>
+        /// 作图模块
+        /// </summary>
+        public const string ApplicationDrawModule = "ApplicationDrawModule";
     }
 }
