@@ -1,7 +1,5 @@
 ﻿using Jamarino.IntervalTree;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 
@@ -40,6 +38,9 @@ namespace IntervalTreeApp.ViewModels
             result = tree.Query(1, 50); // result is {1, 2, 3}
 
             // note: result order is not guaranteed
+            var regexA = Regex.Replace("-10.12mm", @"[^\d.\d]", "");
+            var regexB = Regex.Replace("-10.12mm", @"[^\d\.\-]", "");
+            MessageBox.Show($"{regexA == regexB}");
         }
     }
 }
