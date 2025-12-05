@@ -7,5 +7,6 @@
         <ResourceDictionary Source="/Company.UI;component/Styles/Converter.xaml" />
         <ResourceDictionary Source="/Company.UI;component/Styles/Icon.xaml" />
         <ResourceDictionary Source="/Company.UI;component/Styles/GroupBox.xaml" />
+        <ResourceDictionary Source="/Company.UI;component/Styles/ToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

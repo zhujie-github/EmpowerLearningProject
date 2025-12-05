@@ -6,9 +6,40 @@
              xmlns:local="clr-namespace:Company.Application.Draw.Views"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <Canvas ClipToBounds="True" Focusable="True" Background="Transparent">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <prism:InvokeCommandAction Command="{Binding CanvasLoadedCommand}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <prism:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonDownCommand}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeftButtonUp">
+                <prism:InvokeCommandAction Command="{Binding CanvasMouseLeftButtonUpCommand}" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseMove">
+                <prism:InvokeCommandAction Command="{Binding CanvasMouseMoveCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid Cursor="SizeAll" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top"
+              Visibility="{Binding IsWriting, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Canvas.Left="{Binding OffsetX}" Canvas.Top="{Binding OffsetY}">
+            <Border BorderBrush="Red" BorderThickness="1" Background="Transparent" Margin="4">
+                <Grid>
+                    <TextBox x:Name="textBoxInput" AcceptsReturn="True" BorderThickness="0" MinWidth="50" Background="Transparent"
+                             Text="{Binding InputText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding Foreground}" FontSize="{Binding FontSize}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="LostFocus">
+                                <prism:InvokeCommandAction Command="{Binding TextBoxLostFocusCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <Border BorderBrush="Transparent" BorderThickness="4" Visibility="Visible"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Canvas>
 </UserControl>
