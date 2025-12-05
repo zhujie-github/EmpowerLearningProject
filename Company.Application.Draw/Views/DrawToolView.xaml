@@ -49,23 +49,23 @@
                 </StackPanel>
                 <Separator Margin="10" Background="LightGray"/>
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton ToolTip="红色" Background="Red" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="红色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Red}}" Background="Red" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="橙色" Background="Orange" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="橙色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Orange}}" Background="Orange" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="黄色" Background="Yellow" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="黄色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Yellow}}" Background="Yellow" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="绿色" Background="Green" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="绿色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Green}}" Background="Green" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="青色" Background="Cyan" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="青色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Cyan}}" Background="Cyan" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="蓝色" Background="Blue" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="蓝色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Blue}}" Background="Blue" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="紫色" Background="Purple" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="紫色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Purple}}" Background="Purple" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="白色" Background="White" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="白色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.White}}" Background="White" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="黑色" Background="Black" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="黑色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Black}}" Background="Black" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
                 </StackPanel>
             </StackPanel>
