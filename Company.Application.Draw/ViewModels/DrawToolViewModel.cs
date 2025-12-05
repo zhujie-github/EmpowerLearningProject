@@ -1,13 +1,15 @@
-﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Company.Application.Draw.Models;
+using ReactiveUI;
 
 namespace Company.Application.Draw.ViewModels
 {
     public class DrawToolViewModel : ReactiveObject
     {
+        public DrawToolModel DrawToolModel { get; private set; }
+
+        public DrawToolViewModel(DrawToolModel drawToolModel)
+        {
+            DrawToolModel = drawToolModel;
+        }
     }
 }

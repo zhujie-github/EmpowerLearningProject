@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Company.Application.Draw.Views"
+             xmlns:draw="clr-namespace:Company.Application.Share.Draw;assembly=Company.Application.Share"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -39,11 +40,11 @@
             <!--设计画笔的粗细按钮和颜色选择按钮-->
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton ToolTip="细笔" MinWidth="8" MinHeight="8" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="细笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Small}}"  MinWidth="8" MinHeight="8" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="粗笔" MinWidth="11" MinHeight="11" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="中笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Medium}}" MinWidth="11" MinHeight="11" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="细笔" MinWidth="14" MinHeight="14" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="粗笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Large}}" MinWidth="14" MinHeight="14" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
                 </StackPanel>
                 <Separator Margin="10" Background="LightGray"/>

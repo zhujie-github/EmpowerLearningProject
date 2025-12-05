@@ -12,6 +12,7 @@ namespace Company.Application.Draw
         {
             containerProvider.InitializeAssembly(Assembly.GetExecutingAssembly());
             containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<DrawToolView>(RegionNames.DrawToolRegion);
+            containerProvider.Resolve<IRegionManager>().RegisterViewWithRegion<DrawTextView>(RegionNames.DrawTextRegion);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

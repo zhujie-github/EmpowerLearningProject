@@ -47,6 +47,7 @@
                 <Image Source="{Binding Gray16ImageSource.ImageSource}"/>
             </Grid>
         </Canvas>
+        <ContentControl prism:RegionManager.RegionName="{x:Static share:RegionNames.DrawTextRegion}"/>
         <Grid Visibility="{Binding LineVisibility}">
             <Line Stroke="GreenYellow" StrokeThickness="1"
                   X1="0"

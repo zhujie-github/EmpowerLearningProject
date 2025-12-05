@@ -3,4 +3,6 @@
                     xmlns:converters="clr-namespace:Company.UI.Converters">
     <converters:IconToImageConverter x:Key="IconToImageConverter"/>
     <converters:BoolToMovingConverter x:Key="BoolToMovingConverter"/>
+    <converters:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <converters:EnumToVisibleConverter x:Key="EnumToVisibleConverter" />
 </ResourceDictionary>
