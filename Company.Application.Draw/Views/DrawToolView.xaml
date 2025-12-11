@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Company.Application.Draw.Views"
              xmlns:draw="clr-namespace:Company.Application.Share.Draw;assembly=Company.Application.Share"
+             xmlns:enums="clr-namespace:Company.Core.Enums;assembly=Company.Core"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <GroupBox Header="{Binding}">
@@ -24,15 +25,17 @@
                     <Rectangle Width="5"/>
                     <Button ToolTip="默认" Command="{Binding MouseOperationNoneCommand}" Content="&#xf245;" Style="{StaticResource IconButtonStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="方框" Content="&#xf096;" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="方框" Content="&#xf096;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawRectangle}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="椭圆" Content="&#xf1db;" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="椭圆" Content="&#xf1db;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawEllipse}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="箭头" Content="&#xf177;" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="箭头" Content="&#xf177;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawArrow}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="文字" Content="&#xf035;" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="画笔" Content="&#xf044;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawPen}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="选择" Content="&#xf247;" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="文字" Content="&#xf035;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawText}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <Rectangle Width="5"/>
+                    <CheckBox ToolTip="选择" Content="&#xf247;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawSelect}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
                     <Button ToolTip="删除所有元素" Command="{Binding DeleteAllCommand}" Content="&#xf014;" Style="{StaticResource IconButtonStyle}"/>
                 </StackPanel>
