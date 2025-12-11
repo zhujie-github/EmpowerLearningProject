@@ -4,15 +4,10 @@ using ReactiveUI;
 
 namespace Company.Application.Draw.ViewModels
 {
-    public class DrawToolViewModel : ReactiveObject
+    public class DrawToolViewModel(DrawToolModel drawToolModel, IMouseOperationProvider mouseOperationProvider)
+        : ReactiveObject
     {
-        public DrawToolModel DrawToolModel { get; private set; }
-        public IMouseOperationProvider MouseOperationProvider { get; }
-
-        public DrawToolViewModel(DrawToolModel drawToolModel, IMouseOperationProvider mouseOperationProvider)
-        {
-            DrawToolModel = drawToolModel;
-            MouseOperationProvider = mouseOperationProvider;
-        }
+        public DrawToolModel DrawToolModel { get; private set; } = drawToolModel;
+        public IMouseOperationProvider MouseOperationProvider { get; } = mouseOperationProvider;
     }
 }

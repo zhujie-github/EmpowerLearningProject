@@ -5,27 +5,20 @@ namespace Company.Application.Share.Draw
     /// <summary>
     /// 坐标变换模型
     /// </summary>
-    public struct TransformModel
+    public readonly struct TransformModel(TransformGroup group)
     {
-        public TransformGroup TransformGroup { get;  }
-        public TransformModel(TransformGroup group) 
-        { 
-            TransformGroup = group;
-        }
+        public TransformGroup TransformGroup { get; } = group;
 
         /// <summary>
         /// 当前缩放对象
         /// </summary>
-        public ScaleTransform ScaleTransform
+        public ScaleTransform? ScaleTransform
         {
             get
             {
-                if(TransformGroup!=null&& TransformGroup.Children.Count == 2)
+                if (TransformGroup != null && TransformGroup.Children.Count == 2 && TransformGroup.Children[0] is ScaleTransform)
                 {
-                    if (TransformGroup.Children[0] is ScaleTransform)
-                    {
-                        return TransformGroup.Children[0] as ScaleTransform;
-                    }
+                    return TransformGroup.Children[0] as ScaleTransform;
                 }
 
                 return null;
@@ -35,21 +28,17 @@ namespace Company.Application.Share.Draw
         /// <summary>
         /// 当前平移对象
         /// </summary>
-        public TranslateTransform TranslateTransform
+        public TranslateTransform? TranslateTransform
         {
             get
             {
-                if (TransformGroup != null && TransformGroup.Children.Count == 2)
+                if (TransformGroup != null && TransformGroup.Children.Count == 2 && TransformGroup.Children[1] is TranslateTransform)
                 {
-                    if (TransformGroup.Children[1] is TranslateTransform)
-                    {
-                        return TransformGroup.Children[1] as TranslateTransform;
-                    }
+                    return TransformGroup.Children[1] as TranslateTransform;
                 }
 
                 return null;
             }
         }
-
     }
 }
