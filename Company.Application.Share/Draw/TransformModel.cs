@@ -7,7 +7,7 @@ namespace Company.Application.Share.Draw
     /// </summary>
     public readonly struct TransformModel(TransformGroup group)
     {
-        public TransformGroup TransformGroup { get; } = group;
+        public TransformGroup? TransformGroup { get; } = group;
 
         /// <summary>
         /// 当前缩放对象
@@ -16,7 +16,7 @@ namespace Company.Application.Share.Draw
         {
             get
             {
-                if (TransformGroup != null && TransformGroup.Children.Count == 2 && TransformGroup.Children[0] is ScaleTransform)
+                if (TransformGroup?.Children.Count == 2 && TransformGroup.Children[0] is ScaleTransform)
                 {
                     return TransformGroup.Children[0] as ScaleTransform;
                 }
@@ -32,7 +32,7 @@ namespace Company.Application.Share.Draw
         {
             get
             {
-                if (TransformGroup != null && TransformGroup.Children.Count == 2 && TransformGroup.Children[1] is TranslateTransform)
+                if (TransformGroup?.Children.Count == 2 && TransformGroup.Children[1] is TranslateTransform)
                 {
                     return TransformGroup.Children[1] as TranslateTransform;
                 }
