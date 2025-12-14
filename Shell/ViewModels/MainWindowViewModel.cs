@@ -1,4 +1,5 @@
 ﻿using Company.Application.Share.Configs;
+using Company.Application.Share.Events;
 using Company.Application.Share.Prism;
 using Company.Core.Events;
 using Company.Core.Ioc;

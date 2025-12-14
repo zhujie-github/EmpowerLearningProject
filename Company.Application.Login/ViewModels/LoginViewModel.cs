@@ -1,6 +1,6 @@
-﻿using Company.Core.Cache;
+﻿using Company.Application.Share.Events;
+using Company.Core.Cache;
 using Company.Core.Dialogs;
-using Company.Core.Events;
 using Company.Core.Ioc;
 using Company.Core.Models;
 using ReactiveUI;
