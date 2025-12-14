@@ -8,11 +8,10 @@ namespace Company.Core.Models
 {
     public class BitmapSourceGDI
     {
-        public int _width;
-        public int _height;
-        public Bitmap _bitmap;
-        public Graphics _graphics;
-        public WriteableBitmap _source;
+        private readonly int _width;
+        private readonly int _height;
+        private readonly Graphics _graphics;
+        private readonly WriteableBitmap _source;
 
         /// <summary>
         /// 用于绑定到WPF前端
@@ -24,12 +23,12 @@ namespace Company.Core.Models
             _width = width;
             _height = height;
             _source = new WriteableBitmap(_width, _height, 96d, 96d, System.Windows.Media.PixelFormats.Pbgra32, null);
-            _bitmap = new Bitmap(_source.PixelWidth,
+            var bitmap = new Bitmap(_source.PixelWidth,
                 _source.PixelHeight,
                 _source.BackBufferStride,
                 PixelFormat.Format32bppArgb,
                 _source.BackBuffer);
-            _graphics = Graphics.FromImage(_bitmap);
+            _graphics = Graphics.FromImage(bitmap);
             _graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // 抗锯齿
         }
 
@@ -42,10 +41,10 @@ namespace Company.Core.Models
 
             var rect = new Rectangle(x, y, bitmap.Width, bitmap.Height);
             rect.Intersect(new Rectangle(0, 0, _width, _height));
-            var int32rect = new Int32Rect(rect.X - x, rect.Y - y, rect.Width, rect.Height);
+            var int32Rect = new Int32Rect(rect.X - x, rect.Y - y, rect.Width, rect.Height);
             var bitmapData = bitmap.LockBits();
             _source.WritePixels(
-                int32rect,
+                int32Rect,
                 bitmapData.Scan0,
                 bitmapData.Stride * bitmap.Height,
                 bitmapData.Stride,
@@ -64,14 +63,24 @@ namespace Company.Core.Models
         {
             var rect = new Rectangle(x, y, bitmap.Width, bitmap.Height);
             rect.Intersect(new Rectangle(0, 0, _width, _height));
-            var int32rect = new Int32Rect(rect.X - x, rect.Y - y, rect.Width, rect.Height);
+            var int32Rect = new Int32Rect(rect.X - x, rect.Y - y, rect.Width, rect.Height);
             _source.WritePixels(
-                int32rect,
+                int32Rect,
                 bitmap.Header,
                 (int)bitmap.Length,
                 bitmap.Stride,
                 rect.X,
                 rect.Y);
+        }
+
+        public BitmapSourceDrawProvider Create(Color color)
+        {
+            return BitmapSourceDrawProvider.Create(_graphics, _source, color);
+        }
+
+        public void Clear(Color color)
+        {
+            using (Create(color)) { }
         }
     }
 }

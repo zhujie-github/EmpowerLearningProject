@@ -32,8 +32,7 @@ namespace Company.Application.Draw.Models
     /// 画椭圆
     /// </summary>
     public class DrawEllipseElement(Rect rect, PenWidthType penWidthType, PenColorType penColorType)
-        : DrawElementBase(penWidthType,
-            penColorType)
+        : DrawElementBase(penWidthType, penColorType)
     {
         private Rect Rect { get; } = rect;
 

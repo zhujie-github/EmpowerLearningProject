@@ -1,4 +1,5 @@
-﻿using Company.Application.Share.Draw;
+﻿using System.Collections.ObjectModel;
+using Company.Application.Share.Draw;
 using Company.Core.Ioc;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -20,6 +21,11 @@ namespace Company.Application.Draw.Models
         /// </summary>
         [Reactive]
         public PenColorType PenColorType { get; set; } = PenColorType.Red;
+
+        /// <summary>
+        /// 绘制的元素集合
+        /// </summary>
+        public ObservableCollection<DrawElementBase> DrawElements { get; set; } = [];
 
         public void Draw(Graphics graphics)
         {
