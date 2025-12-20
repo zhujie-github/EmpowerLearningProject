@@ -16,6 +16,6 @@ namespace Company.Application.Share.Mouse
         /// <param name="bitmap">画布</param>
         /// <param name="transformProvider">缩放移动</param>
         /// <returns></returns>
-        MouseOperationBase CreateMouseOperation(MouseOperationType type,BitmapSourceGDI bitmap,ITransformProvider transformProvider);
+        MouseOperationBase CreateMouseOperation(MouseOperationType type, BitmapSourceGDI bitmap, ITransformProvider transformProvider);
     }
 }

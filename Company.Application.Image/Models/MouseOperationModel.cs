@@ -1,12 +1,11 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using Company.Application.Share.Events;
+﻿using Company.Application.Share.Events;
 using Company.Application.Share.Mouse;
-using Company.Core.Helpers;
 using Company.Core.Ioc;
 using Company.Core.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Company.Application.Image.Models
 {
@@ -29,7 +28,7 @@ namespace Company.Application.Image.Models
 
         public bool IsEnabled => Current != null;
 
-        public void Update(MouseOperationBase mouse)
+        public void Update(MouseOperationBase? mouse)
         {
             Current?.Before();
             Current = mouse;

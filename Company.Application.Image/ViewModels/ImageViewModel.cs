@@ -1,6 +1,7 @@
 ﻿using Company.Application.Image.Models;
 using Company.Application.Share.Configs;
 using Company.Application.Share.Main;
+using Company.Application.Share.Mouse;
 using Company.Core.Enums;
 using Company.Core.Models;
 using ReactiveUI;
@@ -23,22 +24,38 @@ namespace Company.Application.Image.ViewModels
         private MouseWorkMode MouseWorkMode { get; set; }
         private ZoomMode ZoomMode { get; set; }
         private bool MousePressed { get; set; }
+        /// <summary>
+        /// 图像的缩放移动业务实体
+        /// </summary>
+        private ImageTransformModel ImageTransformModel { get; }
+        /// <summary>
+        /// 生成鼠标操作模型的工厂（绘制类）
+        /// </summary>
+        private IMouseOperationDrawFactory MouseOperationDrawFactory { get; }
 
         public Gray16ImageSource Gray16ImageSource { get; set; }
+        /// <summary>
+        /// 鼠标操作的业务实体
+        /// </summary>
+        public MouseOperationModel MouseOperationModel { get; private set; }
+        /// <summary>
+        /// 鼠标操作类型的提供者
+        /// </summary>
+        public IMouseOperationProvider MouseOperationProvider { get; }
         /// <summary>
         /// 十字架所引用的点位
         /// </summary>
         [Reactive]
-        public Point MousePoint { get; private set; } = new Point(-1, -1);
+        public Point MousePoint { get; private set; } = new(-1, -1);
         /// <summary>
         /// 鼠标按下的位置
         /// </summary>
         [Reactive]
-        public Point MouseDownPoint { get; private set; } = new Point(-1, -1);
+        public Point MouseDownPoint { get; private set; } = new(-1, -1);
         [Reactive]
         public Visibility LineVisibility { get; set; } = Visibility.Visible;
         [Reactive]
-        public TransformGroup TransformGroup { get; set; } = new TransformGroup();
+        public TransformGroup TransformGroup { get; set; } = new();
         [Reactive]
         public int ViewportWidth { get; set; }
         [Reactive]
@@ -58,36 +75,28 @@ namespace Company.Application.Image.ViewModels
         public ICommand ViewportSizeChangedCommand { get; }
         public ICommand MouseWheelCommand { get; }
 
-        public ImageViewModel(ISystemConfigProvider systemConfigProvider,/* IDetectorProcessModel detectorProcessModel,*/
-            DetectorDisplayModel detectorDisplayModel, IMouseWorkModeProvider mouseWorkModeProvider,
+        public ImageViewModel(ISystemConfigProvider systemConfigProvider,
+            MouseOperationModel mouseOperationModel,
+            DetectorDisplayModel detectorDisplayModel,
+            ImageTransformModel imageTransformModel,
+            IMouseWorkModeProvider mouseWorkModeProvider,
+            IMouseOperationProvider mouseOperationProvider,
+            IMouseOperationDrawFactory mouseOperationDrawFactory,
             IZoomModeProvider zoomModeProvider)
         {
             SystemConfigProvider = systemConfigProvider;
+            MouseOperationModel = mouseOperationModel;
+            ImageTransformModel = imageTransformModel;
+            MouseOperationProvider = mouseOperationProvider;
+            MouseOperationDrawFactory = mouseOperationDrawFactory;
 
-            Gray16ImageSource = new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
             detectorDisplayModel.Observable.Skip(1).ObserveOn(RxApp.MainThreadScheduler).Subscribe(TargetPhotoChanged);
-            //detectorProcessModel.SourceObservable.Subscribe(image =>
-            //{
-            //    if (image == null) return;
-            //    System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            //    {
-            //        using var temp = image.DeepClone();
-            //        var cppImage = new CppImage16UC1(temp);
-            //        //CppMethods.CppTest(cppImage, cppImage, 5000);
-            //        Gray16ImageSource.Write(temp);
-            //    });
-            //});
+            mouseWorkModeProvider.MouseWorkModeObservable.Subscribe(source => { MouseWorkMode = source; });
+            mouseOperationProvider.Observable.ObserveOn(RxApp.MainThreadScheduler).Subscribe(MouseOperationChanged);
+            zoomModeProvider.ZoomModeObservable.Subscribe(ZoomModeChanged);
 
-            mouseWorkModeProvider.MouseWorkModeObservable.Subscribe(source =>
-            {
-                MouseWorkMode = source;
-            });
-
-            zoomModeProvider.ZoomModeObservable.Subscribe(source =>
-            {
-                ZoomModeChanged(source);
-            });
-
+            Gray16ImageSource =
+                new Gray16ImageSource(SystemConfigProvider.DetectorConfig.Width, SystemConfigProvider.DetectorConfig.Height);
             TransformGroup.Children.Add(ScaleTransform);
             TransformGroup.Children.Add(TranslateTransform);
 
@@ -228,6 +237,19 @@ namespace Company.Application.Image.ViewModels
         {
             if (photo == null) return;
             Gray16ImageSource.Write(photo);
+        }
+
+        private void MouseOperationChanged(MouseOperationType? type)
+        {
+            if (type.HasValue)
+            {
+                var mouseOperationBase = MouseOperationDrawFactory.CreateMouseOperation(type.Value, MouseOperationModel.PreviewBitmap, ImageTransformModel);
+                MouseOperationModel.Update(mouseOperationBase);
+            }
+            else
+            {
+                MouseOperationModel.Update(null);
+            }
         }
     }
 }
