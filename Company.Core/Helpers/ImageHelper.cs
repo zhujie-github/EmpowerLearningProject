@@ -1,7 +1,14 @@
 ﻿using Company.Core.Extensions;
 using Company.Core.Models;
+using MahApps.Metro.Controls;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Company.Core.Helpers
@@ -12,50 +19,56 @@ namespace Company.Core.Helpers
     public static class ImageHelper
     {
         /// <summary>
-        /// 读本地图片转成位图（默认32位）
+        /// 读本地图片转成位图
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        public static Bitmap? Load(string filePath)
+        public static Bitmap Load(string path)
         {
-            if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
+            byte[] bytes = FileHelper.Load(path);
+            using(MemoryStream ms = new MemoryStream(bytes))
             {
-                throw new FileNotFoundException("Image file not found.", filePath);
+                return Image.FromStream(ms) as Bitmap;
             }
-
-            var bytes = FileHelper.Load(filePath);
-            using var memoryStream = new MemoryStream(bytes);
-            return Image.FromStream(memoryStream) as Bitmap;
         }
 
         /// <summary>
-        /// 读取本地TIFF图片转成无管理数组，当文件（filePath）不存在时，返回null
+        /// 读本地TIFF图像数据
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        /// <exception cref="FileNotFoundException"></exception>
-        public static UnmanagedArray2D<ushort>? LoadTiff(string filePath)
+        public static UnmanagedArray2D<ushort> LoadTiff(string path)
         {
-            if (string.IsNullOrWhiteSpace(filePath) || !File.Exists(filePath))
-            {
-                return null;
-            }
-
-            var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var decoder = BitmapDecoder.Create(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
-            var bitmapSource = decoder.Frames[0];
-            var width = bitmapSource.PixelWidth;
-            var height = bitmapSource.PixelHeight;
-            var stride = width * bitmapSource.Format.BitsPerPixel / 8;
-            var pixels = new ushort[stride * height];
+            if(!File.Exists(path)) return null;
+            Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var decoder = new TiffBitmapDecoder(stream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.Default);
+            BitmapSource bitmapSource = decoder.Frames[0];
+            int stride = bitmapSource.PixelWidth * bitmapSource.Format.BitsPerPixel / 8;
+            ushort[] pixels = new ushort[bitmapSource.PixelWidth * bitmapSource.PixelHeight];
             bitmapSource.CopyPixels(pixels, stride, 0);
-            var bitmap = bitmapSource.ToBitmap();
-            var bitmapData = bitmap.LockBits();
-            var image = new UnmanagedArray2D<ushort>(width, height);
-            MemoryHelper.CopyMemory(image.Header, bitmapData.Scan0, image.Length);
-            bitmap.UnlockBits(bitmapData);
+            var bitmap = bitmapSource.ToBitmap();//转换为位图
+            var data = bitmap.LockBits();
+            UnmanagedArray2D<ushort> image = new UnmanagedArray2D<ushort>(bitmapSource.PixelWidth, bitmapSource.PixelHeight);
+            MemoryHelper.CopyMemory(image.Header, data.Scan0, image.Length);
+            bitmap.UnlockBits(data);
             return image;
         }
+
+        public static System.Drawing.Imaging.ColorPalette CreateGray8Palette()
+        {
+            System.Drawing.Imaging.ColorPalette palette;
+            using (Bitmap bmp = new Bitmap(1, 1, PixelFormat.Format8bppIndexed))
+            {
+                palette = bmp.Palette;
+            }
+
+            for (int i = 0; i < 256; i++)
+            {
+                palette.Entries[i] = System.Drawing.Color.FromArgb(i, i, i);
+            }
+
+            return palette;
+        }
+
     }
 }

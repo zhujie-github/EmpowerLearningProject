@@ -1,30 +1,54 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Company.Core.Helpers
 {
     /// <summary>
-    /// 文件帮助类
+    /// 文件帮助 类
     /// </summary>
     public static class FileHelper
     {
         /// <summary>
-        /// 读取文件内容为字节数组
+        /// 以字节方式读取文件内容
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
-        /// <exception cref="FileNotFoundException"></exception>
-        public static byte[] Load(string filePath)
+        /// <exception cref="Exception"></exception>
+        public static byte[] Load(string path)
         {
-            if (string.IsNullOrWhiteSpace(filePath))
+            if(File.Exists(path))
             {
-                throw new ArgumentException("File path cannot be null or empty.", nameof(filePath));
+                return File.ReadAllBytes(path);
             }
-            if (!File.Exists(filePath))
+
+            throw new Exception($"{path}不存在");
+        }
+
+        public static bool SaveFileDialog(string title,string filter,string defaultExt,string defaultFullName,out string fullname)
+        {
+            fullname = null;
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.Title = title;
+            dlg.Filter = filter;
+            string defaultDir = null;
+            if (defaultFullName != null)
             {
-                throw new FileNotFoundException("File not found.", filePath);
+                defaultDir = Path.GetDirectoryName(defaultFullName);
+                dlg.InitialDirectory= defaultDir;
+                dlg.FileName= Path.GetFileName(defaultFullName);
             }
-            return File.ReadAllBytes(filePath);
+            dlg.DefaultExt= defaultExt; 
+            if(dlg.ShowDialog()==true)
+            {
+                fullname=dlg.FileName;
+                return true;
+            }
+
+            return false;   
         }
     }
 }

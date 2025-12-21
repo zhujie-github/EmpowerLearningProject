@@ -1,8 +1,11 @@
 ﻿using Company.Core.Helpers;
+using Company.Core.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace Company.Core.Extensions
 {
@@ -81,6 +84,66 @@ namespace Company.Core.Extensions
             return bitmap.PixelFormat == PixelFormat.Format32bppArgb ||
                 bitmap.PixelFormat == PixelFormat.Format32bppPArgb ||
                 bitmap.PixelFormat == PixelFormat.Format32bppRgb;
+        }
+
+        public static System.Windows.Media.Imaging.BitmapSource ToBitmapSource(this Bitmap bitmap)
+        {
+            Assert.NotNull(bitmap);
+            System.Windows.Media.PixelFormat format;
+            switch (bitmap.PixelFormat)
+            {
+                case PixelFormat.Format8bppIndexed:
+                    format = System.Windows.Media.PixelFormats.Gray8;
+                    break;
+                case PixelFormat.Format24bppRgb:
+                    format = System.Windows.Media.PixelFormats.Bgr24;
+                    break;
+                case PixelFormat.Format32bppArgb:
+                    format = System.Windows.Media.PixelFormats.Bgr32;
+                    break;
+                case PixelFormat.Format16bppGrayScale:
+                    format = System.Windows.Media.PixelFormats.Gray16;
+                    break;
+                default: throw new ArgumentException($"未实现Bitmap像素格式{bitmap.PixelFormat}");
+            }
+
+            var data = bitmap.LockBits();
+            var bitmapSource = System.Windows.Media.Imaging.BitmapSource.Create(
+                data.Width,
+                data.Height,
+                bitmap.HorizontalResolution,
+                bitmap.VerticalResolution,
+                format,
+                null,
+                data.Scan0,
+                data.Stride * data.Height,
+                data.Stride);
+            bitmap.UnlockBits(data);
+            return bitmapSource;
+
+        }
+
+        public static void Save(this UnmanagedArray2D<ushort> unmanagedArray2D, string filename)
+        {
+            try
+            {
+                Bitmap bitmap = new Bitmap(unmanagedArray2D.Width, unmanagedArray2D.Height, PixelFormat.Format16bppGrayScale);
+                var data = bitmap.LockBits();
+                MemoryHelper.CopyMemory(data.Scan0, unmanagedArray2D.Header, unmanagedArray2D.Length);
+                bitmap.UnlockBits(data);
+                var stream = new FileStream(filename, FileMode.Create);
+                var encoder = new TiffBitmapEncoder();
+                encoder.Compression = TiffCompressOption.Zip;
+                encoder.Frames.Add(BitmapFrame.Create(bitmap.ToBitmapSource()));
+                encoder.Save(stream);
+                stream.Close();
+                stream.Dispose();
+                bitmap.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

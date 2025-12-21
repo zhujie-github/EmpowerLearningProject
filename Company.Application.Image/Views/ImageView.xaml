@@ -1,42 +1,40 @@
-﻿<UserControl
-    x:Class="Company.Application.Image.Views.ImageView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Company.Application.Image.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
-    xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    mc:Ignorable="d">
-    <Grid x:Name="viewport" Background="Gray" Tag="{Binding ElementName=imagebox}">
+﻿<UserControl x:Class="Company.Application.Image.Views.ImageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Company.Application.Image.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:share="clr-namespace:Company.Application.Share.Prism;assembly=Company.Application.Share" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="viewport" Background="Gray" Tag="{Binding ElementName=imagebox}" >
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
-                <prism:InvokeCommandAction Command="{Binding ViewportLoadedCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding ViewportLoadedCommand}"/>                
             </i:EventTrigger>
             <i:EventTrigger EventName="SizeChanged">
-                <prism:InvokeCommandAction Command="{Binding ViewportSizeChangedCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding ViewportSizeChangedCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseLeftButtonDown">
-                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseLeftButtonUp">
-                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseRightButtonDown">
-                <prism:InvokeCommandAction Command="{Binding MouseRightButtonDownCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseRightButtonDownCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseRightButtonUp">
-                <prism:InvokeCommandAction Command="{Binding MouseRightButtonUpCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseRightButtonUpCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseMove">
-                <prism:InvokeCommandAction Command="{Binding MouseMoveCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseMoveCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseLeave">
-                <prism:InvokeCommandAction Command="{Binding MouseLeaveCommand}"></prism:InvokeCommandAction>
+                <prism:InvokeCommandAction Command="{Binding MouseLeaveCommand}"/>
             </i:EventTrigger>
             <i:EventTrigger EventName="MouseWheel">
                 <prism:InvokeCommandAction Command="{Binding MouseWheelCommand}"/>
@@ -44,23 +42,54 @@
         </i:Interaction.Triggers>
         <Canvas ClipToBounds="True">
             <Grid x:Name="imagebox" RenderTransform="{Binding TransformGroup}">
-                <Image Source="{Binding Gray16ImageSource.ImageSource}"/>
-            </Grid>
+                <Image Source="{Binding Gray16Image.ImageSource}"/>
+            </Grid>            
         </Canvas>
+        <Image Source="{Binding DrawElementModel.ElementBitmap.ImageSource}"/>
         <Image Source="{Binding MouseOperationModel.PreviewBitmap.ImageSource}"/>
         <ContentControl prism:RegionManager.RegionName="{x:Static share:RegionNames.DrawTextRegion}"/>
         <Grid Visibility="{Binding LineVisibility}">
+            <Line Stroke="GreenYellow" StrokeThickness="1" 
+                  X1="0" Y1="{Binding MousePoint.Y}"
+                  X2="{Binding ElementName=viewport,Path=ActualWidth}"
+                  Y2="{Binding MousePoint.Y}"/>
             <Line Stroke="GreenYellow" StrokeThickness="1"
-                  X1="0"
-                  Y1="{Binding MousePoint.Y}"
-                  X2="{Binding ElementName=viewport, Path=ActualWidth}"
-                  Y2="{Binding MousePoint.Y}" ></Line>
-            <Line Stroke="GreenYellow" StrokeThickness="1"
-                  X1="{Binding MousePoint.X}"
-                  Y1="0"
+                  X1="{Binding MousePoint.X}" Y1="0"
                   X2="{Binding MousePoint.X}"
-                  Y2="{Binding ElementName=viewport, Path=ActualHeight}" ></Line>
+                  Y2="{Binding ElementName=viewport,Path=ActualHeight}"/>
         </Grid>
-        
+        <!--温度采集器-->
+        <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Bottom" Panel.ZIndex="99999">
+            <StackPanel.Background>
+                <SolidColorBrush Color="Gray" Opacity="0.5"/>
+            </StackPanel.Background>
+            <TextBlock Text="温度采集器 连接状态" VerticalAlignment="Center" Foreground="LightGoldenrodYellow"/>
+            <Grid Width="25" Height="25">
+                <Border Background="Red" Width="15" Height="15" CornerRadius="10"/>
+                <Border Background="Green" Width="15" Height="15" CornerRadius="10" Visibility="{Binding TempReader.Connected,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </Grid>
+            <TextBlock VerticalAlignment="Center" Foreground="LightGoldenrodYellow">
+                <Run Text="室内温度:"/>
+                <Run Text="{Binding TempReader.Temperature.RoomTemperature}"/>
+                <Run Text="℃"/>
+                <Run Text="设备温度:"/>
+                <Run Text="{Binding TempReader.Temperature.DeviceTemperature}"/>
+                <Run Text="℃"/>
+                <Run Text="入口温度:"/>
+                <Run Text="{Binding TempReader.Temperature.DoorTemperature}"/>
+                <Run Text="℃"/>
+            </TextBlock>
+            <Rectangle Width="50"/>
+            <TextBlock Text="二维码扫描器 连接状态" VerticalAlignment="Center" Foreground="LightGoldenrodYellow"/>
+            <Grid Width="25" Height="25">
+                <Border Background="Red" Width="15" Height="15" CornerRadius="10"/>
+                <Border Background="Green" Width="15" Height="15" CornerRadius="10" Visibility="{Binding Scanner.Connected,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </Grid>
+            <Rectangle Width="10"/>
+            <TextBlock VerticalAlignment="Center" Foreground="LightGoldenrodYellow">
+                <Run Text="当前二维码:"/>
+                <Run Text="{Binding ScannerContent,Mode=OneWay}"/>                
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </UserControl>

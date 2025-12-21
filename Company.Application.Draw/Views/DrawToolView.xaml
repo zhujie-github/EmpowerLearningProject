@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Company.Application.Draw.Views"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:draw="clr-namespace:Company.Application.Share.Draw;assembly=Company.Application.Share"
              xmlns:enums="clr-namespace:Company.Core.Enums;assembly=Company.Core"
-             xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -23,53 +22,53 @@
             <Grid>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="5"/>
-                    <Button ToolTip="默认" Command="{Binding MouseOperationNoneCommand}" Content="&#xf245;" Style="{StaticResource IconButtonStyle}"/>
+                    <Button ToolTip="默认" Command="{Binding MouseOperationNoneCommand}" Content="&#xf245;" Style="{StaticResource IconButtonStyle}" />
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="方框" Content="&#xf096;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawRectangle}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="方框" Content="&#xf096;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawRectangle}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="椭圆" Content="&#xf1db;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawEllipse}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="椭圆" Content="&#xf1db;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawEllipse}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="箭头" Content="&#xf177;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawArrow}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="箭头" Content="&#xf177;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawArrow}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="画笔" Content="&#xf044;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawPen}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="画笔" Content="&#xf044;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawPen}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="文字" Content="&#xf035;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawText}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="文字" Content="&#xf035;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawText}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <CheckBox ToolTip="选择" Content="&#xf247;" IsChecked="{Binding MouseOperationProvider.MouseOperationType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static enums:MouseOperationType.DrawSelect}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
+                    <CheckBox ToolTip="选择" Content="&#xf247;" IsChecked="{Binding MouseOperationProvider.MouseOperationType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static enums:MouseOperationType.DrawSelect}}" Style="{StaticResource CheckBoxDrawToolStyle}"/>
                     <Rectangle Width="5"/>
-                    <Button ToolTip="删除所有元素" Command="{Binding DeleteAllCommand}" Content="&#xf014;" Style="{StaticResource IconButtonStyle}"/>
+                    <Button ToolTip="删除所有元素" Command="{Binding DeleteAllCommand}" Content="&#xf014;" Style="{StaticResource IconButtonStyle}" />
                 </StackPanel>
-            </Grid>
+        </Grid>
             <!--设计画笔的粗细按钮和颜色选择按钮-->
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton ToolTip="细笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Small}}"  MinWidth="8" MinHeight="8" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="细笔" IsChecked="{Binding DrawToolModel.PenWidthType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenWidthType.Small}}" MinWidth="8" MinHeight="8" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="中笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Medium}}" MinWidth="11" MinHeight="11" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="中笔" IsChecked="{Binding DrawToolModel.PenWidthType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenWidthType.Medium}}" MinWidth="11" MinHeight="11" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="粗笔" IsChecked="{Binding DrawToolModel.PenWidthType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenWidthType.Large}}" MinWidth="14" MinHeight="14" Style="{StaticResource ToggleButtonEllipseStyle}"/>
+                    <RadioButton ToolTip="粗笔" IsChecked="{Binding DrawToolModel.PenWidthType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenWidthType.Large}}" MinWidth="14" MinHeight="14" Style="{StaticResource ToggleButtonEllipseStyle}"/>
                     <Rectangle Width="5"/>
                 </StackPanel>
-                <Separator Margin="10" Background="LightGray"/>
+                <Separator Margin="10,0" Background="LightGray"/>
                 <StackPanel Orientation="Horizontal">
-                    <RadioButton ToolTip="红色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Red}}" Background="Red" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="红色" Background="Red" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Red}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="橙色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Orange}}" Background="Orange" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="橙色" Background="Orange" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Orange}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="黄色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Yellow}}" Background="Yellow" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="黄色" Background="Yellow" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Yellow}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="绿色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Green}}" Background="Green" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="绿色" Background="Green" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Green}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="青色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Cyan}}" Background="Cyan" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="青色" Background="Cyan" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Cyan}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="蓝色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Blue}}" Background="Blue" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="蓝色" Background="Blue" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Blue}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="紫色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Purple}}" Background="Purple" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="紫色" Background="Purple" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Purple}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="白色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.White}}" Background="White" Style="{StaticResource ToggleButtonColorStyle}"/>
+                    <RadioButton ToolTip="白色" Background="#F1F2F9" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.White}}" Style="{StaticResource ToggleButtonColorStyle}"/>
                     <Rectangle Width="5"/>
-                    <RadioButton ToolTip="黑色" IsChecked="{Binding DrawToolModel.PenColorType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static draw:PenColorType.Black}}" Background="Black" Style="{StaticResource ToggleButtonColorStyle}"/>
-                    <Rectangle Width="5"/>
+                    <RadioButton ToolTip="黑色" Background="Black" IsChecked="{Binding DrawToolModel.PenColorType,Converter={StaticResource EnumToBooleanConverter},ConverterParameter={x:Static draw:PenColorType.Black}}" Style="{StaticResource ToggleButtonColorStyle}"/>
+
                 </StackPanel>
             </StackPanel>
         </StackPanel>

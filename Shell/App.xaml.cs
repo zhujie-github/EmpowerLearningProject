@@ -80,16 +80,17 @@ namespace Shell
             moduleCatalog.AddModule<NoneDetectorModule>();
             moduleCatalog.AddModule<ApplicationConfigModule>();
             moduleCatalog.AddModule<ApplicationInitializeModule>();
+
+            moduleCatalog.AddModule<ApplicationDrawModule>();
             moduleCatalog.AddModule<ApplicationMainModule>();
             moduleCatalog.AddModule<ApplicationLoginModule>();
             moduleCatalog.AddModule<ApplicationMenuModule>();
             moduleCatalog.AddModule<ApplicationFlowModule>();
             moduleCatalog.AddModule<ApplicationFilterModule>();
             moduleCatalog.AddModule<ApplicationProcessModule>();
-            moduleCatalog.AddModule<ApplicationImageModule>();
             moduleCatalog.AddModule<ApplicationAxisModule>();
+            moduleCatalog.AddModule<ApplicationImageModule>();
             moduleCatalog.AddModule<ApplicationPreviewModule>();
-            moduleCatalog.AddModule<ApplicationDrawModule>();
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
