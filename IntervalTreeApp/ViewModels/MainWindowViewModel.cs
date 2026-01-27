@@ -41,6 +41,14 @@ namespace IntervalTreeApp.ViewModels
             var regexA = Regex.Replace("-10.12mm", @"[^\d.\d]", "");
             var regexB = Regex.Replace("-10.12mm", @"[^\d\.\-]", "");
             MessageBox.Show($"{regexA == regexB}");
+
+            var device = "A3(U2轴中卡盘加紧(上下))";
+            var portName = "";
+            var portNames = Regex.Matches(device, @"^\w*");
+            if (portNames.Count > 0)
+                portName = portNames[0].Value;
+            var portIndex = Regex.Match(portName, @"\d").Value;
+            MessageBox.Show($"{nameof(portName)}:{portName}, {nameof(portIndex)}:{portIndex}");
         }
     }
 }
